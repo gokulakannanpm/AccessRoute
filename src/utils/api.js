@@ -108,16 +108,35 @@ export const USER_IMPACT_STATS = {
  * Search routes from origin to destination considering preferences
  */
 export async function searchRoutes(origin = 'Chennai Central', destination = 'Guindy', preferences = {}) {
-  // Simulate network delay
-  await new Promise(res => setTimeout(res, 200));
+  try {
+    const res = await fetch('/api/routes/search', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ origin, destination, preferences })
+    });
+    if (res.ok) {
+      const data = await res.json();
+      return data;
+    }
+  } catch (err) {
+    console.warn('[API Client] searchRoutes fetch failed, using fallback:', err.message);
+  }
   return DEMO_ROUTES;
 }
 
 /**
  * Get station accessibility details
  */
-export async function getStationDetails(stationId) {
-  await new Promise(res => setTimeout(res, 100));
+export async function getStationDetails(stationId = 'station_guindy') {
+  try {
+    const res = await fetch(`/api/stations/${stationId}`);
+    if (res.ok) {
+      const data = await res.json();
+      return data;
+    }
+  } catch (err) {
+    console.warn('[API Client] getStationDetails fetch failed, using fallback:', err.message);
+  }
   return {
     stationId,
     name: 'Guindy Station',
@@ -133,11 +152,53 @@ export async function getStationDetails(stationId) {
  * Report an infrastructure issue
  */
 export async function reportIssue(issueData) {
-  await new Promise(res => setTimeout(res, 300));
-  console.log('[AccessRoute API] Issue reported:', issueData);
+  try {
+    const res = await fetch('/api/issues', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(issueData)
+    });
+    if (res.ok) {
+      const data = await res.json();
+      return data;
+    }
+  } catch (err) {
+    console.warn('[API Client] reportIssue fetch failed, using fallback:', err.message);
+  }
+  console.log('[AccessRoute API] Issue reported fallback:', issueData);
   return {
     success: true,
     issueId: 'ISSUE-' + Math.floor(1000 + Math.random() * 9000),
     timestamp: new Date().toISOString()
   };
+}
+
+/**
+ * Fetch searchable locations
+ */
+export async function fetchLocations() {
+  try {
+    const res = await fetch('/api/locations');
+    if (res.ok) {
+      return await res.json();
+    }
+  } catch (err) {
+    console.warn('[API Client] fetchLocations failed:', err.message);
+  }
+  return [];
+}
+
+/**
+ * Fetch user impact and profile statistics
+ */
+export async function fetchUserProfile() {
+  try {
+    const res = await fetch('/api/profile');
+    if (res.ok) {
+      return await res.json();
+    }
+  } catch (err) {
+    console.warn('[API Client] fetchUserProfile failed:', err.message);
+  }
+  return USER_IMPACT_STATS;
 }
