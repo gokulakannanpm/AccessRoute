@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../context/AppContext';
-import { Search, Settings, ArrowLeft, SlidersHorizontal, Sparkles } from 'lucide-react';
+import { Search, ArrowLeft, SlidersHorizontal, Sparkles } from 'lucide-react';
 
 export function Header() {
   const { currentView, setCurrentView } = useContext(AppContext);
@@ -52,15 +52,15 @@ export function Header() {
       <div className="flex items-center gap-2">
         <button
           onClick={() => setCurrentView('assisted')}
-          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${
+          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer ${
             currentView === 'assisted'
-              ? 'bg-[#1AC8A0] text-white shadow-xs'
+              ? 'bg-[#1AC8A0] text-slate-900 shadow-xs font-bold'
               : 'bg-[#1AC8A0]/10 text-[#14A080] hover:bg-[#1AC8A0]/20'
           }`}
           title="Assisted Travel with Gemini AI"
         >
           <Sparkles className="w-3.5 h-3.5" />
-          <span className="hidden xs:inline">Gemini AI</span>
+          <span>Assisted Travel</span>
         </button>
 
         <button

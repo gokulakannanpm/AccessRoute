@@ -21,46 +21,33 @@ function AppContent() {
 
       {/* Main Container Area */}
       <div className="flex-1 flex flex-col min-h-screen overflow-x-hidden">
-        {/* Mobile Top Header (hidden on desktop sidebar view unless needed) */}
+        {/* Mobile Top Header */}
         <Header />
 
-        {/* Content Body Grid / Columns */}
+        {/* Unified Responsive Content Body */}
         <main className="flex-1 p-3 sm:p-4 md:p-6 w-full max-w-7xl mx-auto">
-          {/* DESKTOP SIDE-BY-SIDE LAYOUT (Visible on md and larger) */}
-          <div className="hidden md:grid md:grid-cols-12 gap-6 h-[calc(100vh-5rem)]">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:h-[calc(100vh-5rem)]">
             {/* Left/Middle Column (Route Details / Control Panel) */}
-            <div className="md:col-span-5 lg:col-span-5 h-full overflow-y-auto pr-1">
+            <div className="route-panel order-2 md:order-1 md:col-span-5 lg:col-span-5 md:h-full md:overflow-y-auto pr-1 space-y-4">
               {currentView === 'profile' && <Profile />}
               {currentView === 'preferences' && <TravelPreferences />}
               {currentView === 'assisted' && <AssistedTravel />}
               {currentView === 'journey-steps' && <JourneySteps />}
-              {(currentView === 'route-options' || currentView === 'route-details' || currentView === 'map') && (
-                <RouteDetails />
-              )}
+              {currentView === 'route-details' && <RouteDetails />}
+              {(currentView === 'route-options' || currentView === 'map') && <RouteOptions />}
             </div>
 
-            {/* Right Column (Live Interactive Map Container) */}
-            <div className="md:col-span-7 lg:col-span-7 h-full">
+            {/* Right Column (Map Container) */}
+            <div
+              id="map-container"
+              className={`order-1 md:order-2 md:col-span-7 lg:col-span-7 md:h-full ${
+                currentView === 'route-options' || currentView === 'map'
+                  ? 'h-48 md:h-full w-full rounded-2xl overflow-hidden shadow-xs'
+                  : 'hidden md:block'
+              }`}
+            >
               <MapView />
             </div>
-          </div>
-
-          {/* MOBILE SINGLE-COLUMN LAYOUT (Visible < md) */}
-          <div className="md:hidden space-y-4">
-            {currentView === 'profile' && <Profile />}
-            {currentView === 'preferences' && <TravelPreferences />}
-            {currentView === 'assisted' && <AssistedTravel />}
-            {currentView === 'journey-steps' && <JourneySteps />}
-            {currentView === 'route-details' && <RouteDetails />}
-            {(currentView === 'route-options' || currentView === 'map') && (
-              <div className="space-y-4">
-                {/* Map Preview on Mobile top */}
-                <div className="h-48 w-full rounded-2xl overflow-hidden shadow-xs">
-                  <MapView />
-                </div>
-                <RouteOptions />
-              </div>
-            )}
           </div>
         </main>
       </div>

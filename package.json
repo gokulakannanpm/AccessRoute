@@ -9,11 +9,14 @@
     "server:dev": "node --watch server.js",
     "start": "node server.js",
     "test:api": "node backend/tests/api.test.js",
+    "test:e2e": "playwright test",
+    "test:ai": "node tests/ai.test.js",
     "build": "vite build",
     "lint": "oxlint",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.24.1",
     "@supabase/supabase-js": "^2.112.3",
     "@tailwindcss/vite": "^4.3.3",
     "cors": "^2.8.6",
@@ -28,6 +31,7 @@
     "tailwindcss": "^4.3.3"
   },
   "devDependencies": {
+    "@playwright/test": "^1.62.1",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.4",

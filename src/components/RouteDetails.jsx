@@ -1,53 +1,111 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../context/AppContext';
-import { Bus, Train, ArrowDownUp, Accessibility, AlertTriangle, CheckCircle2, Navigation, MapPin, Footprints } from 'lucide-react';
+import { Bus, Train, ArrowDownUp, Accessibility, AlertTriangle, CheckCircle2, Navigation, MapPin, Footprints, Sparkles } from 'lucide-react';
 
 export function RouteDetails() {
-  const { origin, destination, preferences, selectedRouteKey, setSelectedRouteKey, setCurrentView } = useContext(AppContext);
+  const {
+    origin,
+    setOrigin,
+    destination,
+    setDestination,
+    preferences,
+    togglePreference,
+    selectedRouteKey,
+    setSelectedRouteKey,
+    setCurrentView,
+    refreshRoutes
+  } = useContext(AppContext);
+
+  const handleSearchSubmit = (e) => {
+    if (e) e.preventDefault();
+    refreshRoutes(origin, destination, preferences);
+    setCurrentView('route-options');
+  };
 
   return (
     <div className="bg-white p-4 md:p-6 rounded-2xl shadow-sm border border-slate-100 space-y-4 max-w-xl mx-auto pb-20 md:pb-6">
       {/* Search inputs header */}
-      <div className="space-y-2.5">
+      <form onSubmit={handleSearchSubmit} className="space-y-2.5">
         <div className="flex items-center gap-2 p-2.5 rounded-xl bg-slate-100 border border-slate-200 text-xs font-semibold text-slate-800">
           <Navigation className="w-4 h-4 text-[#1F3A5F] shrink-0" />
           <input
             type="text"
-            readOnly
             value={origin}
-            className="bg-transparent w-full focus:outline-hidden text-slate-900 font-bold"
+            onChange={(e) => setOrigin(e.target.value)}
+            placeholder="Starting point (e.g. Chennai Central)"
+            className="bg-transparent w-full focus:outline-hidden text-slate-900 font-bold text-xs"
           />
         </div>
 
-        <div className="flex items-center gap-2 p-2.5 rounded-xl bg-slate-100 border border-slate-200 text-xs font-semibold text-slate-800">
+        <div className="flex items-center gap-2 p-2.5 rounded-xl bg-slate-100 border border-slate-200 text-xs font-semibold text-slate-800 focus-within:border-[#1AC8A0]">
           <MapPin className="w-4 h-4 text-red-600 shrink-0" />
           <input
             type="text"
-            readOnly
             value={destination}
-            className="bg-transparent w-full focus:outline-hidden text-slate-900 font-bold"
+            onChange={(e) => setDestination(e.target.value)}
+            placeholder="Where to? (e.g. Guindy)"
+            className="bg-transparent w-full focus:outline-hidden text-slate-900 font-bold text-xs"
           />
+          <button
+            type="submit"
+            className="px-3 py-1 bg-[#1F3A5F] hover:bg-[#132A4A] text-white rounded-lg text-xs font-bold transition-colors cursor-pointer shrink-0"
+          >
+            Find Routes
+          </button>
         </div>
-      </div>
+      </form>
 
-      {/* Preferences tags */}
-      <div className="flex items-center gap-2 text-xs font-semibold text-slate-600">
-        <span>Preferences:</span>
-        {preferences.wheelchair && (
-          <span className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#1AC8A0] text-slate-900 font-bold text-[11px]">
-            <Accessibility className="w-3.5 h-3.5" />
-            <span>Wheelchair</span>
-          </span>
-        )}
-        {preferences.avoidStairs && (
-          <span className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#6EE7B7] text-[#064E3B] font-bold text-[11px]">
-            <span>Avoid stairs</span>
-          </span>
-        )}
+      {/* Preferences tags & Assisted Travel button */}
+      <div className="flex items-center justify-between gap-2 text-xs font-semibold text-slate-600 flex-wrap pt-1">
+        <div className="flex items-center gap-2 flex-wrap">
+          <span className="text-slate-500 font-bold text-xs">Preferences:</span>
+
+          {/* Wheelchair toggle checkbox */}
+          <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-50 border border-slate-200 hover:bg-slate-100 cursor-pointer">
+            <input
+              type="checkbox"
+              id="rd-pref-wheelchair"
+              checked={Boolean(preferences.wheelchair)}
+              onChange={() => togglePreference('wheelchair')}
+              className="w-4 h-4 accent-[#1AC8A0] cursor-pointer"
+            />
+            <label
+              htmlFor="rd-pref-wheelchair"
+              className="text-xs font-bold text-slate-800 cursor-pointer select-none"
+            >
+              Wheelchair
+            </label>
+          </div>
+
+          {/* Avoid stairs toggle checkbox */}
+          <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-50 border border-slate-200 hover:bg-slate-100 cursor-pointer">
+            <input
+              type="checkbox"
+              id="rd-pref-avoidStairs"
+              checked={Boolean(preferences.avoidStairs)}
+              onChange={() => togglePreference('avoidStairs')}
+              className="w-4 h-4 accent-[#1AC8A0] cursor-pointer"
+            />
+            <label
+              htmlFor="rd-pref-avoidStairs"
+              className="text-xs font-bold text-slate-800 cursor-pointer select-none"
+            >
+              Avoid stairs
+            </label>
+          </div>
+        </div>
+
+        <button
+          onClick={() => setCurrentView('assisted')}
+          className="flex items-center gap-1 px-3 py-1.5 rounded-xl bg-[#E6FAF5] text-[#064E3B] font-bold text-xs hover:bg-[#1AC8A0]/20 transition-all shrink-0 cursor-pointer shadow-2xs border border-[#1AC8A0]/30"
+        >
+          <Sparkles className="w-3.5 h-3.5 text-[#14A080]" />
+          <span>Assisted Travel</span>
+        </button>
       </div>
 
       {/* Route Cards */}
-      <div className="space-y-4">
+      <div className="space-y-4 pt-1">
         {/* CARD 1: RECOMMENDED */}
         <div
           onClick={() => {
@@ -61,10 +119,21 @@ export function RouteDetails() {
           }`}
         >
           <div className="flex items-center justify-between">
-            <span className="px-2.5 py-0.5 rounded-md bg-[#1F3A5F] text-[#1AC8A0] text-[10px] font-extrabold uppercase tracking-wider">
-              ⭐ RECOMMENDED FOR YOU
-            </span>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setSelectedRouteKey('recommended');
+                setCurrentView('journey-steps');
+              }}
+              className="px-2.5 py-1 rounded-md bg-[#1F3A5F] text-[#1AC8A0] text-[10px] font-extrabold uppercase tracking-wider cursor-pointer"
+            >
+              RECOMMENDED
+            </button>
             <span className="text-xl font-black text-slate-900">₹25</span>
+          </div>
+
+          <div className="mt-1 text-xs font-semibold text-[#14A080]">
+            <span>🚗 ₹140 cheaper than estimated cab</span>
           </div>
 
           <div className="mt-3 flex items-baseline justify-between">
@@ -141,9 +210,16 @@ export function RouteDetails() {
           }`}
         >
           <div className="flex items-center justify-between">
-            <span className="text-[10px] font-extrabold text-slate-700 uppercase tracking-wider flex items-center gap-1">
-              ⚡ FASTEST
-            </span>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setSelectedRouteKey('fastest');
+                setCurrentView('journey-steps');
+              }}
+              className="text-[10px] font-extrabold text-slate-700 uppercase tracking-wider flex items-center gap-1 cursor-pointer"
+            >
+              FASTEST
+            </button>
             <span className="text-xl font-black text-slate-900">₹35</span>
           </div>
 
@@ -175,9 +251,16 @@ export function RouteDetails() {
           }`}
         >
           <div className="flex items-center justify-between">
-            <span className="text-[10px] font-extrabold text-slate-700 uppercase tracking-wider">
-              💰 LOWEST COST
-            </span>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setSelectedRouteKey('lowestCost');
+                setCurrentView('journey-steps');
+              }}
+              className="text-[10px] font-extrabold text-slate-700 uppercase tracking-wider cursor-pointer"
+            >
+              LOWEST COST
+            </button>
             <span className="text-xl font-black text-slate-900">₹15</span>
           </div>
 
@@ -190,7 +273,7 @@ export function RouteDetails() {
           <div className="mt-3 p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-700 space-y-1">
             <div className="flex items-center gap-1.5">
               <Accessibility className="w-3.5 h-3.5 text-emerald-600" />
-              <span>Ramp available</span>
+              <span>Good Accessibility</span>
             </div>
             <div className="flex items-center gap-1.5">
               <Footprints className="w-3.5 h-3.5 text-slate-500" />

@@ -1,9 +1,18 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../context/AppContext';
-import { Bus, Train, Footprints, ArrowDownUp, MapPin, CheckCircle2, Accessibility, CornerDownRight } from 'lucide-react';
+import { Bus, Train, Footprints, ArrowDownUp, MapPin, CheckCircle2, Accessibility, CornerDownRight, Sparkles, Volume2 } from 'lucide-react';
 
 export function JourneySteps() {
-  const { selectedRoute, journeySubTab, setJourneySubTab, setCurrentView } = useContext(AppContext);
+  const {
+    selectedRoute,
+    journeySubTab,
+    setJourneySubTab,
+    setCurrentView,
+    handlePlayDirections,
+    isPlayingAudio
+  } = useContext(AppContext);
+
+  const fare = selectedRoute?.fareText || `₹${selectedRoute?.fare || 25}`;
 
   return (
     <div className="bg-white rounded-t-3xl md:rounded-2xl p-4 md:p-6 shadow-sm border border-slate-100 max-w-xl mx-auto space-y-4 pb-20 md:pb-6">
@@ -14,12 +23,23 @@ export function JourneySteps() {
       <div className="flex items-start justify-between">
         <div>
           <h2 className="text-2xl font-extrabold text-[#1F3A5F] tracking-tight">To Guindy</h2>
-          <p className="text-xs font-semibold text-slate-500 mt-0.5">Chennai Central • 45 min</p>
+          <p className="text-xs font-semibold text-slate-500 mt-0.5">Chennai Central • 38 min • {fare}</p>
         </div>
-        <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#6EE7B7] text-[#064E3B] text-xs font-bold shadow-2xs">
-          <Accessibility className="w-4 h-4" />
-          <span>Accessible Route</span>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => setCurrentView('assisted')}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#1AC8A0]/15 text-[#14A080] text-xs font-bold hover:bg-[#1AC8A0]/25 transition-all cursor-pointer shadow-2xs"
+          >
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>Assisted Travel</span>
+          </button>
         </div>
+      </div>
+
+      {/* Savings badge */}
+      <div className="text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-3 py-1.5 rounded-xl flex items-center justify-between">
+        <span>Fare: {fare}</span>
+        <span>🚗 ₹140 cheaper than cab</span>
       </div>
 
       {/* Map / Steps Segmented Tab Toggle */}
@@ -29,7 +49,7 @@ export function JourneySteps() {
             setJourneySubTab('map');
             setCurrentView('route-details');
           }}
-          className={`flex-1 py-2 text-center text-xs font-bold rounded-lg transition-all ${
+          className={`flex-1 py-2 text-center text-xs font-bold rounded-lg transition-all cursor-pointer ${
             journeySubTab === 'map'
               ? 'bg-white text-slate-900 shadow-xs'
               : 'text-slate-500 hover:text-slate-800'
@@ -39,7 +59,7 @@ export function JourneySteps() {
         </button>
         <button
           onClick={() => setJourneySubTab('steps')}
-          className={`flex-1 py-2 text-center text-xs font-bold rounded-lg transition-all ${
+          className={`flex-1 py-2 text-center text-xs font-bold rounded-lg transition-all cursor-pointer ${
             journeySubTab === 'steps'
               ? 'bg-white text-slate-900 shadow-xs'
               : 'text-slate-500 hover:text-slate-800'
@@ -108,7 +128,7 @@ export function JourneySteps() {
           </div>
 
           <div className="pt-1">
-            <h2 className="text-base font-bold text-slate-900 leading-snug">Use Elevator B</h2>
+            <h2 className="text-base font-bold text-slate-900 leading-snug">Elevator B</h2>
             <p className="text-xs font-medium text-slate-500">Step-free to platform</p>
           </div>
         </div>
@@ -182,6 +202,15 @@ export function JourneySteps() {
           </div>
         </div>
       </div>
+
+      {/* Voice Directions Action Button */}
+      <button
+        onClick={handlePlayDirections}
+        className="w-full py-3.5 px-4 rounded-2xl bg-[#0A192F] hover:bg-[#132A4A] text-white font-bold text-sm flex items-center justify-center gap-2 shadow-md transition-colors cursor-pointer"
+      >
+        <Volume2 className="w-4 h-4 text-[#1AC8A0]" />
+        <span>{isPlayingAudio ? 'Playing directions...' : 'Play directions'}</span>
+      </button>
     </div>
   );
 }
