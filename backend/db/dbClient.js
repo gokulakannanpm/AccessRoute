@@ -83,8 +83,19 @@ export const dbClient = {
       }
     }
 
-    // Dynamic preference adjustment for demo
+    // Dynamic preference adjustment and scoring
     const result = JSON.parse(JSON.stringify(localRoutes));
+
+    // Calculate accessibility scores: score = (elevators * 10) - (stairs * 15) + (ramps * 5) - (walking_distance / 20)
+    for (const key of ['recommended', 'fastest', 'lowestCost']) {
+      if (result[key]) {
+        const elevators = result[key].elevatorsCount || (result[key].accessibility?.elevators || 0);
+        const stairs = result[key].stairsCount || (result[key].accessibility?.stairs || 0);
+        const ramps = result[key].hasRamp || (result[key].accessibility?.ramps ? 1 : 0) ? 1 : 0;
+        const walking = result[key].walkingDistanceMeters || result[key].walkingDistance || 0;
+        result[key].accessibilityScore = Math.round(((elevators * 10) - (stairs * 15) + (ramps * 5) - (walking / 20)) * 10) / 10;
+      }
+    }
 
     // If voice guidance requested, add voice badge
     if (preferences.voiceGuidance) {

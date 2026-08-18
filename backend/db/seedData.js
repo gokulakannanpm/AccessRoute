@@ -217,6 +217,21 @@ export const CHENNAI_ROUTES = {
     hasLowFloorBus: true,
     walkingDistanceMeters: 180,
     walkingText: '180m walking distance',
+    color: '#1A5C8D',
+    coordinates: [
+      [80.2707, 13.0827],
+      [80.2715, 13.0818],
+      [80.2725, 13.0750],
+      [80.2670, 13.0650],
+      [80.2570, 13.0550],
+      [80.2480, 13.0420],
+      [80.2390, 13.0320],
+      [80.2285, 13.0235],
+      [80.2281, 13.0232],
+      [80.2320, 13.0150],
+      [80.2370, 13.0070],
+      [80.2408, 13.0001]
+    ],
     accessibility: {
       level: 'highly_accessible',
       elevators: 2,
@@ -323,6 +338,19 @@ export const CHENNAI_ROUTES = {
     hasRamp: false,
     walkingDistanceMeters: 620,
     walkingText: '620m walking distance',
+    color: '#5A9FD4',
+    coordinates: [
+      [80.2707, 13.0827],
+      [80.2720, 13.0805],
+      [80.2660, 13.0680],
+      [80.2550, 13.0560],
+      [80.2440, 13.0420],
+      [80.2340, 13.0280],
+      [80.2281, 13.0232],
+      [80.2360, 13.0090],
+      [80.2408, 13.0001],
+      [80.2415, 12.9985]
+    ],
     accessibility: {
       level: 'limited',
       elevators: 0,
@@ -395,6 +423,18 @@ export const CHENNAI_ROUTES = {
     hasRamp: true,
     walkingDistanceMeters: 300,
     walkingText: '300m walking distance',
+    color: '#64748B',
+    coordinates: [
+      [80.2707, 13.0827],
+      [80.2718, 13.0815],
+      [80.2690, 13.0720],
+      [80.2600, 13.0590],
+      [80.2480, 13.0450],
+      [80.2360, 13.0300],
+      [80.2310, 13.0180],
+      [80.2395, 13.0030],
+      [80.2408, 13.0001]
+    ],
     accessibility: {
       level: 'good',
       elevators: 1,
