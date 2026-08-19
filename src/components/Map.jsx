@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
-import mapboxgl from 'mapbox-gl';
-import 'mapbox-gl/dist/mapbox-gl.css';
+import * as maplibregl from 'maplibre-gl';
+import 'maplibre-gl/dist/maplibre-gl.css';
 import { AppContext } from '../context/AppContext';
 import {
   Plus,
@@ -23,13 +23,7 @@ import {
   getStationAccessibilityData
 } from '../utils/routing';
 
-// Mapbox Token from environment variables
-const MAPBOX_TOKEN =
-  (typeof import.meta !== 'undefined' && import.meta.env?.VITE_MAPBOX_TOKEN) ||
-  (typeof process !== 'undefined' && process.env?.REACT_APP_MAPBOX_TOKEN) ||
-  '';
-
-// Open-source Mapbox GL fallback raster style (CartoDB Voyager) for 100% offline/demo resilience
+// Open-source MapLibre raster style (CartoDB Voyager) for 100% offline/demo resilience
 const FALLBACK_MAP_STYLE = {
   version: 8,
   sources: {
@@ -76,32 +70,23 @@ export function MapView() {
   const [selectedStationPopup, setSelectedStationPopup] = useState(null);
   const [mapLoaded, setMapLoaded] = useState(false);
 
-  // Initialize Mapbox Map
+  // Initialize MapLibre Map
   useEffect(() => {
     if (!mapContainerRef.current) return;
 
-    mapboxgl.accessToken = MAPBOX_TOKEN;
-
-    // Prefer streets style if token is configured, or use reliable fallback
-    let styleToUse = 'mapbox://styles/mapbox/streets-v12';
-    if (!MAPBOX_TOKEN || MAPBOX_TOKEN.includes('example') || MAPBOX_TOKEN.length < 20) {
-      styleToUse = FALLBACK_MAP_STYLE;
-    }
-
-    const map = new mapboxgl.Map({
+    const map = new maplibregl.Map({
       container: mapContainerRef.current,
-      style: styleToUse,
+      style: FALLBACK_MAP_STYLE,
       center: CHENNAI_COORDINATES.chennaiCentral, // [80.2707, 13.0827]
       zoom: 12.8,
       pitch: 15,
       attributionControl: false
     });
 
-    map.addControl(new mapboxgl.AttributionControl({ compact: true }), 'bottom-right');
+    map.addControl(new maplibregl.AttributionControl({ compact: true }), 'bottom-right');
 
-    map.on('style.error', () => {
-      console.warn('[Mapbox] Style failed to load, switching to fallback Voyager style');
-      map.setStyle(FALLBACK_MAP_STYLE);
+    map.on('style.error', (e) => {
+      console.warn('[MapLibre] Style failed to load:', e);
     });
 
     map.on('load', () => {
@@ -167,7 +152,7 @@ export function MapView() {
       const data = getStationAccessibilityData('chennai central');
       setSelectedStationPopup(data);
     };
-    const originMarker = new mapboxgl.Marker({ element: originEl, anchor: 'bottom' })
+    const originMarker = new maplibregl.Marker({ element: originEl, anchor: 'bottom' })
       .setLngLat(originCoords)
       .addTo(map);
     markersRef.current.push(originMarker);
@@ -195,7 +180,7 @@ export function MapView() {
       const data = getStationAccessibilityData('guindy');
       setSelectedStationPopup(data);
     };
-    const destMarker = new mapboxgl.Marker({ element: destEl, anchor: 'bottom' })
+    const destMarker = new maplibregl.Marker({ element: destEl, anchor: 'bottom' })
       .setLngLat(destCoords)
       .addTo(map);
     markersRef.current.push(destMarker);
@@ -227,7 +212,7 @@ export function MapView() {
         const data = getStationAccessibilityData(st.name);
         setSelectedStationPopup(data);
       };
-      const stMarker = new mapboxgl.Marker({ element: stEl, anchor: 'center' })
+      const stMarker = new maplibregl.Marker({ element: stEl, anchor: 'center' })
         .setLngLat(st.coords)
         .addTo(map);
       markersRef.current.push(stMarker);
@@ -291,7 +276,7 @@ export function MapView() {
         });
       };
 
-      const marker = new mapboxgl.Marker({ element: el, anchor: 'center' })
+      const marker = new maplibregl.Marker({ element: el, anchor: 'center' })
         .setLngLat(feature.coordinates)
         .addTo(map);
 
@@ -452,7 +437,7 @@ export function MapView() {
 
   // Fit bounds to Chennai Central -> Guindy route
   const fitRouteBounds = (map) => {
-    const bounds = new mapboxgl.LngLatBounds();
+    const bounds = new maplibregl.LngLatBounds();
     bounds.extend(CHENNAI_COORDINATES.chennaiCentral);
     bounds.extend(CHENNAI_COORDINATES.guindy);
     bounds.extend(CHENNAI_COORDINATES.egmore);
@@ -482,7 +467,7 @@ export function MapView() {
 
   return (
     <div className="relative w-full h-full min-h-[420px] bg-slate-100 rounded-2xl overflow-hidden shadow-sm border border-slate-200 flex flex-col justify-between">
-      {/* Mapbox Map Container */}
+      {/* MapLibre Map Container */}
       <div ref={mapContainerRef} className="absolute inset-0 w-full h-full" />
 
       {/* TOP OVERLAYS: Live Route Status & Voice Guidance */}
@@ -504,11 +489,10 @@ export function MapView() {
         <div className="flex items-center gap-2">
           <button
             onClick={toggleAccessibilityLayer}
-            className={`px-3 py-2 rounded-xl text-xs font-bold shadow-md border transition-all flex items-center gap-1.5 ${
-              isAccessibilityLayerOn
+            className={`px-3 py-2 rounded-xl text-xs font-bold shadow-md border transition-all flex items-center gap-1.5 ${isAccessibilityLayerOn
                 ? 'bg-white text-emerald-800 border-emerald-300 hover:bg-emerald-50'
                 : 'bg-slate-800 text-slate-300 border-slate-700 hover:bg-slate-700'
-            }`}
+              }`}
             title="Toggle Accessibility Layer"
           >
             {isAccessibilityLayerOn ? (
@@ -532,11 +516,10 @@ export function MapView() {
                 setCurrentView('assisted');
               }
             }}
-            className={`text-xs font-bold px-3 py-2 rounded-xl shadow-md transition-all flex items-center gap-1.5 ${
-              isPlayingAudio
+            className={`text-xs font-bold px-3 py-2 rounded-xl shadow-md transition-all flex items-center gap-1.5 ${isPlayingAudio
                 ? 'bg-[#1AC8A0] text-slate-900 animate-pulse'
                 : 'bg-[#1F3A5F] text-[#1AC8A0] hover:bg-[#132A4A]'
-            }`}
+              }`}
             title="Voice guidance directions"
           >
             <Volume2 className="w-4 h-4" />
