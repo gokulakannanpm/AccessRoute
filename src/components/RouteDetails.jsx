@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../context/AppContext';
 import { Bus, Train, ArrowDownUp, Accessibility, AlertTriangle, CheckCircle2, Navigation, MapPin, Footprints, Sparkles } from 'lucide-react';
+import { RouteSearch } from './RouteSearch';
 
 export function RouteDetails() {
   const {
@@ -16,44 +17,10 @@ export function RouteDetails() {
     refreshRoutes
   } = useContext(AppContext);
 
-  const handleSearchSubmit = (e) => {
-    if (e) e.preventDefault();
-    refreshRoutes(origin, destination, preferences);
-    setCurrentView('route-options');
-  };
-
   return (
     <div className="bg-white p-4 md:p-6 rounded-2xl shadow-sm border border-slate-100 space-y-4 max-w-xl mx-auto pb-20 md:pb-6">
       {/* Search inputs header */}
-      <form onSubmit={handleSearchSubmit} className="space-y-2.5">
-        <div className="flex items-center gap-2 p-2.5 rounded-xl bg-slate-100 border border-slate-200 text-xs font-semibold text-slate-800">
-          <Navigation className="w-4 h-4 text-[#1F3A5F] shrink-0" />
-          <input
-            type="text"
-            value={origin}
-            onChange={(e) => setOrigin(e.target.value)}
-            placeholder="Starting point (e.g. Chennai Central)"
-            className="bg-transparent w-full focus:outline-hidden text-slate-900 font-bold text-xs"
-          />
-        </div>
-
-        <div className="flex items-center gap-2 p-2.5 rounded-xl bg-slate-100 border border-slate-200 text-xs font-semibold text-slate-800 focus-within:border-[#1AC8A0]">
-          <MapPin className="w-4 h-4 text-red-600 shrink-0" />
-          <input
-            type="text"
-            value={destination}
-            onChange={(e) => setDestination(e.target.value)}
-            placeholder="Where to? (e.g. Guindy)"
-            className="bg-transparent w-full focus:outline-hidden text-slate-900 font-bold text-xs"
-          />
-          <button
-            type="submit"
-            className="px-3 py-1 bg-[#1F3A5F] hover:bg-[#132A4A] text-white rounded-lg text-xs font-bold transition-colors cursor-pointer shrink-0"
-          >
-            Find Routes
-          </button>
-        </div>
-      </form>
+      <RouteSearch onSearchComplete={() => setCurrentView('route-options')} />
 
       {/* Preferences tags & Assisted Travel button */}
       <div className="flex items-center justify-between gap-2 text-xs font-semibold text-slate-600 flex-wrap pt-1">

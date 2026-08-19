@@ -49,6 +49,18 @@ const FALLBACK_MAP_STYLE = {
   ]
 };
 
+export function getCoordinatesForLocation(locName) {
+  if (!locName) return [80.2707, 13.0827];
+  const name = String(locName).toLowerCase();
+  if (name.includes('central')) return [80.2707, 13.0827];
+  if (name.includes('egmore')) return [80.2609, 13.0732];
+  if (name.includes('nagar') || name.includes('t. nagar')) return [80.2341, 13.0418];
+  if (name.includes('koyambedu') || name.includes('cmbt')) return [80.1948, 13.0694];
+  if (name.includes('guindy')) return [80.2408, 13.0001];
+  if (name.includes('tambaram')) return [80.1000, 12.9249];
+  return [80.2707, 13.0827];
+}
+
 export function MapView() {
   const {
     origin,
@@ -58,7 +70,9 @@ export function MapView() {
     selectedRoute,
     setCurrentView,
     handlePlayDirections,
-    isPlayingAudio
+    isPlayingAudio,
+    routes,
+    preferences
   } = useContext(AppContext);
 
   const mapContainerRef = useRef(null);
@@ -77,7 +91,7 @@ export function MapView() {
     const map = new maplibregl.Map({
       container: mapContainerRef.current,
       style: FALLBACK_MAP_STYLE,
-      center: CHENNAI_COORDINATES.chennaiCentral, // [80.2707, 13.0827]
+      center: getCoordinatesForLocation(origin),
       zoom: 12.8,
       pitch: 15,
       attributionControl: false
@@ -92,15 +106,7 @@ export function MapView() {
     map.on('load', () => {
       mapRef.current = map;
       setMapLoaded(true);
-
-      // 1. Add Chennai Metro background transit lines
       addMetroLines(map);
-
-      // 2. Add Candidate Route Polylines (Recommended, Fastest, Lowest Cost)
-      addRouteLayers(map);
-
-      // 3. Fit bounds to primary Chennai corridor
-      fitRouteBounds(map);
     });
 
     return () => {
@@ -111,17 +117,154 @@ export function MapView() {
     };
   }, []);
 
-  // Update Route Layers when selected route changes
+  // Compute transformed route polyline coordinates connecting origin -> waypoints -> destination
+  const getTransformedRouteCoords = (baseCoords, startPt, endPt) => {
+    if (!baseCoords || baseCoords.length < 2) return [startPt, endPt];
+    // If baseCoords already start near startPt and end near endPt, use exact OSRM/Metro geometry directly
+    const firstPt = baseCoords[0];
+    const lastPt = baseCoords[baseCoords.length - 1];
+    const startDist = Math.hypot(firstPt[0] - startPt[0], firstPt[1] - startPt[1]);
+    const endDist = Math.hypot(lastPt[0] - endPt[0], lastPt[1] - endPt[1]);
+
+    if (startDist < 0.04 && endDist < 0.04) {
+      return baseCoords;
+    }
+
+    const defaultOrigin = [80.2707, 13.0827];
+    const defaultDest = [80.2408, 13.0001];
+    const totalPts = baseCoords.length;
+    const startDeltaX = startPt[0] - defaultOrigin[0];
+    const startDeltaY = startPt[1] - defaultOrigin[1];
+    const endDeltaX = endPt[0] - defaultDest[0];
+    const endDeltaY = endPt[1] - defaultDest[1];
+
+    return baseCoords.map((pt, idx) => {
+      const t = totalPts > 1 ? idx / (totalPts - 1) : 0;
+      const dx = (1 - t) * startDeltaX + t * endDeltaX;
+      const dy = (1 - t) * startDeltaY + t * endDeltaY;
+      return [pt[0] + dx, pt[1] + dy];
+    });
+  };
+
+  // Render & update route polylines on map whenever routes, selection, or coordinates change
   useEffect(() => {
     if (!mapRef.current || !mapLoaded) return;
-    updateActiveRouteStyles(mapRef.current, selectedRouteKey);
-  }, [selectedRouteKey, mapLoaded]);
+    const map = mapRef.current;
+    const routesData = routes || CHENNAI_CANDIDATE_ROUTES;
+    const routeKeys = ['recommended', 'fastest', 'lowestCost'];
+    const originCoords = getCoordinatesForLocation(origin);
+    const destCoords = getCoordinatesForLocation(destination);
+
+    routeKeys.forEach((key) => {
+      const route = routesData[key];
+      const sourceId = `route-source-${key}`;
+      const layerId = `route-layer-${key}`;
+      const casingId = `route-casing-${key}`;
+
+      // Check if route is filtered out (e.g. stairs filter active on a route with stairs)
+      const isFilteredOut =
+        (preferences?.avoidStairs || preferences?.wheelchair) &&
+        route &&
+        (route.stairsCount > 0 || route.isStepFree === false);
+
+      if (!route || isFilteredOut) {
+        if (map.getLayer(casingId)) map.setLayoutProperty(casingId, 'visibility', 'none');
+        if (map.getLayer(layerId)) map.setLayoutProperty(layerId, 'visibility', 'none');
+        return;
+      }
+
+      const baseCoords = route.coordinates || CHENNAI_CANDIDATE_ROUTES[key]?.coordinates || [];
+      const transformedCoords = getTransformedRouteCoords(baseCoords, originCoords, destCoords);
+
+      const geojson = {
+        type: 'Feature',
+        geometry: {
+          type: 'LineString',
+          coordinates: transformedCoords
+        }
+      };
+
+      if (map.getSource(sourceId)) {
+        map.getSource(sourceId).setData(geojson);
+      } else {
+        map.addSource(sourceId, {
+          type: 'geojson',
+          data: geojson
+        });
+
+        // Glow / Casing Layer for active selection
+        map.addLayer({
+          id: casingId,
+          type: 'line',
+          source: sourceId,
+          layout: { 'line-join': 'round', 'line-cap': 'round', 'visibility': 'visible' },
+          paint: {
+            'line-color': '#1AC8A0',
+            'line-width': key === selectedRouteKey ? 9 : 0,
+            'line-opacity': key === selectedRouteKey ? 0.6 : 0
+          }
+        });
+
+        // Main Polyline Layer
+        map.addLayer({
+          id: layerId,
+          type: 'line',
+          source: sourceId,
+          layout: { 'line-join': 'round', 'line-cap': 'round', 'visibility': 'visible' },
+          paint: {
+            'line-color': route.color || (key === 'recommended' ? '#1A5C8D' : key === 'fastest' ? '#5A9FD4' : '#64748B'),
+            'line-width': key === selectedRouteKey ? 6 : 3.5,
+            'line-opacity': key === selectedRouteKey ? 0.95 : 0.4,
+            ...(key === 'lowestCost' ? { 'line-dasharray': [2, 2] } : {})
+          }
+        });
+
+        map.on('click', layerId, () => {
+          setSelectedRouteKey(key);
+        });
+
+        map.on('mouseenter', layerId, () => {
+          map.getCanvas().style.cursor = 'pointer';
+        });
+
+        map.on('mouseleave', layerId, () => {
+          map.getCanvas().style.cursor = '';
+        });
+      }
+
+      if (map.getLayer(casingId)) map.setLayoutProperty(casingId, 'visibility', 'visible');
+      if (map.getLayer(layerId)) map.setLayoutProperty(layerId, 'visibility', 'visible');
+
+      const isActive = key === selectedRouteKey;
+      if (map.getLayer(layerId)) {
+        map.setPaintProperty(layerId, 'line-width', isActive ? 6 : 3.5);
+        map.setPaintProperty(layerId, 'line-opacity', isActive ? 0.95 : 0.4);
+      }
+      if (map.getLayer(casingId)) {
+        map.setPaintProperty(casingId, 'line-width', isActive ? 9 : 0);
+        map.setPaintProperty(casingId, 'line-opacity', isActive ? 0.6 : 0);
+      }
+    });
+
+    // Fit map bounds to active selected route
+    const activeRouteData = routesData[selectedRouteKey] || routesData.recommended;
+    if (activeRouteData) {
+      const activeBaseCoords = activeRouteData.coordinates || CHENNAI_CANDIDATE_ROUTES[selectedRouteKey]?.coordinates || [];
+      const activeCoords = getTransformedRouteCoords(activeBaseCoords, originCoords, destCoords);
+      const bounds = new maplibregl.LngLatBounds();
+      activeCoords.forEach((pt) => bounds.extend(pt));
+      map.fitBounds(bounds, {
+        padding: { top: 60, bottom: 60, left: 60, right: 60 },
+        maxZoom: 15,
+        duration: 800
+      });
+    }
+  }, [mapLoaded, routes, selectedRouteKey, origin, destination, preferences]);
 
   // Update Markers (Origin, Destination, Stations, Accessibility)
   useEffect(() => {
     if (!mapRef.current || !mapLoaded) return;
 
-    // Clear previous markers
     markersRef.current.forEach((m) => m.remove());
     markersRef.current = [];
     accessMarkersRef.current.forEach((m) => m.remove());
@@ -129,8 +272,8 @@ export function MapView() {
 
     const map = mapRef.current;
 
-    // 1. Origin Marker (Chennai Central - Blue Circle with Bus/Station Icon)
-    const originCoords = CHENNAI_COORDINATES.chennaiCentral;
+    // 1. Origin Marker
+    const originCoords = getCoordinatesForLocation(origin);
     const originEl = document.createElement('div');
     originEl.className = 'origin-marker-container cursor-pointer transition-transform hover:scale-105';
     originEl.innerHTML = `
@@ -149,7 +292,7 @@ export function MapView() {
       </div>
     `;
     originEl.onclick = () => {
-      const data = getStationAccessibilityData('chennai central');
+      const data = getStationAccessibilityData(origin || 'chennai central');
       setSelectedStationPopup(data);
     };
     const originMarker = new maplibregl.Marker({ element: originEl, anchor: 'bottom' })
@@ -157,8 +300,8 @@ export function MapView() {
       .addTo(map);
     markersRef.current.push(originMarker);
 
-    // 2. Destination Marker (Guindy - Red Pin)
-    const destCoords = CHENNAI_COORDINATES.guindy;
+    // 2. Destination Marker
+    const destCoords = getCoordinatesForLocation(destination);
     const destEl = document.createElement('div');
     destEl.className = 'dest-marker-container cursor-pointer transition-transform hover:scale-105';
     destEl.innerHTML = `
@@ -177,7 +320,7 @@ export function MapView() {
       </div>
     `;
     destEl.onclick = () => {
-      const data = getStationAccessibilityData('guindy');
+      const data = getStationAccessibilityData(destination || 'guindy');
       setSelectedStationPopup(data);
     };
     const destMarker = new maplibregl.Marker({ element: destEl, anchor: 'bottom' })
@@ -185,7 +328,7 @@ export function MapView() {
       .addTo(map);
     markersRef.current.push(destMarker);
 
-    // 3. Intermediate Station Nodes (Egmore & Saidapet)
+    // 3. Intermediate Station Nodes
     const stations = [
       { name: 'Egmore Station', coords: CHENNAI_COORDINATES.egmore, type: 'metro' },
       { name: 'Saidapet Metro', coords: CHENNAI_COORDINATES.saidapet, type: 'metro' },
@@ -218,7 +361,7 @@ export function MapView() {
       markersRef.current.push(stMarker);
     });
 
-    // 4. Accessibility Overlay Features (Elevators, Stairs, Ramps, Wheelchair Entrances)
+    // 4. Accessibility Overlay Features
     CHENNAI_ACCESSIBILITY_FEATURES.forEach((feature) => {
       const el = document.createElement('div');
       el.className = `accessibility-marker ${feature.type} cursor-pointer transition-all duration-300 transform hover:scale-125`;
@@ -298,7 +441,6 @@ export function MapView() {
 
   // Add Chennai Metro Lines (Background)
   const addMetroLines = (map) => {
-    // Metro Blue Line
     if (!map.getSource('metro-blue-line')) {
       map.addSource('metro-blue-line', {
         type: 'geojson',
@@ -323,7 +465,6 @@ export function MapView() {
       });
     }
 
-    // Metro Green Line
     if (!map.getSource('metro-green-line')) {
       map.addSource('metro-green-line', {
         type: 'geojson',
@@ -349,107 +490,6 @@ export function MapView() {
     }
   };
 
-  // Add Route Polylines (Recommended, Fastest, Lowest Cost)
-  const addRouteLayers = (map) => {
-    const routeKeys = ['recommended', 'fastest', 'lowestCost'];
-
-    routeKeys.forEach((key) => {
-      const routeData = CHENNAI_CANDIDATE_ROUTES[key];
-      const sourceId = `route-source-${key}`;
-      const layerId = `route-layer-${key}`;
-      const casingId = `route-casing-${key}`;
-
-      if (!map.getSource(sourceId)) {
-        map.addSource(sourceId, {
-          type: 'geojson',
-          data: {
-            type: 'Feature',
-            geometry: {
-              type: 'LineString',
-              coordinates: routeData.coordinates
-            }
-          }
-        });
-
-        // Glow / Casing Layer for active state
-        map.addLayer({
-          id: casingId,
-          type: 'line',
-          source: sourceId,
-          layout: { 'line-join': 'round', 'line-cap': 'round' },
-          paint: {
-            'line-color': '#1AC8A0',
-            'line-width': key === selectedRouteKey ? 8 : 0,
-            'line-opacity': key === selectedRouteKey ? 0.6 : 0
-          }
-        });
-
-        // Main Route Path Layer
-        map.addLayer({
-          id: layerId,
-          type: 'line',
-          source: sourceId,
-          layout: { 'line-join': 'round', 'line-cap': 'round' },
-          paint: {
-            'line-color': routeData.color || '#1A5C8D',
-            'line-width': key === selectedRouteKey ? 5 : 3.5,
-            'line-opacity': key === selectedRouteKey ? 0.95 : 0.45,
-            ...(key === 'lowestCost' ? { 'line-dasharray': [2, 2] } : {})
-          }
-        });
-
-        // Click on route path to select it
-        map.on('click', layerId, () => {
-          setSelectedRouteKey(key);
-        });
-
-        map.on('mouseenter', layerId, () => {
-          map.getCanvas().style.cursor = 'pointer';
-        });
-
-        map.on('mouseleave', layerId, () => {
-          map.getCanvas().style.cursor = '';
-        });
-      }
-    });
-  };
-
-  // Update Active Route Styles
-  const updateActiveRouteStyles = (map, activeKey) => {
-    const routeKeys = ['recommended', 'fastest', 'lowestCost'];
-
-    routeKeys.forEach((key) => {
-      const layerId = `route-layer-${key}`;
-      const casingId = `route-casing-${key}`;
-
-      if (map.getLayer(layerId)) {
-        const isActive = key === activeKey;
-        map.setPaintProperty(layerId, 'line-width', isActive ? 5 : 3);
-        map.setPaintProperty(layerId, 'line-opacity', isActive ? 0.95 : 0.35);
-
-        if (map.getLayer(casingId)) {
-          map.setPaintProperty(casingId, 'line-width', isActive ? 9 : 0);
-          map.setPaintProperty(casingId, 'line-opacity', isActive ? 0.5 : 0);
-        }
-      }
-    });
-  };
-
-  // Fit bounds to Chennai Central -> Guindy route
-  const fitRouteBounds = (map) => {
-    const bounds = new maplibregl.LngLatBounds();
-    bounds.extend(CHENNAI_COORDINATES.chennaiCentral);
-    bounds.extend(CHENNAI_COORDINATES.guindy);
-    bounds.extend(CHENNAI_COORDINATES.egmore);
-    bounds.extend(CHENNAI_COORDINATES.saidapet);
-
-    map.fitBounds(bounds, {
-      padding: { top: 60, bottom: 60, left: 50, right: 50 },
-      maxZoom: 14,
-      duration: 1000
-    });
-  };
-
   // Zoom In / Out Handlers
   const handleZoomIn = () => {
     if (mapRef.current) mapRef.current.zoomIn();
@@ -461,7 +501,18 @@ export function MapView() {
 
   const handleCenterMap = () => {
     if (mapRef.current) {
-      fitRouteBounds(mapRef.current);
+      const activeRouteData = (routes || CHENNAI_CANDIDATE_ROUTES)[selectedRouteKey] || routes?.recommended;
+      const activeBaseCoords = activeRouteData?.coordinates || CHENNAI_CANDIDATE_ROUTES[selectedRouteKey]?.coordinates || [];
+      const originCoords = getCoordinatesForLocation(origin);
+      const destCoords = getCoordinatesForLocation(destination);
+      const activeCoords = getTransformedRouteCoords(activeBaseCoords, originCoords, destCoords);
+      const bounds = new maplibregl.LngLatBounds();
+      activeCoords.forEach((pt) => bounds.extend(pt));
+      mapRef.current.fitBounds(bounds, {
+        padding: { top: 60, bottom: 60, left: 60, right: 60 },
+        maxZoom: 15,
+        duration: 800
+      });
     }
   };
 
@@ -490,8 +541,8 @@ export function MapView() {
           <button
             onClick={toggleAccessibilityLayer}
             className={`px-3 py-2 rounded-xl text-xs font-bold shadow-md border transition-all flex items-center gap-1.5 ${isAccessibilityLayerOn
-                ? 'bg-white text-emerald-800 border-emerald-300 hover:bg-emerald-50'
-                : 'bg-slate-800 text-slate-300 border-slate-700 hover:bg-slate-700'
+              ? 'bg-white text-emerald-800 border-emerald-300 hover:bg-emerald-50'
+              : 'bg-slate-800 text-slate-300 border-slate-700 hover:bg-slate-700'
               }`}
             title="Toggle Accessibility Layer"
           >
@@ -517,8 +568,8 @@ export function MapView() {
               }
             }}
             className={`text-xs font-bold px-3 py-2 rounded-xl shadow-md transition-all flex items-center gap-1.5 ${isPlayingAudio
-                ? 'bg-[#1AC8A0] text-slate-900 animate-pulse'
-                : 'bg-[#1F3A5F] text-[#1AC8A0] hover:bg-[#132A4A]'
+              ? 'bg-[#1AC8A0] text-slate-900 animate-pulse'
+              : 'bg-[#1F3A5F] text-[#1AC8A0] hover:bg-[#132A4A]'
               }`}
             title="Voice guidance directions"
           >

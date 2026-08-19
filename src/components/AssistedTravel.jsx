@@ -1,9 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { AppContext } from '../context/AppContext';
 import { Check, Volume2, Bus, Train, ArrowUpRight, Sparkles, Navigation2, Mic, Loader2 } from 'lucide-react';
 
 export function AssistedTravel() {
   const {
+    origin,
+    destination,
     preferences,
     togglePreference,
     isPlayingAudio,
@@ -15,15 +17,26 @@ export function AssistedTravel() {
     isAiProcessing,
     isListeningVoice,
     triggerVoiceSearch,
+    handleProcessVoice,
     voiceTranscript
   } = useContext(AppContext);
+
+  const [typedInput, setTypedInput] = useState('');
 
   const duration = selectedRoute?.durationMinutes || 38;
   const fare = selectedRoute?.fareText || `₹${selectedRoute?.fare || 25}`;
 
+  const handleSubmitText = (e) => {
+    e.preventDefault();
+    if (typedInput.trim()) {
+      handleProcessVoice(typedInput.trim());
+      setTypedInput('');
+    }
+  };
+
   return (
     <div className="bg-white min-h-screen md:min-h-0 md:rounded-2xl p-4 md:p-6 shadow-sm border border-slate-100 max-w-xl mx-auto space-y-4 pb-20 md:pb-6">
-      {/* Top Header Controls with Voice Trigger */}
+      {/* Top Header Controls with Voice & Typed Input */}
       <div className="flex items-center justify-between pb-1">
         <div className="flex items-center gap-2">
           <div className="p-1.5 rounded-lg bg-[#1AC8A0]/15 text-[#14A080]">
@@ -62,6 +75,28 @@ export function AssistedTravel() {
         </button>
       </div>
 
+      {/* Free-form Typed/Voice Input Bar */}
+      <form
+        onSubmit={handleSubmitText}
+        className="flex items-center gap-2 p-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-semibold text-slate-800 focus-within:border-[#1AC8A0]"
+      >
+        <Sparkles className="w-4 h-4 text-[#14A080] shrink-0 ml-1" />
+        <input
+          type="text"
+          value={typedInput}
+          onChange={(e) => setTypedInput(e.target.value)}
+          placeholder="Type journey (e.g. Egmore to Guindy without stairs)..."
+          className="bg-transparent w-full focus:outline-hidden text-slate-900 font-medium text-xs placeholder:text-slate-400"
+        />
+        <button
+          type="submit"
+          disabled={!typedInput.trim() || isAiProcessing}
+          className="px-3 py-1.5 bg-[#1F3A5F] hover:bg-[#132A4A] text-white rounded-lg text-xs font-bold transition-colors cursor-pointer shrink-0 disabled:opacity-50"
+        >
+          {isAiProcessing ? 'Thinking...' : 'Go'}
+        </button>
+      </form>
+
       {/* Voice Transcript Box (if active) */}
       {voiceTranscript && (
         <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-700 flex items-center gap-2">
@@ -78,7 +113,9 @@ export function AssistedTravel() {
           </div>
           <div>
             <h2 className="text-base font-bold text-[#064E3B] tracking-tight">Preferences understood</h2>
-            <p className="text-xs text-slate-600 font-medium">Route generated based on your voice request.</p>
+            <p className="text-xs text-slate-600 font-medium">
+              Route generated for {origin} → {destination} based on your request.
+            </p>
           </div>
         </div>
       )}
@@ -151,7 +188,7 @@ export function AssistedTravel() {
           {/* Recommendation Banner */}
           <div className="z-10 bg-white/95 backdrop-blur-md px-5 py-3 rounded-xl border border-slate-200 shadow-md flex items-center gap-4 text-center">
             <div>
-              <p className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">RECOMMENDED JOURNEY:</p>
+              <p className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">JOURNEY: {origin} → {destination}</p>
               <p className="text-[11px] font-bold text-[#14A080]">₹140 cheaper than cab</p>
             </div>
             <div className="flex items-baseline gap-1">
@@ -169,39 +206,44 @@ export function AssistedTravel() {
               aiRouteExplanation
             ) : (
               <>
-                Take{' '}
-                <span className="px-2 py-0.5 rounded-md bg-slate-100 text-[#1F3A5F] font-bold border border-slate-200">
-                  Bus 21
-                </span>
-                , then{' '}
-                <span className="px-2 py-0.5 rounded-md bg-slate-100 text-[#1F3A5F] font-bold border border-slate-200">
-                  Chennai Metro
-                </span>
-                . Elevator access is available at the transfer and{' '}
-                <span className="px-2 py-0.5 rounded-md bg-[#6EE7B7]/40 text-[#064E3B] font-bold">
-                  no stairs are required
-                </span>
-                .
+                Take public transit from <span className="font-bold text-[#1F3A5F]">{origin}</span> to <span className="font-bold text-[#1F3A5F]">{destination}</span>. Step-free access and elevators are available.
               </>
             )}
           </p>
 
           {/* Segment visual flow timeline */}
-          <div className="pt-2 flex items-center justify-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-[#1F3A5F] text-white flex items-center justify-center shadow-xs">
-              <Bus className="w-5 h-5" />
+          {selectedRoute?.segments && selectedRoute.segments.length > 0 ? (
+            <div className="pt-2 flex items-center justify-center gap-2 flex-wrap">
+              {selectedRoute.segments.map((seg, idx) => (
+                <React.Fragment key={seg.id || idx}>
+                  {idx > 0 && <div className="h-1 w-6 bg-slate-300 rounded-full shrink-0" />}
+                  <div
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 text-slate-800 text-xs font-bold shadow-2xs"
+                    title={seg.description}
+                  >
+                    {seg.type === 'bus' ? (
+                      <Bus className="w-4 h-4 text-[#1F3A5F]" />
+                    ) : seg.type === 'metro' ? (
+                      <Train className="w-4 h-4 text-[#1F3A5F]" />
+                    ) : (
+                      <Navigation2 className="w-4 h-4 text-emerald-600" />
+                    )}
+                    <span>{seg.badge || seg.mode || seg.routeName}</span>
+                  </div>
+                </React.Fragment>
+              ))}
             </div>
-            <div className="h-1 w-10 bg-slate-800 rounded-full" />
-            <div className="w-10 h-10 rounded-xl bg-[#064E3B] text-white flex items-center justify-center shadow-xs">
-              <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
-                <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-9 14H7v-2h3v2zm0-4H7v-2h3v2zm0-4H7V7h3v2zm7 8h-5V7h5v10z" />
-              </svg>
+          ) : (
+            <div className="pt-2 flex items-center justify-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-[#1F3A5F] text-white flex items-center justify-center shadow-xs">
+                <Bus className="w-5 h-5" />
+              </div>
+              <div className="h-1 w-10 bg-slate-800 rounded-full" />
+              <div className="w-10 h-10 rounded-xl bg-[#064E3B] text-white flex items-center justify-center shadow-xs">
+                <Train className="w-5 h-5" />
+              </div>
             </div>
-            <div className="h-1 w-10 bg-slate-800 rounded-full" />
-            <div className="w-10 h-10 rounded-xl bg-[#1F3A5F] text-white flex items-center justify-center shadow-xs">
-              <Train className="w-5 h-5" />
-            </div>
-          </div>
+          )}
         </div>
       </div>
 

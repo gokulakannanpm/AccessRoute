@@ -19,45 +19,111 @@ const getGeminiApiKey = () => {
   return '';
 };
 
+export const HOTSPOT_ALIASES = {
+  'chennai central': 'Chennai Central',
+  'central': 'Chennai Central',
+  'central station': 'Chennai Central',
+  'egmore': 'Egmore',
+  'egmore station': 'Egmore',
+  't. nagar': 'T. Nagar',
+  't nagar': 'T. Nagar',
+  'tnagar': 'T. Nagar',
+  'thyagaraya nagar': 'T. Nagar',
+  'koyambedu': 'Koyambedu',
+  'cmbt': 'Koyambedu',
+  'guindy': 'Guindy',
+  'guindy metro': 'Guindy',
+  'tambaram': 'Tambaram',
+  'tambaram station': 'Tambaram'
+};
+
+export function matchLocationName(str) {
+  if (!str) return null;
+  const s = String(str).trim().toLowerCase();
+  for (const aliasKey in HOTSPOT_ALIASES) {
+    if (s.includes(aliasKey) || aliasKey.includes(s)) {
+      return HOTSPOT_ALIASES[aliasKey];
+    }
+  }
+  return null;
+}
+
+export function extractOriginAndDestination(text) {
+  if (!text || typeof text !== 'string') return { origin: null, destination: null };
+  const lower = text.toLowerCase().trim();
+
+  let origin = null;
+  let destination = null;
+
+  // 1. Pattern "from <loc1> to <loc2>"
+  const fromToMatch = lower.match(/from\s+([a-z0-9\s.]+?)\s+to\s+([a-z0-9\s.]+?)(?:\s+(?:with|without|via|for|using|please)|$)/i);
+  if (fromToMatch) {
+    const candidateOrigin = matchLocationName(fromToMatch[1]);
+    const candidateDest = matchLocationName(fromToMatch[2]);
+    if (candidateOrigin) origin = candidateOrigin;
+    if (candidateDest) destination = candidateDest;
+  }
+
+  // 2. Pattern "to <loc2> from <loc1>"
+  if (!origin || !destination) {
+    const toFromMatch = lower.match(/to\s+([a-z0-9\s.]+?)\s+from\s+([a-z0-9\s.]+?)(?:\s+(?:with|without|via|for|using|please)|$)/i);
+    if (toFromMatch) {
+      const candidateDest = matchLocationName(toFromMatch[1]);
+      const candidateOrigin = matchLocationName(toFromMatch[2]);
+      if (candidateDest) destination = candidateDest;
+      if (candidateOrigin) origin = candidateOrigin;
+    }
+  }
+
+  // 3. Pattern "<loc1> to <loc2>"
+  if (!origin || !destination) {
+    const simpleToMatch = lower.match(/([a-z0-9\s.]+?)\s+to\s+([a-z0-9\s.]+?)(?:\s+(?:with|without|via|for|using|please)|$)/i);
+    if (simpleToMatch) {
+      const candidateOrigin = matchLocationName(simpleToMatch[1]);
+      const candidateDest = matchLocationName(simpleToMatch[2]);
+      if (candidateOrigin && candidateDest) {
+        origin = candidateOrigin;
+        destination = candidateDest;
+      }
+    }
+  }
+
+  // 4. Search for any mentioned hotspots
+  if (!origin || !destination) {
+    const foundLocations = [];
+    const sortedAliasKeys = Object.keys(HOTSPOT_ALIASES).sort((a, b) => b.length - a.length);
+
+    for (const key of sortedAliasKeys) {
+      if (lower.includes(key)) {
+        const canonical = HOTSPOT_ALIASES[key];
+        if (!foundLocations.includes(canonical)) {
+          foundLocations.push(canonical);
+        }
+      }
+    }
+
+    if (foundLocations.length >= 2) {
+      if (!origin) origin = foundLocations[0];
+      if (!destination) destination = foundLocations[1];
+    } else if (foundLocations.length === 1) {
+      if (lower.includes('from ' + foundLocations[0].toLowerCase())) {
+        if (!origin) origin = foundLocations[0];
+      } else {
+        if (!destination) destination = foundLocations[0];
+      }
+    }
+  }
+
+  return { origin, destination };
+}
+
 /**
  * Deterministic offline rule-based extractor
  * Provides 100% reliable fallback when API key is not configured or network is unavailable
  */
 export function fallbackExtractPreferences(userInput = '') {
   const text = String(userInput).toLowerCase().trim();
-  
-  // Destination detection
-  let destination = null;
-  const knownLocations = [
-    'Guindy',
-    'Chennai Central',
-    'Egmore',
-    'Koyambedu',
-    'T. Nagar',
-    'Airport',
-    'Velachery',
-    'Tambaram',
-    'Anna Nagar',
-    'Thiruvanmiyur',
-    'Adyar',
-    'Marina Beach',
-    'Apollo Hospital'
-  ];
-
-  for (const loc of knownLocations) {
-    if (text.includes(loc.toLowerCase())) {
-      destination = loc;
-      break;
-    }
-  }
-
-  // If "to <Location>" pattern
-  if (!destination) {
-    const toMatch = text.match(/\bto\s+([A-Za-z0-9\s.]+?)(?:\s+(?:with|without|via|for|and|please)|$)/i);
-    if (toMatch && toMatch[1]) {
-      destination = toMatch[1].trim();
-    }
-  }
+  const { origin, destination } = extractOriginAndDestination(userInput);
 
   const wheelchair =
     text.includes('wheelchair') ||
@@ -98,6 +164,7 @@ export function fallbackExtractPreferences(userInput = '') {
     text.includes('read out');
 
   return {
+    origin,
     destination,
     wheelchair,
     avoidStairs,
@@ -109,11 +176,12 @@ export function fallbackExtractPreferences(userInput = '') {
 /**
  * Extract structured accessibility preferences from natural language using Gemini API
  * @param {string} userInput - The raw text or voice transcript from the user
- * @returns {Promise<{ destination: string|null, wheelchair: boolean, avoidStairs: boolean, minimizeWalking: boolean, voiceGuidance: boolean }>}
+ * @returns {Promise<{ origin: string|null, destination: string|null, wheelchair: boolean, avoidStairs: boolean, minimizeWalking: boolean, voiceGuidance: boolean }>}
  */
 export async function extractPreferences(userInput) {
   if (!userInput || typeof userInput !== 'string' || userInput.trim() === '') {
     return {
+      origin: null,
       destination: null,
       wheelchair: false,
       avoidStairs: false,
@@ -136,12 +204,14 @@ export async function extractPreferences(userInput) {
 
     const prompt = `
       You are an accessibility preference extractor for a Chennai transportation app.
+      Supported hotspots: Chennai Central, Egmore, T. Nagar, Koyambedu, Guindy, Tambaram.
       
       User input: "${userInput}"
       
       Extract structured preferences as JSON:
       {
-        "destination": "location name or null if not mentioned",
+        "origin": "exact hotspot name or null if not mentioned",
+        "destination": "exact hotspot name or null if not mentioned",
         "wheelchair": boolean,
         "avoidStairs": boolean,
         "minimizeWalking": boolean,
@@ -155,7 +225,6 @@ export async function extractPreferences(userInput) {
     const response = await result.response;
     let text = response.text().trim();
 
-    // Clean any markdown code blocks from Gemini response
     if (text.startsWith('```json')) {
       text = text.slice(7);
     } else if (text.startsWith('```')) {
@@ -167,9 +236,11 @@ export async function extractPreferences(userInput) {
     text = text.trim();
 
     const parsed = JSON.parse(text);
+    const fallbackLocations = extractOriginAndDestination(userInput);
 
     return {
-      destination: parsed.destination || null,
+      origin: parsed.origin || fallbackLocations.origin || null,
+      destination: parsed.destination || fallbackLocations.destination || null,
       wheelchair: Boolean(parsed.wheelchair),
       avoidStairs: Boolean(parsed.avoidStairs),
       minimizeWalking: Boolean(parsed.minimizeWalking),

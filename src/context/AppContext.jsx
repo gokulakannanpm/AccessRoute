@@ -67,18 +67,35 @@ export function AppProvider({ children }) {
     setVoiceTranscript(transcript);
 
     try {
-      // 1. Extract structured preferences with Gemini
+      // 1. Extract structured preferences with Gemini & offline fallback
       const extracted = await extractPreferences(transcript);
-      console.log('[AppContext] Extracted preferences from voice:', extracted);
+      console.log('[AppContext] Extracted preferences from voice/text:', extracted);
 
-      // 2. Update destination if extracted
+      const ALLOWED_LOCATIONS = [
+        'Chennai Central',
+        'Egmore',
+        'T. Nagar',
+        'Koyambedu',
+        'Guindy',
+        'Tambaram'
+      ];
+
+      let newOrigin = origin;
       let newDest = destination;
-      if (extracted.destination && extracted.destination.trim() !== '') {
+      const originExtracted = extracted.origin && ALLOWED_LOCATIONS.includes(extracted.origin);
+      const destExtracted = extracted.destination && ALLOWED_LOCATIONS.includes(extracted.destination);
+
+      if (originExtracted) {
+        newOrigin = extracted.origin;
+        setOrigin(extracted.origin);
+      }
+
+      if (destExtracted) {
         newDest = extracted.destination;
         setDestination(extracted.destination);
       }
 
-      // 3. Update preferences state
+      // 2. Update preferences state
       const updatedPrefs = {
         wheelchair: Boolean(extracted.wheelchair),
         avoidStairs: Boolean(extracted.avoidStairs),
@@ -90,18 +107,26 @@ export function AppProvider({ children }) {
       setPreferences(updatedPrefs);
       setPreferencesUnderstood(true);
 
-      // 4. Fetch routes for updated preferences
-      const fetchedRoutes = await searchRoutes(origin, newDest, updatedPrefs);
-      if (fetchedRoutes) {
-        setRoutes(fetchedRoutes);
+      // 3. Check location extraction completeness & route search
+      if (!originExtracted && !destExtracted) {
+        setAiRouteExplanation('Please specify your origin and destination from our 6 supported hotspots: Chennai Central, Egmore, T. Nagar, Koyambedu, Guindy, Tambaram.');
+      } else if (!originExtracted && destExtracted) {
+        setAiRouteExplanation(`I detected ${newDest} as your destination. Where are you traveling from? (Supported: Chennai Central, Egmore, T. Nagar, Koyambedu, Guindy, Tambaram)`);
+      } else if (originExtracted && !destExtracted) {
+        setAiRouteExplanation(`I detected ${newOrigin} as your starting point. Where would you like to go? (Supported: Chennai Central, Egmore, T. Nagar, Koyambedu, Guindy, Tambaram)`);
+      } else if (newOrigin === newDest) {
+        setAiRouteExplanation('Origin and destination cannot be the same location. Please select two different hotspots.');
+      } else {
+        // Both origin and destination resolved cleanly!
+        const fetchedRoutes = await searchRoutes(newOrigin, newDest, updatedPrefs);
+        if (fetchedRoutes) {
+          setRoutes(fetchedRoutes);
+        }
+        const activeRoute = fetchedRoutes?.recommended || DEMO_ROUTES.recommended;
+        const explanation = await explainRoute(activeRoute);
+        setAiRouteExplanation(explanation);
       }
 
-      // 5. Generate route explanation
-      const activeRoute = fetchedRoutes?.recommended || DEMO_ROUTES.recommended;
-      const explanation = await explainRoute(activeRoute);
-      setAiRouteExplanation(explanation);
-
-      // 6. Navigate to Assisted Travel view
       setCurrentView('assisted');
     } catch (err) {
       console.error('[AppContext] Error in handleProcessVoice:', err);
@@ -110,7 +135,7 @@ export function AppProvider({ children }) {
     } finally {
       setIsAiProcessing(false);
     }
-  }, [destination, origin]);
+  }, [destination, origin, setOrigin, setDestination, setRoutes, setPreferences, setPreferencesUnderstood, setAiRouteExplanation, setCurrentView]);
 
   // Voice Search initiation helper
   const triggerVoiceSearch = () => {

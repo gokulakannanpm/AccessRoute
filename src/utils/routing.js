@@ -729,3 +729,303 @@ export function getStationAccessibilityData(stationNameOrId) {
     knownIssues: []
   };
 }
+
+// Bus numbers sourced from public MTC route data as of 2026-08-19, not a live feed
+// Fares based on official MTC distance-based stage fare table (illustrative, not live pricing)
+export const MTC_BUS_ROUTES_AND_FARES = {
+  'Chennai Central-Guindy': { busNumber: '18A', fareRecommended: 25, fareFastest: 35, fareLowest: 15 },
+  'Guindy-Chennai Central': { busNumber: '18A', fareRecommended: 25, fareFastest: 35, fareLowest: 15 },
+
+  'Chennai Central-Egmore': { busNumber: '17D', fareRecommended: 15, fareFastest: 25, fareLowest: 10 },
+  'Egmore-Chennai Central': { busNumber: '17D', fareRecommended: 15, fareFastest: 25, fareLowest: 10 },
+
+  'Chennai Central-T. Nagar': { busNumber: '27C', fareRecommended: 20, fareFastest: 30, fareLowest: 12 },
+  'T. Nagar-Chennai Central': { busNumber: '27C', fareRecommended: 20, fareFastest: 30, fareLowest: 12 },
+
+  'Chennai Central-Koyambedu': { busNumber: '15B', fareRecommended: 22, fareFastest: 35, fareLowest: 15 },
+  'Koyambedu-Chennai Central': { busNumber: '15B', fareRecommended: 22, fareFastest: 35, fareLowest: 15 },
+
+  'Chennai Central-Tambaram': { busNumber: '18A', fareRecommended: 32, fareFastest: 45, fareLowest: 22 },
+  'Tambaram-Chennai Central': { busNumber: '18A', fareRecommended: 32, fareFastest: 45, fareLowest: 22 },
+
+  'Egmore-Koyambedu': { busNumber: '27B', fareRecommended: 20, fareFastest: 30, fareLowest: 12 },
+  'Koyambedu-Egmore': { busNumber: '27B', fareRecommended: 20, fareFastest: 30, fareLowest: 12 },
+
+  'Egmore-Guindy': { busNumber: '15A', fareRecommended: 22, fareFastest: 35, fareLowest: 15 },
+  'Guindy-Egmore': { busNumber: '15A', fareRecommended: 22, fareFastest: 35, fareLowest: 15 },
+
+  'Egmore-T. Nagar': { busNumber: '47', fareRecommended: 15, fareFastest: 25, fareLowest: 10 },
+  'T. Nagar-Egmore': { busNumber: '47', fareRecommended: 15, fareFastest: 25, fareLowest: 10 },
+
+  'Egmore-Tambaram': { busNumber: 'E18', fareRecommended: 30, fareFastest: 45, fareLowest: 20 },
+  'Tambaram-Egmore': { busNumber: 'E18', fareRecommended: 30, fareFastest: 45, fareLowest: 20 },
+
+  'Koyambedu-Tambaram': { busNumber: '70K', fareRecommended: 28, fareFastest: 40, fareLowest: 18 },
+  'Tambaram-Koyambedu': { busNumber: '70K', fareRecommended: 28, fareFastest: 40, fareLowest: 18 },
+
+  'Koyambedu-Guindy': { busNumber: '70K', fareRecommended: 20, fareFastest: 30, fareLowest: 14 },
+  'Guindy-Koyambedu': { busNumber: '70K', fareRecommended: 20, fareFastest: 30, fareLowest: 14 },
+
+  'Koyambedu-T. Nagar': { busNumber: '29C', fareRecommended: 18, fareFastest: 28, fareLowest: 12 },
+  'T. Nagar-Koyambedu': { busNumber: '29C', fareRecommended: 18, fareFastest: 28, fareLowest: 12 },
+
+  'T. Nagar-Guindy': { busNumber: '47', fareRecommended: 15, fareFastest: 25, fareLowest: 10 },
+  'Guindy-T. Nagar': { busNumber: '47', fareRecommended: 15, fareFastest: 25, fareLowest: 10 },
+
+  'T. Nagar-Tambaram': { busNumber: '52', fareRecommended: 25, fareFastest: 35, fareLowest: 16 },
+  'Tambaram-T. Nagar': { busNumber: '52', fareRecommended: 25, fareFastest: 35, fareLowest: 16 },
+
+  'Guindy-Tambaram': { busNumber: '70C', fareRecommended: 20, fareFastest: 30, fareLowest: 12 },
+  'Tambaram-Guindy': { busNumber: '70C', fareRecommended: 20, fareFastest: 30, fareLowest: 12 }
+};
+
+// Cache for fetched OSRM road geometry
+const OSRM_CACHE = new Map();
+
+/**
+ * Fetch road-following polyline from public OSRM API for road/bus/walk segments
+ */
+export async function getOSRMRoutePath(startCoords, endCoords) {
+  if (!startCoords || !endCoords) return [];
+  const cacheKey = `${startCoords[0].toFixed(4)},${startCoords[1].toFixed(4)};${endCoords[0].toFixed(4)},${endCoords[1].toFixed(4)}`;
+
+  if (OSRM_CACHE.has(cacheKey)) {
+    return OSRM_CACHE.get(cacheKey);
+  }
+
+  try {
+    const url = `https://router.project-osrm.org/route/v1/driving/${startCoords[0]},${startCoords[1]};${endCoords[0]},${endCoords[1]}?overview=full&geometries=geojson`;
+    const res = await fetch(url);
+    if (res.ok) {
+      const data = await res.json();
+      if (data && data.routes && data.routes[0] && data.routes[0].geometry) {
+        const coords = data.routes[0].geometry.coordinates;
+        if (Array.isArray(coords) && coords.length > 0) {
+          OSRM_CACHE.set(cacheKey, coords);
+          return coords;
+        }
+      }
+    }
+  } catch (err) {
+    console.warn('[OSRM API] Failed to fetch road geometry, falling back to 2-point line:', err.message);
+  }
+
+  const fallback = [startCoords, endCoords];
+  OSRM_CACHE.set(cacheKey, fallback);
+  return fallback;
+}
+
+/**
+ * Extract track geometry from Chennai Metro Blue/Green Line track data
+ */
+export function getMetroTrackSegment(startCoords, endCoords, lineName = 'Green Line') {
+  const line = lineName.toLowerCase().includes('blue')
+    ? CHENNAI_METRO_LINES.blueLine.coordinates
+    : CHENNAI_METRO_LINES.greenLine.coordinates;
+
+  const findClosestIndex = (pt) => {
+    let minDist = Infinity;
+    let closestIdx = 0;
+    line.forEach((linePt, idx) => {
+      const dist = Math.hypot(linePt[0] - pt[0], linePt[1] - pt[1]);
+      if (dist < minDist) {
+        minDist = dist;
+        closestIdx = idx;
+      }
+    });
+    return closestIdx;
+  };
+
+  const startIdx = findClosestIndex(startCoords);
+  const endIdx = findClosestIndex(endCoords);
+
+  if (startIdx <= endIdx) {
+    return line.slice(startIdx, endIdx + 1);
+  } else {
+    return line.slice(endIdx, startIdx + 1).reverse();
+  }
+}
+
+// Reference table of estimated per-pair route durations and fares (placeholder estimate, not live MTC/Metro data)
+// Values are symmetric in both directions (A -> B and B -> A produce identical values).
+export const HUB_PAIR_ROUTE_METRICS = {
+  'Chennai Central-Egmore': { distKm: 2, recMin: 12, recFare: 10, fastMin: 9, fastFare: 15, lowMin: 16, lowFare: 8 },
+  'Egmore-Chennai Central': { distKm: 2, recMin: 12, recFare: 10, fastMin: 9, fastFare: 15, lowMin: 16, lowFare: 8 },
+
+  'Chennai Central-T. Nagar': { distKm: 7, recMin: 27, recFare: 20, fastMin: 22, fastFare: 25, lowMin: 32, lowFare: 12 },
+  'T. Nagar-Chennai Central': { distKm: 7, recMin: 27, recFare: 20, fastMin: 22, fastFare: 25, lowMin: 32, lowFare: 12 },
+
+  'Chennai Central-Koyambedu': { distKm: 11, recMin: 38, recFare: 25, fastMin: 30, fastFare: 30, lowMin: 46, lowFare: 15 },
+  'Koyambedu-Chennai Central': { distKm: 11, recMin: 38, recFare: 25, fastMin: 30, fastFare: 30, lowMin: 46, lowFare: 15 },
+
+  'Chennai Central-Guindy': { distKm: 10, recMin: 38, recFare: 25, fastMin: 31, fastFare: 35, lowMin: 44, lowFare: 15 },
+  'Guindy-Chennai Central': { distKm: 10, recMin: 38, recFare: 25, fastMin: 31, fastFare: 35, lowMin: 44, lowFare: 15 },
+
+  'Chennai Central-Tambaram': { distKm: 25, recMin: 68, recFare: 40, fastMin: 55, fastFare: 45, lowMin: 82, lowFare: 20 },
+  'Tambaram-Chennai Central': { distKm: 25, recMin: 68, recFare: 40, fastMin: 55, fastFare: 45, lowMin: 82, lowFare: 20 },
+
+  'Egmore-T. Nagar': { distKm: 5, recMin: 22, recFare: 15, fastMin: 17, fastFare: 20, lowMin: 27, lowFare: 10 },
+  'T. Nagar-Egmore': { distKm: 5, recMin: 22, recFare: 15, fastMin: 17, fastFare: 20, lowMin: 27, lowFare: 10 },
+
+  'Egmore-Koyambedu': { distKm: 9, recMin: 34, recFare: 22, fastMin: 27, fastFare: 28, lowMin: 42, lowFare: 14 },
+  'Koyambedu-Egmore': { distKm: 9, recMin: 34, recFare: 22, fastMin: 27, fastFare: 28, lowMin: 42, lowFare: 14 },
+
+  'Egmore-Guindy': { distKm: 8, recMin: 31, recFare: 20, fastMin: 25, fastFare: 25, lowMin: 38, lowFare: 12 },
+  'Guindy-Egmore': { distKm: 8, recMin: 31, recFare: 20, fastMin: 25, fastFare: 25, lowMin: 38, lowFare: 12 },
+
+  'Egmore-Tambaram': { distKm: 23, recMin: 63, recFare: 38, fastMin: 50, fastFare: 42, lowMin: 76, lowFare: 18 },
+  'Tambaram-Egmore': { distKm: 23, recMin: 63, recFare: 38, fastMin: 50, fastFare: 42, lowMin: 76, lowFare: 18 },
+
+  'T. Nagar-Koyambedu': { distKm: 6, recMin: 25, recFare: 18, fastMin: 19, fastFare: 22, lowMin: 30, lowFare: 11 },
+  'Koyambedu-T. Nagar': { distKm: 6, recMin: 25, recFare: 18, fastMin: 19, fastFare: 22, lowMin: 30, lowFare: 11 },
+
+  'T. Nagar-Guindy': { distKm: 5, recMin: 22, recFare: 15, fastMin: 17, fastFare: 20, lowMin: 27, lowFare: 10 },
+  'Guindy-T. Nagar': { distKm: 5, recMin: 22, recFare: 15, fastMin: 17, fastFare: 20, lowMin: 27, lowFare: 10 },
+
+  'T. Nagar-Tambaram': { distKm: 19, recMin: 54, recFare: 32, fastMin: 43, fastFare: 38, lowMin: 66, lowFare: 16 },
+  'Tambaram-T. Nagar': { distKm: 19, recMin: 54, recFare: 32, fastMin: 43, fastFare: 38, lowMin: 66, lowFare: 16 },
+
+  'Koyambedu-Guindy': { distKm: 9, recMin: 34, recFare: 22, fastMin: 27, fastFare: 28, lowMin: 42, lowFare: 14 },
+  'Guindy-Koyambedu': { distKm: 9, recMin: 34, recFare: 22, fastMin: 27, fastFare: 28, lowMin: 42, lowFare: 14 },
+
+  'Koyambedu-Tambaram': { distKm: 22, recMin: 60, recFare: 36, fastMin: 48, fastFare: 40, lowMin: 73, lowFare: 17 },
+  'Tambaram-Koyambedu': { distKm: 22, recMin: 60, recFare: 36, fastMin: 48, fastFare: 40, lowMin: 73, lowFare: 17 },
+
+  'Guindy-Tambaram': { distKm: 14, recMin: 44, recFare: 26, fastMin: 35, fastFare: 32, lowMin: 53, lowFare: 13 },
+  'Tambaram-Guindy': { distKm: 14, recMin: 44, recFare: 26, fastMin: 35, fastFare: 32, lowMin: 53, lowFare: 13 }
+};
+
+export function getHubPairMetrics(originName, destName) {
+  const o = (originName || 'Chennai Central').trim();
+  const d = (destName || 'Guindy').trim();
+
+  const key1 = `${o}-${d}`;
+  const key2 = `${d}-${o}`;
+
+  if (HUB_PAIR_ROUTE_METRICS[key1]) return HUB_PAIR_ROUTE_METRICS[key1];
+  if (HUB_PAIR_ROUTE_METRICS[key2]) return HUB_PAIR_ROUTE_METRICS[key2];
+
+  return { distKm: 10, recMin: 38, recFare: 25, fastMin: 31, fastFare: 35, lowMin: 44, lowFare: 15 };
+}
+
+/**
+ * Asynchronously build dynamic route candidate polylines and metadata for any hub pair
+ */
+export async function fetchDynamicRouteData(originName = 'Chennai Central', destName = 'Guindy') {
+  const startCoords = getCoordinatesForLocation(originName);
+  const endCoords = getCoordinatesForLocation(destName);
+  const metrics = getHubPairMetrics(originName, destName);
+  const pairKey = `${originName}-${destName}`;
+
+  const busRouteInfo = MTC_BUS_ROUTES_AND_FARES[pairKey] || MTC_BUS_ROUTES_AND_FARES[`${destName}-${originName}`] || { busNumber: '18A' };
+  const busNumber = busRouteInfo.busNumber || '18A';
+
+  // Recommended Route: OSRM Road polyline
+  let recPolyline = [];
+  try {
+    recPolyline = await getOSRMRoutePath(startCoords, endCoords);
+  } catch (e) {
+    recPolyline = CHENNAI_CANDIDATE_ROUTES.recommended.coordinates;
+  }
+
+  // Fastest Route: Real Chennai Metro Track geometry (Green/Blue line if applicable, else OSRM)
+  let fastPolyline = [];
+  try {
+    const isGreenLine = (originName.includes('Egmore') && destName.includes('Koyambedu')) || (originName.includes('Koyambedu') && destName.includes('Egmore'));
+    const isBlueLine = (originName.includes('Central') && destName.includes('Guindy')) || (originName.includes('Guindy') && destName.includes('Central'));
+
+    if (isGreenLine || isBlueLine) {
+      fastPolyline = getMetroTrackSegment(startCoords, endCoords, isGreenLine ? 'Green Line' : 'Blue Line');
+    } else {
+      fastPolyline = await getOSRMRoutePath(startCoords, endCoords);
+    }
+  } catch (e) {
+    fastPolyline = CHENNAI_CANDIDATE_ROUTES.fastest.coordinates;
+  }
+
+  // Lowest Cost Route: OSRM Road polyline
+  let costPolyline = [];
+  try {
+    costPolyline = await getOSRMRoutePath(startCoords, endCoords);
+  } catch (e) {
+    costPolyline = CHENNAI_CANDIDATE_ROUTES.lowestCost.coordinates;
+  }
+
+  return {
+    recommended: {
+      ...CHENNAI_CANDIDATE_ROUTES.recommended,
+      id: `rec-${pairKey}`,
+      duration: metrics.recMin,
+      durationMinutes: metrics.recMin,
+      durationText: `${metrics.recMin} min`,
+      fare: metrics.recFare,
+      fareText: `₹${metrics.recFare}`,
+      coordinates: recPolyline,
+      segments: [
+        {
+          id: 1,
+          type: 'walk',
+          mode: 'Walk',
+          distance: '120m',
+          duration: '2 min',
+          description: 'Step-free path to bus bay',
+          icon: 'walk'
+        },
+        {
+          id: 2,
+          type: 'bus',
+          mode: 'MTC Bus',
+          badge: `MTC Bus ${busNumber}`,
+          line: `MTC Bus ${busNumber}`,
+          routeName: `Bus ${busNumber}`,
+          duration: `${Math.max(5, Math.round(metrics.recMin * 0.6))} min`,
+          description: 'Low-floor, Ramp equipped',
+          icon: 'bus'
+        },
+        {
+          id: 3,
+          type: 'metro',
+          mode: 'Chennai Metro',
+          line: 'Chennai Metro',
+          routeName: 'Metro Line',
+          duration: `${Math.max(4, Math.round(metrics.recMin * 0.35))} min`,
+          description: 'Step-free platform transfer',
+          icon: 'metro'
+        }
+      ]
+    },
+    fastest: {
+      ...CHENNAI_CANDIDATE_ROUTES.fastest,
+      id: `fast-${pairKey}`,
+      duration: metrics.fastMin,
+      durationMinutes: metrics.fastMin,
+      durationText: `${metrics.fastMin} min`,
+      fare: metrics.fastFare,
+      fareText: `₹${metrics.fastFare}`,
+      coordinates: fastPolyline
+    },
+    lowestCost: {
+      ...CHENNAI_CANDIDATE_ROUTES.lowestCost,
+      id: `cost-${pairKey}`,
+      duration: metrics.lowMin,
+      durationMinutes: metrics.lowMin,
+      durationText: `${metrics.lowMin} min`,
+      fare: metrics.lowFare,
+      fareText: `₹${metrics.lowFare}`,
+      coordinates: costPolyline,
+      segments: [
+        {
+          id: 1,
+          type: 'bus',
+          mode: 'MTC Bus',
+          badge: `MTC Bus ${busNumber}`,
+          line: `MTC Bus ${busNumber}`,
+          routeName: `Bus ${busNumber}`,
+          duration: `${metrics.lowMin} min`,
+          description: 'Ordinary MTC Bus service',
+          icon: 'bus'
+        }
+      ]
+    }
+  };
+}

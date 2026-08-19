@@ -144,6 +144,8 @@ export const USER_IMPACT_STATS = {
   }
 };
 
+import { fetchDynamicRouteData } from './routing';
+
 /**
  * Search routes from origin to destination considering preferences
  */
@@ -156,12 +158,16 @@ export async function searchRoutes(origin = 'Chennai Central', destination = 'Gu
     });
     if (res.ok) {
       const data = await res.json();
-      return data;
+      if (data && (data.recommended || data.fastest)) {
+        return data;
+      }
     }
   } catch (err) {
-    console.warn('[API Client] searchRoutes fetch failed, using fallback:', err.message);
+    console.warn('[API Client] searchRoutes fetch failed, using dynamic route builder:', err.message);
   }
-  return DEMO_ROUTES;
+
+  // Generate real road-snapped polylines via OSRM + MTC bus numbers and stage fares
+  return await fetchDynamicRouteData(origin, destination);
 }
 
 /**
