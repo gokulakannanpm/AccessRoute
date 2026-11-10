@@ -147,14 +147,91 @@ export const USER_IMPACT_STATS = {
 import { fetchDynamicRouteData } from './routing';
 
 /**
- * Search routes from origin to destination considering preferences
+ * Fetch timetable routing engine status and feed eligibility audit
  */
-export async function searchRoutes(origin = 'Chennai Central', destination = 'Guindy', preferences = {}) {
+export async function fetchTimetableStatus() {
+  try {
+    const res = await fetch('/api/routes/timetable/status');
+    if (res.ok) {
+      return await res.json();
+    }
+  } catch (err) {
+    console.warn('[API Client] fetchTimetableStatus failed:', err.message);
+  }
+  return {
+    service: 'AccessRoute Timetable Routing Engine',
+    productionRoutingReady: false,
+    eligibleFeedsCount: 0,
+    notice: 'Production timetable routing is strictly disabled: unverified feeds in verification quarantine.'
+  };
+}
+
+/**
+ * Query the timetable routing engine for real schedule-based journeys.
+ * Returns { success: true, data } on success, or { success: false, status, code, error, details } on failure.
+ * Never silently falls back to illustrative routes.
+ */
+export async function searchTimetableRoutes({
+  origin = 'Chennai Central',
+  destination = 'Guindy',
+  departureTime = '08:30:00',
+  preferences = {},
+  transportModes = {},
+  useSyntheticFixtures = false
+}) {
+  try {
+    const res = await fetch('/api/routes/timetable-search', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        origin,
+        destination,
+        departureTime,
+        preferences: {
+          ...preferences,
+          transportModes
+        },
+        useSyntheticFixtures
+      })
+    });
+
+    const data = await res.json();
+
+    if (res.ok && data.success) {
+      return {
+        success: true,
+        data
+      };
+    }
+
+    return {
+      success: false,
+      status: res.status,
+      code: data.code || 'ROUTING_ERROR',
+      error: data.error || 'Failed to calculate timetable route',
+      details: data.details || {}
+    };
+  } catch (err) {
+    return {
+      success: false,
+      status: 503,
+      code: 'NETWORK_ERROR',
+      error: `Network error reaching routing engine: ${err.message}`,
+      details: {}
+    };
+  }
+}
+
+/**
+ * Search routes from origin to destination considering preferences.
+ * By default returns illustrative preview; if routingMode === 'timetable', queries timetable engine.
+ */
+export async function searchRoutes(origin = 'Chennai Central', destination = 'Guindy', preferences = {}, routingMode = 'illustrative') {
   try {
     const res = await fetch('/api/routes/search', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ origin, destination, preferences })
+      body: JSON.stringify({ origin, destination, preferences, routingMode })
     });
     if (res.ok) {
       const data = await res.json();
@@ -248,3 +325,73 @@ export async function fetchUserProfile() {
   }
   return USER_IMPACT_STATS;
 }
+
+/**
+ * Calculate geographical road or pedestrian route via /api/geo/route
+ */
+export async function calculateGeoRoute({ origin, destination, profile = 'walking', preferences = {} }) {
+  try {
+    const res = await fetch('/api/geo/route', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ origin, destination, profile, preferences })
+    });
+    const data = await res.json();
+    if (!res.ok) {
+      return { success: false, status: res.status, code: data.code, error: data.error, details: data.details };
+    }
+    return { success: true, data };
+  } catch (err) {
+    return { success: false, status: 500, code: 'NETWORK_ERROR', error: err.message };
+  }
+}
+
+/**
+ * Geocode query via /api/geo/geocode
+ */
+export async function geocodeLocation(query) {
+  try {
+    const res = await fetch(`/api/geo/geocode?q=${encodeURIComponent(query)}`);
+    const data = await res.json();
+    if (!res.ok) {
+      return { success: false, status: res.status, error: data.error, code: data.code };
+    }
+    return { success: true, data };
+  } catch (err) {
+    return { success: false, error: err.message };
+  }
+}
+
+/**
+ * Autocomplete place query via /api/geo/autocomplete
+ */
+export async function searchAutocomplete(query) {
+  try {
+    const res = await fetch(`/api/geo/autocomplete?q=${encodeURIComponent(query || '')}`);
+    const data = await res.json();
+    return data;
+  } catch (err) {
+    return { outOfScope: false, results: [] };
+  }
+}
+
+/**
+ * Fetch pedestrian infrastructure features via /api/geo/pedestrian
+ */
+export async function fetchPedestrianFeatures(filters = {}) {
+  try {
+    const params = new URLSearchParams();
+    if (filters.type) params.set('type', filters.type);
+    if (filters.stepFreeOnly) params.set('stepFreeOnly', 'true');
+    if (filters.avoidStairs) params.set('avoidStairs', 'true');
+    const res = await fetch(`/api/geo/pedestrian?${params.toString()}`);
+    if (res.ok) {
+      const data = await res.json();
+      return data.features || [];
+    }
+  } catch (err) {
+    console.warn('[API Client] fetchPedestrianFeatures failed:', err.message);
+  }
+  return [];
+}
+

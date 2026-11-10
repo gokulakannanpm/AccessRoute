@@ -1,0 +1,48 @@
+{
+  "datasetName": "Metropolitan Transport Corporation (MTC) Chennai Bus Foundation",
+  "category": "mtc_bus",
+  "operator": "Metropolitan Transport Corporation (Chennai) Ltd. — Government of Tamil Nadu Undertaking",
+  "officialUrl": "https://mtcbus.tn.gov.in/",
+  "openDataSources": [
+    {
+      "sourceName": "CUMTA Open Data Portal",
+      "url": "https://test.cumta.org/ (mirror of static_mtc_gtfs_data.zip)",
+      "retrievalDate": "2026-10-04",
+      "format": "GTFS Static"
+    },
+    {
+      "sourceName": "UngalSoththu ChennaiGTFS",
+      "url": "https://github.com/ungalsoththu/ChennaiGTFS/tree/main/data/mtc",
+      "retrievalDate": "2026-10-26",
+      "format": "GTFS Static",
+      "license": "ODbL / PDDL"
+    },
+    {
+      "sourceName": "OpenCity Chennai Urban Data Portal",
+      "url": "https://data.opencity.in/dataset/chennai-mtc-bus-routes-and-timetables",
+      "retrievalDate": "2026-10-15",
+      "format": "CSV / GeoJSON"
+    }
+  ],
+  "dataArtifactType": "interchange_hubs_catalogue_tier_2_and_imported_gtfs_static",
+  "rawSourceDownloadedToRepo": true,
+  "importedSourceDir": "data/mtc_bus/imported/",
+  "verificationStatus": "cross_checked_catalogue_and_imported_gtfs",
+  "coverage": {
+    "agency": "MTC Chennai",
+    "curatedInterchangeHubsInRepo": 21,
+    "upstreamFeedTotalBusStops": 5580,
+    "upstreamFeedTotalRouteVariants": 4611,
+    "upstreamFeedTotalScheduledTrips": 47047,
+    "operatingJurisdiction": "Greater Chennai Metropolitan Area, Tambaram Corporation, and designated regional permit corridors into Chengalpattu, Kanchipuram, and Tiruvallur"
+  },
+  "licenseAndAttribution": "Public transit timetable data compiled from MTC mobile application API. Curated GTFS compilation licensed under ODbL / PDDL by UngalSoththu. Underlying MTC timetable redistribution rights unconfirmed.",
+  "limitationsAndCaveats": [
+    "Raw GTFS snapshot (7 files: agency, calendar, feed_info, routes, stops, stop_times, trips) imported into data/mtc_bus/imported/ with byte-for-byte SHA-256 verification and strictly isolated from production journey routing (readyForJourneyRouting: false).",
+    "Accessibility Reality: MTC buses are almost exclusively high-floor chassis (850-900mm entrance) without mechanical wheelchair lifts; bus terminus boarding curbs are not uniformly step-free. Blanket step-free access is NOT supported by physical evidence.",
+    "Regional Coverage Reality: Bus stands in Chengalpattu (CGLB) and Sriperumbudur (SPBD) are primarily TNSTC/municipal bus terminals with designated MTC bays for long-distance city services, not standalone MTC facilities.",
+    "CUMTA's official static GTFS feed stamped 4,721 trips with dummy 00:00:15 timestamps. UngalSoththu feed resolves this by scraping real scheduled departures from the official MTC app.",
+    "Real-time vehicle locations (GPS feeds / Chalo MTC Live) are restricted behind commercial API gateways and are not publicly available as open GTFS-RT.",
+    "Free bus travel (Vidiyal Payanam) is valid only on Ordinary / White Board services, not on Deluxe, Express, or AC services."
+  ]
+}

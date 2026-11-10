@@ -1,0 +1,2 @@
+trip_id,arrival_time,departure_time,stop_id,stop_sequence
+UNKNOWN_TRIP,06:00:00,06:01:00,UNKNOWN_STOP,1

@@ -15,7 +15,7 @@ function AppContent() {
   const { currentView } = useContext(AppContext);
 
   return (
-    <div className="min-h-screen bg-slate-100 flex flex-col md:flex-row w-full font-sans antialiased text-slate-900">
+    <div className="min-h-screen bg-[#F5F3ED] flex flex-col md:flex-row w-full font-sans antialiased text-slate-900">
       {/* Desktop Sidebar & Mobile Bottom Navigation */}
       <Navigation />
 

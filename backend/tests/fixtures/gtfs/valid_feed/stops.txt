@@ -1,0 +1,4 @@
+stop_id,stop_name,stop_lat,stop_lon
+ST_CENTRAL,Chennai Central Metro,13.0827,80.2707
+ST_GUINDY,Guindy Metro,13.0084,80.2131
+ST_AIRPORT,Chennai Airport Metro,12.9805,80.1645

@@ -1,0 +1,245 @@
+{
+  "manifestVersion": "1.1.0",
+  "mode": "chennai_metro",
+  "provenance": {
+    "mode": "chennai_metro",
+    "sourceUrl": "https://github.com/ungalsoththu/ChennaiGTFS/tree/main/data/cmrl",
+    "sourceCommit": "af0742dba777f9657ed6fda2046d6c2a721d630b",
+    "sourceRelease": "v0.2.0",
+    "publisher": "Chennai Metro Rail Limited / CUMTA (Mirrored by UngalSoththu)",
+    "license": "UNCONFIRMED",
+    "retrievalDate": "2026-10-27",
+    "feedPublicationDate": "2021-04-20",
+    "timetableValidityRange": {
+      "feedStartDate": "unknown",
+      "feedEndDate": "unknown",
+      "calendarStartDate": "20210420",
+      "calendarEndDate": "20211231",
+      "minServiceDate": "20210420",
+      "maxServiceDate": "20211231",
+      "status": "EXPIRED"
+    },
+    "verifiedOperationalCurrency": "UNVERIFIED_HISTORICAL",
+    "licensing": {
+      "compilationPipeline": "ODbL / PDDL",
+      "timetableSchedules": "UNCONFIRMED",
+      "publisher": "Chennai Metro Rail Limited / CUMTA (Mirrored by UngalSoththu)",
+      "legalAttribution": "Public passenger metro operational timetable published by Chennai Metro Rail Limited; redistribution rights unconfirmed"
+    },
+    "ingestedAt": "2026-10-27T17:40:39.644Z"
+  },
+  "status": "EXPIRED_CALENDAR",
+  "readyForJourneyRouting": false,
+  "calendarStatus": "EXPIRED",
+  "fileInventory": {
+    "agency.txt": {
+      "bytes": 300,
+      "sha256": "8e96c79f3d2fff5b5a982f1c2c95b30508259a0977997833a50d6cbbc611fe5e"
+    },
+    "calendar.txt": {
+      "bytes": 123,
+      "sha256": "00c8d79e1bffa04abfecce8d05606101b24cc76c41e8e44c80c86c5349e7aebc"
+    },
+    "fare_attributes.txt": {
+      "bytes": 196,
+      "sha256": "52ea5b7b3dc2ddcf25485d141570b77796f060272ea863f49ae59d7ad2b5bdcc"
+    },
+    "fare_rules.txt": {
+      "bytes": 20842,
+      "sha256": "786917869bf3a56860f3213ccd093d580c252e09ba2aa7ca88f80e1bd9074c3a"
+    },
+    "routes.txt": {
+      "bytes": 2343,
+      "sha256": "46ee8a8673029c0526ee783b6c946070c6987f8790f4c3e8836dc6f6939f10d4"
+    },
+    "shapes.txt": {
+      "bytes": 178555,
+      "sha256": "901e08e7e8a06661b18d426048a6154f6bac317b85159046773a9a5a29dcb8ab"
+    },
+    "stops.txt": {
+      "bytes": 26901,
+      "sha256": "618bf5eb45ee2445bcd29acd61837cfa174d65fd8fbbaee6534e3c2309bd2304"
+    },
+    "stop_times.txt": {
+      "bytes": 457077,
+      "sha256": "1e2f355ba0c97e8570267777b05ec7562b5ccdf0b53ed60d91f2096faff518b0"
+    },
+    "transfers.txt": {
+      "bytes": 1338,
+      "sha256": "52937473eb8c9314fab8dfb41f46d0b79e543871c0caf7a06eb8b010c1637dad"
+    },
+    "trips.txt": {
+      "bytes": 28482,
+      "sha256": "2ae2e6c419cc6280ba023dad96454f37729223cb8d49d4c72d7c2772dbe86e40"
+    }
+  },
+  "filesFound": [
+    "agency.txt",
+    "calendar.txt",
+    "fare_attributes.txt",
+    "fare_rules.txt",
+    "routes.txt",
+    "shapes.txt",
+    "stops.txt",
+    "stop_times.txt",
+    "transfers.txt",
+    "trips.txt"
+  ],
+  "recordCounts": {
+    "agencies": 1,
+    "routes": 28,
+    "stops": 254,
+    "trips": 625,
+    "stopTimes": 12503,
+    "calendarServices": 1
+  },
+  "qualityClassification": {
+    "sourceValidTripsCount": 625,
+    "quarantinedTripsCount": 0,
+    "quarantinedTrips": []
+  },
+  "feedLevelBlockers": [
+    "FEED_EXPIRED_CALENDAR: All 1 calendar services expired before 20261027",
+    "FEED_MISSING_EXTENSION_TIMETABLES: Stations SWND, STVT lack commercial schedules in this snapshot",
+    "FEED_UNCONFIRMED_DATA_LICENSE: Underlying Chennai Metro Rail Limited timetable data redistribution rights are UNCONFIRMED"
+  ],
+  "catalogueReconciliation": {
+    "catalogueTotalStations": 41,
+    "exactMatchedStations": 20,
+    "aliasMappedStations": [
+      {
+        "catalogueCode": "SWND",
+        "gtfsCode": "SWD",
+        "name": "Wimco Nagar Depot"
+      },
+      {
+        "catalogueCode": "STVT",
+        "gtfsCode": "STT",
+        "name": "Tiruvottiyur Theradi"
+      },
+      {
+        "catalogueCode": "STP",
+        "gtfsCode": "STR",
+        "name": "Tondiarpet"
+      },
+      {
+        "catalogueCode": "SWP",
+        "gtfsCode": "SWA",
+        "name": "Washermanpet"
+      },
+      {
+        "catalogueCode": "SMD",
+        "gtfsCode": "SMA",
+        "name": "Mannadi"
+      },
+      {
+        "catalogueCode": "SMC",
+        "gtfsCode": "SCC",
+        "name": "Puratchi Thalaivar Dr. M.G. Ramachandran Central"
+      },
+      {
+        "catalogueCode": "SLIC",
+        "gtfsCode": "SLI",
+        "name": "LIC"
+      },
+      {
+        "catalogueCode": "SDMS",
+        "gtfsCode": "SGM",
+        "name": "AG-DMS"
+      },
+      {
+        "catalogueCode": "STN",
+        "gtfsCode": "STE",
+        "name": "Teynampet"
+      },
+      {
+        "catalogueCode": "SND",
+        "gtfsCode": "SCR",
+        "name": "Nandanam"
+      },
+      {
+        "catalogueCode": "SSD",
+        "gtfsCode": "SSA",
+        "name": "Saidapet"
+      },
+      {
+        "catalogueCode": "SGD",
+        "gtfsCode": "SGU",
+        "name": "Guindy"
+      },
+      {
+        "catalogueCode": "SNG",
+        "gtfsCode": "SOT",
+        "name": "Nanganallur Road"
+      },
+      {
+        "catalogueCode": "SMB",
+        "gtfsCode": "SME",
+        "name": "Meenambakkam"
+      },
+      {
+        "catalogueCode": "STM",
+        "gtfsCode": "STI",
+        "name": "Thirumangalam"
+      },
+      {
+        "catalogueCode": "SKB",
+        "gtfsCode": "SKO",
+        "name": "Koyambedu"
+      },
+      {
+        "catalogueCode": "SCMBT",
+        "gtfsCode": "SCM",
+        "name": "Puratchi Thalaivi Dr. J. Jayalalithaa CMBT"
+      },
+      {
+        "catalogueCode": "SAB",
+        "gtfsCode": "SAR",
+        "name": "Arumbakkam"
+      },
+      {
+        "catalogueCode": "SVD",
+        "gtfsCode": "SVA",
+        "name": "Vadapalani"
+      },
+      {
+        "catalogueCode": "SEK",
+        "gtfsCode": "SSI",
+        "name": "Ekkattuthangal"
+      },
+      {
+        "catalogueCode": "STMNT",
+        "gtfsCode": "SMM",
+        "name": "St. Thomas Mount"
+      }
+    ],
+    "unmatchedExtensionStations": [
+      {
+        "code": "SWND",
+        "name": "Wimco Nagar Depot",
+        "reason": "CMRL_PHASE_1_EXTENSION_POSTDATES_2021_SNAPSHOT"
+      },
+      {
+        "code": "STVT",
+        "name": "Tiruvottiyur Theradi",
+        "reason": "CMRL_PHASE_1_EXTENSION_POSTDATES_2021_SNAPSHOT"
+      }
+    ],
+    "unmatchedStations": [],
+    "reconciliationRate": "100.0%"
+  },
+  "rejectionsCount": 0,
+  "duplicateCount": 0,
+  "brokenReferencesCount": 0,
+  "anomalies": {
+    "timeInversionsCount": 0,
+    "timeRegressionsCount": 0,
+    "singleStopTripsCount": 0,
+    "distantCalendarServicesCount": 0
+  },
+  "errors": [
+    "Service calendar is expired: all 1 services ended before reference date 20261027"
+  ],
+  "warnings": [],
+  "sampleRejectedRecords": []
+}

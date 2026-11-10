@@ -1,0 +1,3 @@
+stop_id,stop_name,stop_lat,stop_lon
+ST1,Stop 1,13.0827,80.2707
+ST1,Stop 1 Duplicate,13.0827,80.2707

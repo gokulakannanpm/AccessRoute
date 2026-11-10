@@ -1,0 +1,39 @@
+{
+  "datasetName": "Chennai Metro Rail (CMRL) Station & Network Foundation",
+  "category": "chennai_metro",
+  "operator": "Chennai Metro Rail Limited (CMRL)",
+  "officialUrl": "https://chennaimetrorail.org/",
+  "openDataSources": [
+    {
+      "sourceName": "CUMTA Staging Mirror (test.cumta.org)",
+      "url": "https://test.cumta.org/ (unauthenticated staging mirror of CMRL gtfs.zip)",
+      "retrievalDate": "2026-10-04",
+      "format": "GTFS Static"
+    },
+    {
+      "sourceName": "UngalSoththu ChennaiGTFS",
+      "url": "https://github.com/ungalsoththu/ChennaiGTFS/tree/main/data/cmrl",
+      "retrievalDate": "2026-10-26",
+      "format": "GTFS Static",
+      "license": "ODbL / PDDL"
+    }
+  ],
+  "dataArtifactType": "station_catalogue_tier_2_and_imported_gtfs_static",
+  "rawSourceDownloadedToRepo": true,
+  "importedSourceDir": "data/chennai_metro/imported/",
+  "verificationStatus": "cross_checked_catalogue_and_imported_gtfs",
+  "coverage": {
+    "networkPhase": "Phase 1 + Phase 1 North Extension",
+    "totalOperationalStations": 41,
+    "lines": ["Blue Line (Line 1)", "Green Line (Line 2)"],
+    "routeLengthKm": 45.1
+  },
+  "licenseAndAttribution": "Station listings and line layouts are official public transport geographic information from CMRL. GTFS mirror data licensed under Open Database License (ODbL). Underlying CMRL timetable redistribution rights unconfirmed.",
+  "limitationsAndCaveats": [
+    "Raw GTFS feed (10 files: agency, calendar, fare_attributes, fare_rules, routes, shapes, stops, stop_times, transfers, trips) imported into data/chennai_metro/imported/ with byte-for-byte SHA-256 verification.",
+    "Static calendar for CMRL expired on 2021-12-31. Historical fixed timetables must not be used for live routing. Current operating timetables and headway frequencies are unverified and unimported; obtaining current operational service data remains a prerequisite before routing integration.",
+    "Wimco Nagar Depot (SWND) and Tiruvottiyur Theradi (STVT) passenger stations are present in stops.txt but lack commercial timetable schedules in this 2021 snapshot (both stations opened for passenger service in 2022).",
+    "Station-level accessibility flags (stepFreeAccess, hasElevator) reflect CMRL architectural design mandates, but real-time elevator maintenance and gate-specific ramp usability have not been audited in the field.",
+    "Phase 2 corridors (Lines 3, 4, 5) are actively under construction and are excluded from operational routing until commercial commission."
+  ]
+}

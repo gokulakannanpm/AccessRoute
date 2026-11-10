@@ -1,0 +1,38 @@
+{
+  "manifestVersion": "1.1.0",
+  "mode": "synthetic_blocked_test",
+  "provenance": {
+    "mode": "synthetic_blocked_test",
+    "sourceUrl": "local://synthetic_test_data",
+    "publisher": "AccessRoute Test Framework",
+    "license": "UNCONFIRMED",
+    "verifiedOperationalCurrency": "UNVERIFIED_HISTORICAL"
+  },
+  "status": "EXPIRED_CALENDAR",
+  "readyForJourneyRouting": false,
+  "calendarStatus": "EXPIRED",
+  "filesFound": [
+    "agency.txt",
+    "calendar.txt",
+    "routes.txt",
+    "stops.txt",
+    "stop_times.txt",
+    "trips.txt"
+  ],
+  "recordCounts": {
+    "agencies": 1,
+    "routes": 1,
+    "stops": 2,
+    "trips": 1,
+    "stopTimes": 2,
+    "calendarServices": 1
+  },
+  "feedLevelBlockers": [
+    "FEED_EXPIRED_CALENDAR: All calendar services expired",
+    "FEED_UNCONFIRMED_DATA_LICENSE: Underlying timetable data redistribution rights are UNCONFIRMED"
+  ],
+  "errors": [
+    "Service calendar is expired"
+  ],
+  "warnings": []
+}

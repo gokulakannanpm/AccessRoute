@@ -1,0 +1,427 @@
+{
+  "manifestVersion": "1.1.0",
+  "mode": "suburban_rail",
+  "provenance": {
+    "mode": "suburban_rail",
+    "sourceUrl": "https://github.com/ungalsoththu/ChennaiGTFS/tree/main/data/srr",
+    "sourceCommit": "af0742dba777f9657ed6fda2046d6c2a721d630b",
+    "sourceRelease": "v0.2.0",
+    "publisher": "Southern Railway / CUMTA (compiled via ungalsoththu/ChennaiGTFS v0.2.0)",
+    "license": "UNCONFIRMED",
+    "retrievalDate": "2026-10-26",
+    "feedPublicationDate": "2026-10-04",
+    "timetableValidityRange": {
+      "feedStartDate": "20250722",
+      "feedEndDate": "21700822",
+      "calendarStartDate": "20250806",
+      "calendarEndDate": "21700820",
+      "minServiceDate": "20250806",
+      "maxServiceDate": "21700820",
+      "status": "SUSPICIOUS_FAR_FUTURE_PLACEHOLDER"
+    },
+    "verifiedOperationalCurrency": "UNVERIFIED_HISTORICAL",
+    "licensing": {
+      "compilationPipeline": "MIT",
+      "timetableSchedules": "UNCONFIRMED",
+      "publisher": "Southern Railway / CUMTA (compiled via ungalsoththu/ChennaiGTFS v0.2.0)",
+      "legalAttribution": "Public passenger railway operational timetable sheets published by Ministry of Railways; redistribution rights unconfirmed"
+    },
+    "ingestedAt": "2026-10-26T15:16:00.127Z"
+  },
+  "status": "VALIDATED_WITH_WARNINGS",
+  "readyForJourneyRouting": false,
+  "calendarStatus": "ACTIVE",
+  "fileInventory": {
+    "agency.txt": {
+      "bytes": 115,
+      "sha256": "2ef8f11ce5c52eb8b62e02f87fbdc6865d0af3a4538754aa862dd5fbec7c4751"
+    },
+    "calendar.txt": {
+      "bytes": 328,
+      "sha256": "decf74ac0a5f7a060a93708b84e2f5c33ceff985b47d3437de0c721abc388087"
+    },
+    "calendar_dates.txt": {
+      "bytes": 139,
+      "sha256": "fba0b31d3f38b24804169c5aab9e8596eeb4abb3888aadec87ac465dec492fdd"
+    },
+    "feed_info.txt": {
+      "bytes": 178,
+      "sha256": "e1e3415e38e8e9f8516fc4ed05b04fc280fd2dc973d46a6e94ea73d1e9781ca8"
+    },
+    "pathways.txt": {
+      "bytes": 65738,
+      "sha256": "9a12074f0a387cd454d6cf319701982e3c2de8b7c20c8d5da1c21d1de22cdf76"
+    },
+    "routes.txt": {
+      "bytes": 25455,
+      "sha256": "357bfa08dcf31a3cf0dfa4e65ab344ffcd730f9cfcaf18e024ba93e3290ffa64"
+    },
+    "stops.txt": {
+      "bytes": 36199,
+      "sha256": "29bc27abb8e1ce94e312ad46c2a151f62a4174a279a520aa2ed442fc54588459"
+    },
+    "stop_times.txt": {
+      "bytes": 608308,
+      "sha256": "3f5a6d5f3bf76494e69d7b7a19199a3f73f208cfd3a7b19406059ac4a3f93e09"
+    },
+    "trips.txt": {
+      "bytes": 26798,
+      "sha256": "fc2f72954e8a024f56dda1cdc02669751435048c683bab5a62f6d857fc587bab"
+    }
+  },
+  "filesFound": [
+    "agency.txt",
+    "calendar.txt",
+    "calendar_dates.txt",
+    "feed_info.txt",
+    "pathways.txt",
+    "routes.txt",
+    "stops.txt",
+    "stop_times.txt",
+    "trips.txt"
+  ],
+  "recordCounts": {
+    "agencies": 1,
+    "routes": 763,
+    "stops": 708,
+    "trips": 763,
+    "stopTimes": 16135,
+    "calendarServices": 5
+  },
+  "qualityClassification": {
+    "sourceValidTripsCount": 740,
+    "quarantinedTripsCount": 23,
+    "quarantinedTrips": [
+      {
+        "tripId": "40089_T1",
+        "status": "UNNORMALIZED_MIDNIGHT_ROLLOVER",
+        "stopCount": 18,
+        "usableForRouting": false,
+        "normalizableWithoutAmbiguity": true,
+        "ambiguous": false,
+        "issues": [
+          "Progression regression at seq 18 (TBM_P_1): arrival 00:00:00 < previous departure (85680s)"
+        ],
+        "normalizedDurationMinutes": 55
+      },
+      {
+        "tripId": "40091_T1",
+        "status": "UNNORMALIZED_MIDNIGHT_ROLLOVER",
+        "stopCount": 18,
+        "usableForRouting": false,
+        "normalizableWithoutAmbiguity": true,
+        "ambiguous": false,
+        "issues": [
+          "Progression regression at seq 12 (PZA_P_2): arrival 00:01:00 < previous departure (86340s)"
+        ],
+        "normalizedDurationMinutes": 55
+      },
+      {
+        "tripId": "40093_T1",
+        "status": "UNNORMALIZED_MIDNIGHT_ROLLOVER",
+        "stopCount": 18,
+        "usableForRouting": false,
+        "normalizableWithoutAmbiguity": true,
+        "ambiguous": false,
+        "issues": [
+          "Progression regression at seq 2 (MSF_P_2): arrival 00:01:00 < previous departure (86340s)"
+        ],
+        "normalizedDurationMinutes": 55
+      },
+      {
+        "tripId": "40206_T1",
+        "status": "UNNORMALIZED_MIDNIGHT_ROLLOVER",
+        "stopCount": 22,
+        "usableForRouting": false,
+        "normalizableWithoutAmbiguity": true,
+        "ambiguous": false,
+        "issues": [
+          "Progression regression at seq 22 (MSB_P_4): arrival 00:15:00 < previous departure (85920s)"
+        ],
+        "normalizedDurationMinutes": 95
+      },
+      {
+        "tripId": "40208_T1",
+        "status": "UNNORMALIZED_MIDNIGHT_ROLLOVER",
+        "stopCount": 22,
+        "usableForRouting": false,
+        "normalizableWithoutAmbiguity": true,
+        "ambiguous": false,
+        "issues": [
+          "Same-stop inversion at seq 15 (MBM_P_2): arrival 23:59:00 > departure 00:00:00"
+        ],
+        "normalizedDurationMinutes": 80
+      },
+      {
+        "tripId": "40381_T1",
+        "status": "UNNORMALIZED_MIDNIGHT_ROLLOVER",
+        "stopCount": 18,
+        "usableForRouting": false,
+        "normalizableWithoutAmbiguity": true,
+        "ambiguous": false,
+        "issues": [
+          "Same-stop inversion at seq 15 (PV_P_2): arrival 23:59:00 > departure 00:00:00"
+        ],
+        "normalizedDurationMinutes": 55
+      },
+      {
+        "tripId": "40383_T1",
+        "status": "UNNORMALIZED_MIDNIGHT_ROLLOVER",
+        "stopCount": 18,
+        "usableForRouting": false,
+        "normalizableWithoutAmbiguity": true,
+        "ambiguous": false,
+        "issues": [
+          "Same-stop inversion at seq 8 (MBM_P_2): arrival 23:59:00 > departure 00:00:00"
+        ],
+        "normalizedDurationMinutes": 55
+      },
+      {
+        "tripId": "40385_T1",
+        "status": "UNNORMALIZED_MIDNIGHT_ROLLOVER",
+        "stopCount": 18,
+        "usableForRouting": false,
+        "normalizableWithoutAmbiguity": true,
+        "ambiguous": false,
+        "issues": [
+          "Progression regression at seq 2 (MSF_P_2): arrival 00:02:00 < previous departure (86340s)"
+        ],
+        "normalizedDurationMinutes": 55
+      },
+      {
+        "tripId": "40396_T1",
+        "status": "UNNORMALIZED_MIDNIGHT_ROLLOVER",
+        "stopCount": 18,
+        "usableForRouting": false,
+        "normalizableWithoutAmbiguity": true,
+        "ambiguous": false,
+        "issues": [
+          "Progression regression at seq 8 (STM_P_2): arrival 00:00:00 < previous departure (86280s)"
+        ],
+        "normalizedDurationMinutes": 55
+      },
+      {
+        "tripId": "40571_T1",
+        "status": "UNNORMALIZED_MIDNIGHT_ROLLOVER",
+        "stopCount": 28,
+        "usableForRouting": false,
+        "normalizableWithoutAmbiguity": true,
+        "ambiguous": false,
+        "issues": [
+          "Progression regression at seq 26 (SKL_P_1): arrival 00:00:00 < previous departure (86280s)"
+        ],
+        "normalizedDurationMinutes": 120
+      },
+      {
+        "tripId": "40572_T1",
+        "status": "UNNORMALIZED_MIDNIGHT_ROLLOVER",
+        "stopCount": 28,
+        "usableForRouting": false,
+        "normalizableWithoutAmbiguity": true,
+        "ambiguous": false,
+        "issues": [
+          "Progression regression at seq 12 (TBMS_P_2): arrival 00:02:00 < previous departure (86340s)"
+        ],
+        "normalizedDurationMinutes": 114
+      },
+      {
+        "tripId": "40660_T1",
+        "status": "UNNORMALIZED_MIDNIGHT_ROLLOVER",
+        "stopCount": 28,
+        "usableForRouting": false,
+        "normalizableWithoutAmbiguity": true,
+        "ambiguous": false,
+        "issues": [
+          "Same-stop inversion at seq 25 (MS_P_10): arrival 23:59:00 > departure 00:00:00"
+        ],
+        "normalizedDurationMinutes": 120
+      },
+      {
+        "tripId": "40661_T1",
+        "status": "UNNORMALIZED_MIDNIGHT_ROLLOVER",
+        "stopCount": 28,
+        "usableForRouting": false,
+        "normalizableWithoutAmbiguity": true,
+        "ambiguous": false,
+        "issues": [
+          "Progression regression at seq 23 (POTI_P_1): arrival 00:00:00 < previous departure (86220s)"
+        ],
+        "normalizedDurationMinutes": 115
+      },
+      {
+        "tripId": "40662_T1",
+        "status": "UNNORMALIZED_MIDNIGHT_ROLLOVER",
+        "stopCount": 28,
+        "usableForRouting": false,
+        "normalizableWithoutAmbiguity": true,
+        "ambiguous": false,
+        "issues": [
+          "Progression regression at seq 12 (TBMS_P_2): arrival 00:02:00 < previous departure (86340s)"
+        ],
+        "normalizedDurationMinutes": 114
+      },
+      {
+        "tripId": "42035_T1",
+        "status": "UNNORMALIZED_MIDNIGHT_ROLLOVER",
+        "stopCount": 17,
+        "usableForRouting": false,
+        "normalizableWithoutAmbiguity": true,
+        "ambiguous": false,
+        "issues": [
+          "Progression regression at seq 17 (GPD_P_1): arrival 00:15:00 < previous departure (85740s)"
+        ],
+        "normalizedDurationMinutes": 100
+      },
+      {
+        "tripId": "42037_T1",
+        "status": "UNNORMALIZED_MIDNIGHT_ROLLOVER",
+        "stopCount": 17,
+        "usableForRouting": false,
+        "normalizableWithoutAmbiguity": true,
+        "ambiguous": false,
+        "issues": [
+          "Progression regression at seq 10 (AIPP_P_3): arrival 00:02:00 < previous departure (86160s)"
+        ],
+        "normalizedDurationMinutes": 100
+      },
+      {
+        "tripId": "43253_T1",
+        "status": "UNNORMALIZED_MIDNIGHT_ROLLOVER",
+        "stopCount": 21,
+        "usableForRouting": false,
+        "normalizableWithoutAmbiguity": true,
+        "ambiguous": false,
+        "issues": [
+          "Progression regression at seq 15 (PAB_P_1): arrival 00:03:00 < previous departure (86340s)"
+        ],
+        "normalizedDurationMinutes": 80
+      },
+      {
+        "tripId": "43441_T1",
+        "status": "UNNORMALIZED_MIDNIGHT_ROLLOVER",
+        "stopCount": 29,
+        "usableForRouting": false,
+        "normalizableWithoutAmbiguity": true,
+        "ambiguous": false,
+        "issues": [
+          "Progression regression at seq 29 (AJJ_P_1): arrival 00:05:00 < previous departure (86220s)"
+        ],
+        "normalizedDurationMinutes": 125
+      },
+      {
+        "tripId": "43524_T1",
+        "status": "UNNORMALIZED_MIDNIGHT_ROLLOVER",
+        "stopCount": 29,
+        "usableForRouting": false,
+        "normalizableWithoutAmbiguity": true,
+        "ambiguous": false,
+        "issues": [
+          "Progression regression at seq 29 (MAS_P_12): arrival 00:20:00 < previous departure (85860s)"
+        ],
+        "normalizedDurationMinutes": 136
+      },
+      {
+        "tripId": "43551_T1",
+        "status": "INSUFFICIENT_STOPS",
+        "stopCount": 1,
+        "usableForRouting": false,
+        "normalizableWithoutAmbiguity": false,
+        "ambiguous": false,
+        "issues": [
+          "Trip contains fewer than 2 stops"
+        ]
+      },
+      {
+        "tripId": "43552_T1",
+        "status": "INSUFFICIENT_STOPS",
+        "stopCount": 1,
+        "usableForRouting": false,
+        "normalizableWithoutAmbiguity": false,
+        "ambiguous": false,
+        "issues": [
+          "Trip contains fewer than 2 stops"
+        ]
+      },
+      {
+        "tripId": "43553_T1",
+        "status": "INSUFFICIENT_STOPS",
+        "stopCount": 1,
+        "usableForRouting": false,
+        "normalizableWithoutAmbiguity": false,
+        "ambiguous": false,
+        "issues": [
+          "Trip contains fewer than 2 stops"
+        ]
+      },
+      {
+        "tripId": "43554_T1",
+        "status": "INSUFFICIENT_STOPS",
+        "stopCount": 1,
+        "usableForRouting": false,
+        "normalizableWithoutAmbiguity": false,
+        "ambiguous": false,
+        "issues": [
+          "Trip contains fewer than 2 stops"
+        ]
+      }
+    ]
+  },
+  "feedLevelBlockers": [
+    "FEED_SUSPICIOUS_CALENDAR_EXPIRY: 5 services specify distant placeholder end dates (>5 years in future)",
+    "FEED_INCOMPLETE_SHUTTLE_TRIPS: 4 trips have fewer than 2 stops and lack destination terminus",
+    "FEED_UNNORMALIZED_MIDNIGHT_ROLLOVER: 19 trips have unnormalized modulo-24 midnight wrap that breaks chronological traversal in raw source",
+    "FEED_MISSING_EXTENSION_TIMETABLES: Stations PRTK, ADMB lack commercial schedules in this snapshot",
+    "FEED_UNCONFIRMED_DATA_LICENSE: Underlying Southern Railway timetable data redistribution rights are UNCONFIRMED"
+  ],
+  "catalogueReconciliation": {
+    "catalogueTotalStations": 70,
+    "exactMatchedStations": 66,
+    "aliasMappedStations": [
+      {
+        "catalogueCode": "MASS",
+        "gtfsCode": "MAS",
+        "name": "Chennai Central (MMC Suburban)"
+      },
+      {
+        "catalogueCode": "VPY",
+        "gtfsCode": "VJM",
+        "name": "Vyasarpadi Jeeva"
+      }
+    ],
+    "unmatchedExtensionStations": [
+      {
+        "code": "PRTK",
+        "name": "Puzhuthivakkam",
+        "reason": "MRTS_PHASE_2_EXTENSION_POSTDATES_SNAPSHOT"
+      },
+      {
+        "code": "ADMB",
+        "name": "Adambakkam",
+        "reason": "MRTS_PHASE_2_EXTENSION_POSTDATES_SNAPSHOT"
+      }
+    ],
+    "unmatchedStations": [],
+    "reconciliationRate": "97.1%"
+  },
+  "rejectionsCount": 0,
+  "duplicateCount": 0,
+  "brokenReferencesCount": 0,
+  "anomalies": {
+    "timeInversionsCount": 4,
+    "timeRegressionsCount": 15,
+    "singleStopTripsCount": 4,
+    "distantCalendarServicesCount": 5
+  },
+  "errors": [],
+  "warnings": [
+    "calendar.txt service service_1111111 has distant future end_date 21700820 (144 years in future). Treat as open-ended placeholder date.",
+    "calendar.txt service service_1111110 has distant future end_date 21700820 (144 years in future). Treat as open-ended placeholder date.",
+    "calendar.txt service service_0000001 has distant future end_date 21700820 (144 years in future). Treat as open-ended placeholder date.",
+    "calendar.txt service service_1111101 has distant future end_date 21700820 (144 years in future). Treat as open-ended placeholder date.",
+    "calendar.txt service service_0000010 has distant future end_date 21700820 (144 years in future). Treat as open-ended placeholder date.",
+    "trips contain 4 total single-stop trips unsuitable for journey planning",
+    "stop_times.txt contains 4 total instances where arrival_time is after departure_time",
+    "stop_times.txt contains 15 total time progression regressions across stops (unnormalized midnight rollovers)"
+  ],
+  "sampleRejectedRecords": []
+}

@@ -6,6 +6,9 @@ import routesRouter from './routes/routes.js';
 import stationsRouter from './routes/stations.js';
 import issuesRouter from './routes/issues.js';
 import profileRouter from './routes/profile.js';
+import aiRouter from './routes/ai.js';
+import transitRouter from './routes/transit.js';
+import geoRoutingRouter from './routes/geoRouting.js';
 import { notFoundHandler, globalErrorHandler } from './middleware/errorHandler.js';
 
 dotenv.config();
@@ -41,11 +44,16 @@ app.get('/', (req, res) => {
       'GET  /api/health',
       'GET  /api/locations',
       'POST /api/routes/search',
+      'POST /api/routes/timetable-search',
+      'GET  /api/routes/timetable/status',
       'GET  /api/routes/:routeId',
       'GET  /api/stations/:stationId',
       'POST /api/issues',
       'GET  /api/issues',
-      'GET  /api/profile'
+      'GET  /api/profile',
+      'GET  /api/ai/status',
+      'POST /api/ai/extract-preferences',
+      'POST /api/ai/explain-route'
     ]
   });
 });
@@ -63,8 +71,11 @@ app.get('/api/health', (req, res) => {
 app.use('/api/locations', locationsRouter);
 app.use('/api/routes', routesRouter);
 app.use('/api/stations', stationsRouter);
+app.use('/api/transit', transitRouter);
+app.use('/api/geo', geoRoutingRouter);
 app.use('/api/issues', issuesRouter);
 app.use('/api/profile', profileRouter);
+app.use('/api/ai', aiRouter);
 
 // 404 & Global Error Handling
 app.use(notFoundHandler);

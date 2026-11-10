@@ -1,0 +1,35 @@
+{
+  "datasetName": "Chennai Belt Express Rail Stop & Classification Foundation",
+  "category": "express_rail",
+  "operator": "Indian Railways (Southern Railway, South Western Railway, South Central Railway)",
+  "officialUrl": "https://enquiry.indianrailway.gov.in/ (National Train Enquiry System - NTES)",
+  "openDataSources": [
+    {
+      "sourceName": "Indian Railways Timetable & Commercial Stop Master (CRIS / NTES)",
+      "url": "https://enquiry.indianrailway.gov.in/",
+      "retrievalDate": "2026-10-20",
+      "format": "Official Railway Operations Database"
+    },
+    {
+      "sourceName": "Southern Railway Passenger Operations Schedule",
+      "url": "https://sr.indianrailways.gov.in/",
+      "retrievalDate": "2026-10-20",
+      "format": "Divisional Timetable Notification"
+    }
+  ],
+  "dataArtifactType": "commercial_stops_catalogue_tier_2",
+  "rawSourceDownloadedToRepo": false,
+  "verificationStatus": "cross_checked_catalogue",
+  "coverage": {
+    "scope": "Express, Superfast, and Intercity train stops within the Chennai metropolitan commuter belt",
+    "primaryStations": ["MAS (Chennai Central)", "MS (Chennai Egmore)", "TBM (Tambaram)", "CGL (Chengalpattu)", "PER (Perambur)", "TRL (Tiruvallur)", "AJJ (Arakkonam)"],
+    "districtsCovered": ["Chennai", "Chengalpattu", "Tiruvallur"]
+  },
+  "licenseAndAttribution": "Public passenger timetable data published by Indian Railways / Ministry of Railways, Government of India.",
+  "limitationsAndCaveats": [
+    "No actual express train schedule or timetable trips are committed in the repository; only a catalogue of 8 commercial stops and train type ticketing rules is stored.",
+    "Strict Isolation: Express trains must NEVER be merged into suburban EMU tables without explicit train_type classification. Suburban monthly season tickets are NOT universally valid on Express/Superfast trains unless specifically endorsed for unreserved second-class coaches.",
+    "Skip-Stop Behavior: Express trains do not stop at standard suburban stations (e.g. Chetpet, Palavanthangal, Tirusulam, Urapakkam, Potheri, Villivakkam, Ambattur).",
+    "Platform and Punctuality Variability: Intercity express services are subject to national route delays and platform reassignments."
+  ]
+}

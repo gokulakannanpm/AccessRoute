@@ -1,0 +1,2 @@
+trip_id,arrival_time,departure_time,stop_id,stop_sequence
+TRIP_SINGLE,04:00:00,04:00:00,ST_CENTRAL,1

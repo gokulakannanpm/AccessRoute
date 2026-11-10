@@ -1,0 +1,901 @@
+{
+  "version": "1.0.0",
+  "operator": {
+    "id": "CMRL",
+    "name": "Chennai Metro Rail Limited",
+    "fareSystem": "distance_zone_smartcard"
+  },
+  "lines": [
+    {
+      "id": "blue_line",
+      "name": "Blue Line (Corridor 1)",
+      "color": "#0055A5",
+      "status": "operational",
+      "terminals": [
+        "Wimco Nagar Depot",
+        "Chennai International Airport"
+      ],
+      "headwayMinutes": {
+        "peak": 4,
+        "offPeak": 8
+      }
+    },
+    {
+      "id": "green_line",
+      "name": "Green Line (Corridor 2)",
+      "color": "#008850",
+      "status": "operational",
+      "terminals": [
+        "Puratchi Thalaivar Dr. M.G. Ramachandran Central",
+        "St. Thomas Mount"
+      ],
+      "headwayMinutes": {
+        "peak": 6,
+        "offPeak": 10
+      }
+    }
+  ],
+  "stations": [
+    {
+      "id": "cmrl_swnd",
+      "code": "SWND",
+      "name": "Wimco Nagar Depot",
+      "tamilName": "விம்கோ நகர் பணிமனை",
+      "latitude": 13.1754,
+      "longitude": 80.3065,
+      "lines": [
+        "blue_line"
+      ],
+      "stationType": "elevated",
+      "isInterchange": false,
+      "interchangeWith": [],
+      "stepFreeAccess": true,
+      "hasElevator": true,
+      "hasEscalator": true,
+      "parkingAvailable": true,
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "cmrl_swn",
+      "code": "SWN",
+      "name": "Wimco Nagar",
+      "tamilName": "விம்கோ நகர்",
+      "latitude": 13.1678,
+      "longitude": 80.3045,
+      "lines": [
+        "blue_line"
+      ],
+      "stationType": "elevated",
+      "isInterchange": false,
+      "interchangeWith": [
+        "Suburban Rail (Wimco Nagar EMU Station)"
+      ],
+      "stepFreeAccess": true,
+      "hasElevator": true,
+      "hasEscalator": true,
+      "parkingAvailable": true,
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "cmrl_stv",
+      "code": "STV",
+      "name": "Tiruvottiyur",
+      "tamilName": "திருவொற்றியூர்",
+      "latitude": 13.1592,
+      "longitude": 80.3015,
+      "lines": [
+        "blue_line"
+      ],
+      "stationType": "elevated",
+      "isInterchange": false,
+      "interchangeWith": [],
+      "stepFreeAccess": true,
+      "hasElevator": true,
+      "hasEscalator": true,
+      "parkingAvailable": true,
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "cmrl_stvt",
+      "code": "STVT",
+      "name": "Tiruvottiyur Theradi",
+      "tamilName": "திருவொற்றியூர் தேரடி",
+      "latitude": 13.1518,
+      "longitude": 80.301,
+      "lines": [
+        "blue_line"
+      ],
+      "stationType": "elevated",
+      "isInterchange": false,
+      "interchangeWith": [],
+      "stepFreeAccess": true,
+      "hasElevator": true,
+      "hasEscalator": true,
+      "parkingAvailable": false,
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "cmrl_skp",
+      "code": "SKP",
+      "name": "Kaladipet",
+      "tamilName": "காலடிப்பேட்டை",
+      "latitude": 13.1425,
+      "longitude": 80.2985,
+      "lines": [
+        "blue_line"
+      ],
+      "stationType": "elevated",
+      "isInterchange": false,
+      "interchangeWith": [],
+      "stepFreeAccess": true,
+      "hasElevator": true,
+      "hasEscalator": true,
+      "parkingAvailable": true,
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "cmrl_stg",
+      "code": "STG",
+      "name": "Tollgate",
+      "tamilName": "டோல்கேட்",
+      "latitude": 13.1325,
+      "longitude": 80.2965,
+      "lines": [
+        "blue_line"
+      ],
+      "stationType": "elevated",
+      "isInterchange": false,
+      "interchangeWith": [
+        "MTC Tollgate Bus Terminus"
+      ],
+      "stepFreeAccess": true,
+      "hasElevator": true,
+      "hasEscalator": true,
+      "parkingAvailable": true,
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "cmrl_snw",
+      "code": "SNW",
+      "name": "New Washermanpet",
+      "tamilName": "புது வண்ணாரப்பேட்டை",
+      "latitude": 13.1235,
+      "longitude": 80.294,
+      "lines": [
+        "blue_line"
+      ],
+      "stationType": "elevated",
+      "isInterchange": false,
+      "interchangeWith": [],
+      "stepFreeAccess": true,
+      "hasElevator": true,
+      "hasEscalator": true,
+      "parkingAvailable": true,
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "cmrl_stp",
+      "code": "STP",
+      "name": "Tondiarpet",
+      "tamilName": "தண்டையார்பேட்டை",
+      "latitude": 13.1165,
+      "longitude": 80.2925,
+      "lines": [
+        "blue_line"
+      ],
+      "stationType": "elevated",
+      "isInterchange": false,
+      "interchangeWith": [],
+      "stepFreeAccess": true,
+      "hasElevator": true,
+      "hasEscalator": true,
+      "parkingAvailable": true,
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "cmrl_stc",
+      "code": "STC",
+      "name": "Sir Theagaraya College",
+      "tamilName": "சர் தியாகராயா கல்லூரி",
+      "latitude": 13.1105,
+      "longitude": 80.2905,
+      "lines": [
+        "blue_line"
+      ],
+      "stationType": "underground",
+      "isInterchange": false,
+      "interchangeWith": [],
+      "stepFreeAccess": true,
+      "hasElevator": true,
+      "hasEscalator": true,
+      "parkingAvailable": false,
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "cmrl_swp",
+      "code": "SWP",
+      "name": "Washermanpet",
+      "tamilName": "வண்ணாரப்பேட்டை",
+      "latitude": 13.1025,
+      "longitude": 80.2865,
+      "lines": [
+        "blue_line"
+      ],
+      "stationType": "underground",
+      "isInterchange": false,
+      "interchangeWith": [
+        "Suburban Rail (Washermanpet EMU Station)"
+      ],
+      "stepFreeAccess": true,
+      "hasElevator": true,
+      "hasEscalator": true,
+      "parkingAvailable": true,
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "cmrl_smd",
+      "code": "SMD",
+      "name": "Mannadi",
+      "tamilName": "மண்ணடி",
+      "latitude": 13.0935,
+      "longitude": 80.2875,
+      "lines": [
+        "blue_line"
+      ],
+      "stationType": "underground",
+      "isInterchange": false,
+      "interchangeWith": [],
+      "stepFreeAccess": true,
+      "hasElevator": true,
+      "hasEscalator": true,
+      "parkingAvailable": false,
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "cmrl_shc",
+      "code": "SHC",
+      "name": "High Court",
+      "tamilName": "உயர் நீதிமன்றம்",
+      "latitude": 13.088,
+      "longitude": 80.2882,
+      "lines": [
+        "blue_line"
+      ],
+      "stationType": "underground",
+      "isInterchange": true,
+      "interchangeWith": [
+        "MTC Broadway Bus Terminus",
+        "Suburban Rail (Chennai Fort)"
+      ],
+      "stepFreeAccess": true,
+      "hasElevator": true,
+      "hasEscalator": true,
+      "parkingAvailable": false,
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "cmrl_smc",
+      "code": "SMC",
+      "name": "Puratchi Thalaivar Dr. M.G. Ramachandran Central",
+      "tamilName": "புரட்சித் தலைவர் டாக்டர் எம்.ஜி.ஆர் சென்ட்ரல்",
+      "latitude": 13.0827,
+      "longitude": 80.2707,
+      "lines": [
+        "blue_line",
+        "green_line"
+      ],
+      "stationType": "underground",
+      "isInterchange": true,
+      "interchangeWith": [
+        "Puratchi Thalaivar Dr. M.G. Ramachandran Central Railway Station (MAS)",
+        "Chennai Suburban Terminal (MMC)",
+        "Chennai Park Suburban Station (MPK)",
+        "Chennai Park Town MRTS (MPKT)",
+        "MTC Central Bus Stops"
+      ],
+      "stepFreeAccess": true,
+      "hasElevator": true,
+      "hasEscalator": true,
+      "parkingAvailable": true,
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "cmrl_sge",
+      "code": "SGE",
+      "name": "Government Estate",
+      "tamilName": "அரசினர் தோட்டம்",
+      "latitude": 13.0695,
+      "longitude": 80.274,
+      "lines": [
+        "blue_line"
+      ],
+      "stationType": "underground",
+      "isInterchange": false,
+      "interchangeWith": [
+        "MTC Anna Salai Corridors"
+      ],
+      "stepFreeAccess": true,
+      "hasElevator": true,
+      "hasEscalator": true,
+      "parkingAvailable": true,
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "cmrl_slic",
+      "code": "SLIC",
+      "name": "LIC",
+      "tamilName": "எல்.ஐ.சி",
+      "latitude": 13.062,
+      "longitude": 80.2678,
+      "lines": [
+        "blue_line"
+      ],
+      "stationType": "underground",
+      "isInterchange": false,
+      "interchangeWith": [
+        "MTC Mount Road Bus Stops"
+      ],
+      "stepFreeAccess": true,
+      "hasElevator": true,
+      "hasEscalator": true,
+      "parkingAvailable": false,
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "cmrl_stl",
+      "code": "STL",
+      "name": "Thousand Lights",
+      "tamilName": "ஆயிரம் விளக்கு",
+      "latitude": 13.056,
+      "longitude": 80.258,
+      "lines": [
+        "blue_line"
+      ],
+      "stationType": "underground",
+      "isInterchange": false,
+      "interchangeWith": [
+        "MTC Mount Road / Anna Salai Corridors"
+      ],
+      "stepFreeAccess": true,
+      "hasElevator": true,
+      "hasEscalator": true,
+      "parkingAvailable": false,
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "cmrl_sdms",
+      "code": "SDMS",
+      "name": "AG-DMS",
+      "tamilName": "ஏ.ஜி - டி.எம்.எஸ்",
+      "latitude": 13.0465,
+      "longitude": 80.249,
+      "lines": [
+        "blue_line"
+      ],
+      "stationType": "underground",
+      "isInterchange": false,
+      "interchangeWith": [
+        "MTC Anna Salai Corridors"
+      ],
+      "stepFreeAccess": true,
+      "hasElevator": true,
+      "hasEscalator": true,
+      "parkingAvailable": true,
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "cmrl_stn",
+      "code": "STN",
+      "name": "Teynampet",
+      "tamilName": "தேனாம்பேட்டை",
+      "latitude": 13.0405,
+      "longitude": 80.245,
+      "lines": [
+        "blue_line"
+      ],
+      "stationType": "underground",
+      "isInterchange": false,
+      "interchangeWith": [
+        "MTC Anna Salai Corridors"
+      ],
+      "stepFreeAccess": true,
+      "hasElevator": true,
+      "hasEscalator": true,
+      "parkingAvailable": false,
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "cmrl_snd",
+      "code": "SND",
+      "name": "Nandanam",
+      "tamilName": "நந்தனம்",
+      "latitude": 13.0315,
+      "longitude": 80.2405,
+      "lines": [
+        "blue_line"
+      ],
+      "stationType": "underground",
+      "isInterchange": false,
+      "interchangeWith": [
+        "MTC Chamier's Road / Cenotaph Junction"
+      ],
+      "stepFreeAccess": true,
+      "hasElevator": true,
+      "hasEscalator": true,
+      "parkingAvailable": true,
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "cmrl_ssd",
+      "code": "SSD",
+      "name": "Saidapet",
+      "tamilName": "சைதாப்பேட்டை",
+      "latitude": 13.0235,
+      "longitude": 80.2285,
+      "lines": [
+        "blue_line"
+      ],
+      "stationType": "underground",
+      "isInterchange": true,
+      "interchangeWith": [
+        "Suburban Rail (Saidapet EMU Station)",
+        "MTC Saidapet Bus Terminus"
+      ],
+      "stepFreeAccess": true,
+      "hasElevator": true,
+      "hasEscalator": true,
+      "parkingAvailable": true,
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "cmrl_slm",
+      "code": "SLM",
+      "name": "Little Mount",
+      "tamilName": "சின்னமலை",
+      "latitude": 13.0135,
+      "longitude": 80.2205,
+      "lines": [
+        "blue_line"
+      ],
+      "stationType": "elevated",
+      "isInterchange": false,
+      "interchangeWith": [
+        "MTC Little Mount Bus Stops"
+      ],
+      "stepFreeAccess": true,
+      "hasElevator": true,
+      "hasEscalator": true,
+      "parkingAvailable": true,
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "cmrl_sgd",
+      "code": "SGD",
+      "name": "Guindy",
+      "tamilName": "கிண்டி",
+      "latitude": 13.0084,
+      "longitude": 80.2131,
+      "lines": [
+        "blue_line"
+      ],
+      "stationType": "elevated",
+      "isInterchange": true,
+      "interchangeWith": [
+        "Suburban Rail (Guindy EMU Station - GDY)",
+        "MTC Guindy Bus Terminal"
+      ],
+      "stepFreeAccess": true,
+      "hasElevator": true,
+      "hasEscalator": true,
+      "parkingAvailable": true,
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "cmrl_sal",
+      "code": "SAL",
+      "name": "Arignar Anna Alandur",
+      "tamilName": "அறிஞர் அண்ணா ஆலந்தூர்",
+      "latitude": 13.0039,
+      "longitude": 80.2014,
+      "lines": [
+        "blue_line",
+        "green_line"
+      ],
+      "stationType": "elevated",
+      "isInterchange": true,
+      "interchangeWith": [
+        "MTC Kathipara Interchange Junction"
+      ],
+      "stepFreeAccess": true,
+      "hasElevator": true,
+      "hasEscalator": true,
+      "parkingAvailable": true,
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "cmrl_sng",
+      "code": "SNG",
+      "name": "Nanganallur Road",
+      "tamilName": "நங்கநல்லூர் சாலை",
+      "latitude": 12.9905,
+      "longitude": 80.1915,
+      "lines": [
+        "blue_line"
+      ],
+      "stationType": "elevated",
+      "isInterchange": false,
+      "interchangeWith": [
+        "MTC GST Road Feeder Services"
+      ],
+      "stepFreeAccess": true,
+      "hasElevator": true,
+      "hasEscalator": true,
+      "parkingAvailable": true,
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "cmrl_smb",
+      "code": "SMB",
+      "name": "Meenambakkam",
+      "tamilName": "மீனம்பாக்கம்",
+      "latitude": 12.984,
+      "longitude": 80.181,
+      "lines": [
+        "blue_line"
+      ],
+      "stationType": "elevated",
+      "isInterchange": false,
+      "interchangeWith": [
+        "Suburban Rail (Meenambakkam EMU Station)"
+      ],
+      "stepFreeAccess": true,
+      "hasElevator": true,
+      "hasEscalator": true,
+      "parkingAvailable": true,
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "cmrl_sap",
+      "code": "SAP",
+      "name": "Chennai International Airport",
+      "tamilName": "சென்னை பன்னாட்டு விமான நிலையம்",
+      "latitude": 12.9805,
+      "longitude": 80.1645,
+      "lines": [
+        "blue_line"
+      ],
+      "stationType": "elevated",
+      "isInterchange": true,
+      "interchangeWith": [
+        "Chennai International Airport (Domestic & International Terminals)",
+        "Suburban Rail (Tirusulam EMU Station)"
+      ],
+      "stepFreeAccess": true,
+      "hasElevator": true,
+      "hasEscalator": true,
+      "parkingAvailable": true,
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "cmrl_seg",
+      "code": "SEG",
+      "name": "Chennai Egmore",
+      "tamilName": "சென்னை எழும்பூர்",
+      "latitude": 13.0792,
+      "longitude": 80.261,
+      "lines": [
+        "green_line"
+      ],
+      "stationType": "underground",
+      "isInterchange": true,
+      "interchangeWith": [
+        "Chennai Egmore Railway Station (MS)",
+        "Suburban Rail (South Line Platforms)",
+        "MTC Egmore Bus Stops"
+      ],
+      "stepFreeAccess": true,
+      "hasElevator": true,
+      "hasEscalator": true,
+      "parkingAvailable": true,
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "cmrl_snp",
+      "code": "SNP",
+      "name": "Nehru Park",
+      "tamilName": "நேரு பூங்கா",
+      "latitude": 13.079,
+      "longitude": 80.2505,
+      "lines": [
+        "green_line"
+      ],
+      "stationType": "underground",
+      "isInterchange": false,
+      "interchangeWith": [
+        "MTC Poonamallee High Road Corridors"
+      ],
+      "stepFreeAccess": true,
+      "hasElevator": true,
+      "hasEscalator": true,
+      "parkingAvailable": true,
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "cmrl_skm",
+      "code": "SKM",
+      "name": "Kilpauk Medical College",
+      "tamilName": "கீழ்ப்பாக்கம் மருத்துவக் கல்லூரி",
+      "latitude": 13.0785,
+      "longitude": 80.2425,
+      "lines": [
+        "green_line"
+      ],
+      "stationType": "underground",
+      "isInterchange": false,
+      "interchangeWith": [
+        "Suburban Rail (Chetpet EMU Station - ~500m)"
+      ],
+      "stepFreeAccess": true,
+      "hasElevator": true,
+      "hasEscalator": true,
+      "parkingAvailable": true,
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "cmrl_spc",
+      "code": "SPC",
+      "name": "Pachaiyappa's College",
+      "tamilName": "பச்சையப்பன் கல்லூரி",
+      "latitude": 13.078,
+      "longitude": 80.233,
+      "lines": [
+        "green_line"
+      ],
+      "stationType": "underground",
+      "isInterchange": false,
+      "interchangeWith": [
+        "MTC Poonamallee High Road Corridors"
+      ],
+      "stepFreeAccess": true,
+      "hasElevator": true,
+      "hasEscalator": true,
+      "parkingAvailable": true,
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "cmrl_ssn",
+      "code": "SSN",
+      "name": "Shenoy Nagar",
+      "tamilName": "செனாய் நகர்",
+      "latitude": 13.0785,
+      "longitude": 80.2245,
+      "lines": [
+        "green_line"
+      ],
+      "stationType": "underground",
+      "isInterchange": false,
+      "interchangeWith": [
+        "MTC Shenoy Nagar Bus Stops"
+      ],
+      "stepFreeAccess": true,
+      "hasElevator": true,
+      "hasEscalator": true,
+      "parkingAvailable": true,
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "cmrl_sae",
+      "code": "SAE",
+      "name": "Anna Nagar East",
+      "tamilName": "அண்ணா நகர் கிழக்கு",
+      "latitude": 13.085,
+      "longitude": 80.2195,
+      "lines": [
+        "green_line"
+      ],
+      "stationType": "underground",
+      "isInterchange": false,
+      "interchangeWith": [
+        "MTC Anna Nagar Roundtana Services"
+      ],
+      "stepFreeAccess": true,
+      "hasElevator": true,
+      "hasEscalator": true,
+      "parkingAvailable": true,
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "cmrl_sat",
+      "code": "SAT",
+      "name": "Anna Nagar Tower",
+      "tamilName": "அண்ணா நகர் கோபுரம்",
+      "latitude": 13.0865,
+      "longitude": 80.2105,
+      "lines": [
+        "green_line"
+      ],
+      "stationType": "underground",
+      "isInterchange": false,
+      "interchangeWith": [
+        "MTC Anna Nagar Tower Bus Stops"
+      ],
+      "stepFreeAccess": true,
+      "hasElevator": true,
+      "hasEscalator": true,
+      "parkingAvailable": true,
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "cmrl_stm",
+      "code": "STM",
+      "name": "Thirumangalam",
+      "tamilName": "திருமங்கலம்",
+      "latitude": 13.085,
+      "longitude": 80.1995,
+      "lines": [
+        "green_line"
+      ],
+      "stationType": "underground",
+      "isInterchange": false,
+      "interchangeWith": [
+        "MTC Thirumangalam / Inner Ring Road Services"
+      ],
+      "stepFreeAccess": true,
+      "hasElevator": true,
+      "hasEscalator": true,
+      "parkingAvailable": true,
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "cmrl_skb",
+      "code": "SKB",
+      "name": "Koyambedu",
+      "tamilName": "கோயம்பேடு",
+      "latitude": 13.0735,
+      "longitude": 80.195,
+      "lines": [
+        "green_line"
+      ],
+      "stationType": "elevated",
+      "isInterchange": false,
+      "interchangeWith": [
+        "MTC Koyambedu Wholesale Market Corridor"
+      ],
+      "stepFreeAccess": true,
+      "hasElevator": true,
+      "hasEscalator": true,
+      "parkingAvailable": true,
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "cmrl_scmbt",
+      "code": "SCMBT",
+      "name": "Puratchi Thalaivi Dr. J. Jayalalithaa CMBT",
+      "tamilName": "புரட்சித் தலைவி டாக்டர் ஜெ. ஜெயலலிதா பேருந்து நிலையம்",
+      "latitude": 13.0694,
+      "longitude": 80.1948,
+      "lines": [
+        "green_line"
+      ],
+      "stationType": "elevated",
+      "isInterchange": true,
+      "interchangeWith": [
+        "Chennai Mofussil Bus Terminus (CMBT)",
+        "MTC Koyambedu Bus Terminus",
+        "SETC / TNSTC Intercity Bus Terminus"
+      ],
+      "stepFreeAccess": true,
+      "hasElevator": true,
+      "hasEscalator": true,
+      "parkingAvailable": true,
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "cmrl_sab",
+      "code": "SAB",
+      "name": "Arumbakkam",
+      "tamilName": "அரும்பாக்கம்",
+      "latitude": 13.0615,
+      "longitude": 80.203,
+      "lines": [
+        "green_line"
+      ],
+      "stationType": "elevated",
+      "isInterchange": false,
+      "interchangeWith": [
+        "MTC 100 Feet Road Corridors"
+      ],
+      "stepFreeAccess": true,
+      "hasElevator": true,
+      "hasEscalator": true,
+      "parkingAvailable": true,
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "cmrl_svd",
+      "code": "SVD",
+      "name": "Vadapalani",
+      "tamilName": "வடபழனி",
+      "latitude": 13.0515,
+      "longitude": 80.21,
+      "lines": [
+        "green_line"
+      ],
+      "stationType": "elevated",
+      "isInterchange": true,
+      "interchangeWith": [
+        "MTC Vadapalani Bus Depot"
+      ],
+      "stepFreeAccess": true,
+      "hasElevator": true,
+      "hasEscalator": true,
+      "parkingAvailable": true,
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "cmrl_san",
+      "code": "SAN",
+      "name": "Ashok Nagar",
+      "tamilName": "அசோக் நகர்",
+      "latitude": 13.036,
+      "longitude": 80.2115,
+      "lines": [
+        "green_line"
+      ],
+      "stationType": "elevated",
+      "isInterchange": false,
+      "interchangeWith": [
+        "MTC Ashok Pillar Services"
+      ],
+      "stepFreeAccess": true,
+      "hasElevator": true,
+      "hasEscalator": true,
+      "parkingAvailable": true,
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "cmrl_sek",
+      "code": "SEK",
+      "name": "Ekkattuthangal",
+      "tamilName": "ஈக்காட்டுத்தாங்கல்",
+      "latitude": 13.021,
+      "longitude": 80.2055,
+      "lines": [
+        "green_line"
+      ],
+      "stationType": "elevated",
+      "isInterchange": false,
+      "interchangeWith": [
+        "MTC Guindy Industrial Estate Services"
+      ],
+      "stepFreeAccess": true,
+      "hasElevator": true,
+      "hasEscalator": true,
+      "parkingAvailable": true,
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "cmrl_stmnt",
+      "code": "STMNT",
+      "name": "St. Thomas Mount",
+      "tamilName": "பரங்கிமலை",
+      "latitude": 12.9948,
+      "longitude": 80.1988,
+      "lines": [
+        "green_line"
+      ],
+      "stationType": "elevated",
+      "isInterchange": true,
+      "interchangeWith": [
+        "Suburban Rail (St. Thomas Mount EMU Station - STM)",
+        "MRTS (Future Velachery Extension Connection)",
+        "MTC St. Thomas Mount Bus Terminus"
+      ],
+      "stepFreeAccess": true,
+      "hasElevator": true,
+      "hasEscalator": true,
+      "parkingAvailable": true,
+      "evidenceStatus": "cross_checked"
+    }
+  ]
+}

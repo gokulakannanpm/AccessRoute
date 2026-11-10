@@ -1,0 +1,4 @@
+stop_id,stop_name,stop_lat,stop_lon
+ST_CENTRAL,Puratchi Thalaivar Dr. M.G. Ramachandran Central,13.0827,80.2707
+ST_GUINDY,Guindy,13.0083,80.2125
+ST_AIRPORT,Chennai International Airport,12.9815,80.1637

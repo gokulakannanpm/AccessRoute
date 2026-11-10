@@ -1,0 +1,1584 @@
+[
+  {
+    "tripId": "40089_T1",
+    "transformationType": "INTER_STOP_MIDNIGHT_REGRESSION",
+    "rolloverStopSequence": "18",
+    "rolloverStopId": "TBM_P_1",
+    "dwellOrHopSeconds": 720,
+    "totalStopsCount": 18,
+    "transformedStopsCount": 1,
+    "durationMinutes": 55,
+    "firstDeparture": "23:05:00",
+    "lastArrival": "24:00:00",
+    "stopsDiff": [
+      {
+        "stop_sequence": "18",
+        "stop_id": "TBM_P_1",
+        "raw_arrival_time": "00:00:00",
+        "normalized_arrival_time": "24:00:00",
+        "raw_departure_time": "00:00:00",
+        "normalized_departure_time": "24:00:00",
+        "offset_seconds": 86400
+      }
+    ],
+    "routeId": "40089",
+    "tripHeadsign": "TBM"
+  },
+  {
+    "tripId": "40091_T1",
+    "transformationType": "INTER_STOP_MIDNIGHT_REGRESSION",
+    "rolloverStopSequence": "12",
+    "rolloverStopId": "PZA_P_2",
+    "dwellOrHopSeconds": 120,
+    "totalStopsCount": 18,
+    "transformedStopsCount": 7,
+    "durationMinutes": 55,
+    "firstDeparture": "23:30:00",
+    "lastArrival": "24:25:00",
+    "stopsDiff": [
+      {
+        "stop_sequence": "12",
+        "stop_id": "PZA_P_2",
+        "raw_arrival_time": "00:01:00",
+        "normalized_arrival_time": "24:01:00",
+        "raw_departure_time": "00:02:00",
+        "normalized_departure_time": "24:02:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "13",
+        "stop_id": "MN_P_2",
+        "raw_arrival_time": "00:04:00",
+        "normalized_arrival_time": "24:04:00",
+        "raw_departure_time": "00:05:00",
+        "normalized_departure_time": "24:05:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "14",
+        "stop_id": "TLM_P_2",
+        "raw_arrival_time": "00:06:00",
+        "normalized_arrival_time": "24:06:00",
+        "raw_departure_time": "00:07:00",
+        "normalized_departure_time": "24:07:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "15",
+        "stop_id": "PV_P_2",
+        "raw_arrival_time": "00:09:00",
+        "normalized_arrival_time": "24:09:00",
+        "raw_departure_time": "00:10:00",
+        "normalized_departure_time": "24:10:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "16",
+        "stop_id": "CMP_P_2",
+        "raw_arrival_time": "00:12:00",
+        "normalized_arrival_time": "24:12:00",
+        "raw_departure_time": "00:13:00",
+        "normalized_departure_time": "24:13:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "17",
+        "stop_id": "TBMS_P_2",
+        "raw_arrival_time": "00:15:00",
+        "normalized_arrival_time": "24:15:00",
+        "raw_departure_time": "00:16:00",
+        "normalized_departure_time": "24:16:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "18",
+        "stop_id": "TBM_P_1",
+        "raw_arrival_time": "00:25:00",
+        "normalized_arrival_time": "24:25:00",
+        "raw_departure_time": "00:25:00",
+        "normalized_departure_time": "24:25:00",
+        "offset_seconds": 86400
+      }
+    ],
+    "routeId": "40091",
+    "tripHeadsign": "TBM"
+  },
+  {
+    "tripId": "40093_T1",
+    "transformationType": "INTER_STOP_MIDNIGHT_REGRESSION",
+    "rolloverStopSequence": "2",
+    "rolloverStopId": "MSF_P_2",
+    "dwellOrHopSeconds": 120,
+    "totalStopsCount": 18,
+    "transformedStopsCount": 17,
+    "durationMinutes": 55,
+    "firstDeparture": "23:59:00",
+    "lastArrival": "24:54:00",
+    "stopsDiff": [
+      {
+        "stop_sequence": "2",
+        "stop_id": "MSF_P_2",
+        "raw_arrival_time": "00:01:00",
+        "normalized_arrival_time": "24:01:00",
+        "raw_departure_time": "00:02:00",
+        "normalized_departure_time": "24:02:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "3",
+        "stop_id": "MPK_P_2",
+        "raw_arrival_time": "00:05:00",
+        "normalized_arrival_time": "24:05:00",
+        "raw_departure_time": "00:06:00",
+        "normalized_departure_time": "24:06:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "4",
+        "stop_id": "MS_P_10",
+        "raw_arrival_time": "00:08:00",
+        "normalized_arrival_time": "24:08:00",
+        "raw_departure_time": "00:09:00",
+        "normalized_departure_time": "24:09:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "5",
+        "stop_id": "MSC_P_2",
+        "raw_arrival_time": "00:11:00",
+        "normalized_arrival_time": "24:11:00",
+        "raw_departure_time": "00:12:00",
+        "normalized_departure_time": "24:12:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "6",
+        "stop_id": "NBK_P_2",
+        "raw_arrival_time": "00:14:00",
+        "normalized_arrival_time": "24:14:00",
+        "raw_departure_time": "00:15:00",
+        "normalized_departure_time": "24:15:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "7",
+        "stop_id": "MKK_P_2",
+        "raw_arrival_time": "00:16:00",
+        "normalized_arrival_time": "24:16:00",
+        "raw_departure_time": "00:17:00",
+        "normalized_departure_time": "24:17:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "8",
+        "stop_id": "MBM_P_2",
+        "raw_arrival_time": "00:18:00",
+        "normalized_arrival_time": "24:18:00",
+        "raw_departure_time": "00:19:00",
+        "normalized_departure_time": "24:19:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "9",
+        "stop_id": "SP_P_2",
+        "raw_arrival_time": "00:21:00",
+        "normalized_arrival_time": "24:21:00",
+        "raw_departure_time": "00:22:00",
+        "normalized_departure_time": "24:22:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "10",
+        "stop_id": "GDY_P_2",
+        "raw_arrival_time": "00:24:00",
+        "normalized_arrival_time": "24:24:00",
+        "raw_departure_time": "00:25:00",
+        "normalized_departure_time": "24:25:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "11",
+        "stop_id": "STM_P_2",
+        "raw_arrival_time": "00:27:00",
+        "normalized_arrival_time": "24:27:00",
+        "raw_departure_time": "00:28:00",
+        "normalized_departure_time": "24:28:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "12",
+        "stop_id": "PZA_P_2",
+        "raw_arrival_time": "00:30:00",
+        "normalized_arrival_time": "24:30:00",
+        "raw_departure_time": "00:31:00",
+        "normalized_departure_time": "24:31:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "13",
+        "stop_id": "MN_P_2",
+        "raw_arrival_time": "00:33:00",
+        "normalized_arrival_time": "24:33:00",
+        "raw_departure_time": "00:34:00",
+        "normalized_departure_time": "24:34:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "14",
+        "stop_id": "TLM_P_2",
+        "raw_arrival_time": "00:35:00",
+        "normalized_arrival_time": "24:35:00",
+        "raw_departure_time": "00:36:00",
+        "normalized_departure_time": "24:36:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "15",
+        "stop_id": "PV_P_2",
+        "raw_arrival_time": "00:38:00",
+        "normalized_arrival_time": "24:38:00",
+        "raw_departure_time": "00:39:00",
+        "normalized_departure_time": "24:39:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "16",
+        "stop_id": "CMP_P_2",
+        "raw_arrival_time": "00:41:00",
+        "normalized_arrival_time": "24:41:00",
+        "raw_departure_time": "00:42:00",
+        "normalized_departure_time": "24:42:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "17",
+        "stop_id": "TBMS_P_2",
+        "raw_arrival_time": "00:44:00",
+        "normalized_arrival_time": "24:44:00",
+        "raw_departure_time": "00:45:00",
+        "normalized_departure_time": "24:45:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "18",
+        "stop_id": "TBM_P_1",
+        "raw_arrival_time": "00:54:00",
+        "normalized_arrival_time": "24:54:00",
+        "raw_departure_time": "00:54:00",
+        "normalized_departure_time": "24:54:00",
+        "offset_seconds": 86400
+      }
+    ],
+    "routeId": "40093",
+    "tripHeadsign": "TBM"
+  },
+  {
+    "tripId": "40206_T1",
+    "transformationType": "INTER_STOP_MIDNIGHT_REGRESSION",
+    "rolloverStopSequence": "22",
+    "rolloverStopId": "MSB_P_4",
+    "dwellOrHopSeconds": 1380,
+    "totalStopsCount": 22,
+    "transformedStopsCount": 1,
+    "durationMinutes": 95,
+    "firstDeparture": "22:40:00",
+    "lastArrival": "24:15:00",
+    "stopsDiff": [
+      {
+        "stop_sequence": "22",
+        "stop_id": "MSB_P_4",
+        "raw_arrival_time": "00:15:00",
+        "normalized_arrival_time": "24:15:00",
+        "raw_departure_time": "00:15:00",
+        "normalized_departure_time": "24:15:00",
+        "offset_seconds": 86400
+      }
+    ],
+    "routeId": "40206",
+    "tripHeadsign": "MSB"
+  },
+  {
+    "tripId": "40208_T1",
+    "transformationType": "SAME_STOP_MIDNIGHT_INVERSION",
+    "rolloverStopSequence": "15",
+    "rolloverStopId": "MBM_P_2",
+    "dwellOrHopSeconds": 60,
+    "totalStopsCount": 22,
+    "transformedStopsCount": 8,
+    "durationMinutes": 80,
+    "firstDeparture": "23:15:00",
+    "lastArrival": "24:35:00",
+    "stopsDiff": [
+      {
+        "stop_sequence": "15",
+        "stop_id": "MBM_P_2",
+        "raw_arrival_time": "23:59:00",
+        "normalized_arrival_time": "23:59:00",
+        "raw_departure_time": "00:00:00",
+        "normalized_departure_time": "24:00:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "16",
+        "stop_id": "MKK_P_2",
+        "raw_arrival_time": "00:01:00",
+        "normalized_arrival_time": "24:01:00",
+        "raw_departure_time": "00:02:00",
+        "normalized_departure_time": "24:02:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "17",
+        "stop_id": "NBK_P_2",
+        "raw_arrival_time": "00:03:00",
+        "normalized_arrival_time": "24:03:00",
+        "raw_departure_time": "00:04:00",
+        "normalized_departure_time": "24:04:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "18",
+        "stop_id": "MSC_P_2",
+        "raw_arrival_time": "00:05:00",
+        "normalized_arrival_time": "24:05:00",
+        "raw_departure_time": "00:06:00",
+        "normalized_departure_time": "24:06:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "19",
+        "stop_id": "MS_P_10",
+        "raw_arrival_time": "00:07:00",
+        "normalized_arrival_time": "24:07:00",
+        "raw_departure_time": "00:08:00",
+        "normalized_departure_time": "24:08:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "20",
+        "stop_id": "MPK_P_2",
+        "raw_arrival_time": "00:09:00",
+        "normalized_arrival_time": "24:09:00",
+        "raw_departure_time": "00:10:00",
+        "normalized_departure_time": "24:10:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "21",
+        "stop_id": "MSF_P_2",
+        "raw_arrival_time": "00:11:00",
+        "normalized_arrival_time": "24:11:00",
+        "raw_departure_time": "00:12:00",
+        "normalized_departure_time": "24:12:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "22",
+        "stop_id": "MSB_P_4",
+        "raw_arrival_time": "00:35:00",
+        "normalized_arrival_time": "24:35:00",
+        "raw_departure_time": "00:35:00",
+        "normalized_departure_time": "24:35:00",
+        "offset_seconds": 86400
+      }
+    ],
+    "routeId": "40208",
+    "tripHeadsign": "MSB"
+  },
+  {
+    "tripId": "40381_T1",
+    "transformationType": "SAME_STOP_MIDNIGHT_INVERSION",
+    "rolloverStopSequence": "15",
+    "rolloverStopId": "PV_P_2",
+    "dwellOrHopSeconds": 60,
+    "totalStopsCount": 18,
+    "transformedStopsCount": 4,
+    "durationMinutes": 55,
+    "firstDeparture": "23:20:00",
+    "lastArrival": "24:15:00",
+    "stopsDiff": [
+      {
+        "stop_sequence": "15",
+        "stop_id": "PV_P_2",
+        "raw_arrival_time": "23:59:00",
+        "normalized_arrival_time": "23:59:00",
+        "raw_departure_time": "00:00:00",
+        "normalized_departure_time": "24:00:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "16",
+        "stop_id": "CMP_P_2",
+        "raw_arrival_time": "00:02:00",
+        "normalized_arrival_time": "24:02:00",
+        "raw_departure_time": "00:03:00",
+        "normalized_departure_time": "24:03:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "17",
+        "stop_id": "TBMS_P_2",
+        "raw_arrival_time": "00:05:00",
+        "normalized_arrival_time": "24:05:00",
+        "raw_departure_time": "00:06:00",
+        "normalized_departure_time": "24:06:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "18",
+        "stop_id": "TBM_P_1",
+        "raw_arrival_time": "00:15:00",
+        "normalized_arrival_time": "24:15:00",
+        "raw_departure_time": "00:15:00",
+        "normalized_departure_time": "24:15:00",
+        "offset_seconds": 86400
+      }
+    ],
+    "routeId": "40381",
+    "tripHeadsign": "TBM"
+  },
+  {
+    "tripId": "40383_T1",
+    "transformationType": "SAME_STOP_MIDNIGHT_INVERSION",
+    "rolloverStopSequence": "8",
+    "rolloverStopId": "MBM_P_2",
+    "dwellOrHopSeconds": 60,
+    "totalStopsCount": 18,
+    "transformedStopsCount": 11,
+    "durationMinutes": 55,
+    "firstDeparture": "23:40:00",
+    "lastArrival": "24:35:00",
+    "stopsDiff": [
+      {
+        "stop_sequence": "8",
+        "stop_id": "MBM_P_2",
+        "raw_arrival_time": "23:59:00",
+        "normalized_arrival_time": "23:59:00",
+        "raw_departure_time": "00:00:00",
+        "normalized_departure_time": "24:00:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "9",
+        "stop_id": "SP_P_2",
+        "raw_arrival_time": "00:02:00",
+        "normalized_arrival_time": "24:02:00",
+        "raw_departure_time": "00:03:00",
+        "normalized_departure_time": "24:03:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "10",
+        "stop_id": "GDY_P_2",
+        "raw_arrival_time": "00:05:00",
+        "normalized_arrival_time": "24:05:00",
+        "raw_departure_time": "00:06:00",
+        "normalized_departure_time": "24:06:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "11",
+        "stop_id": "STM_P_2",
+        "raw_arrival_time": "00:08:00",
+        "normalized_arrival_time": "24:08:00",
+        "raw_departure_time": "00:09:00",
+        "normalized_departure_time": "24:09:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "12",
+        "stop_id": "PZA_P_2",
+        "raw_arrival_time": "00:11:00",
+        "normalized_arrival_time": "24:11:00",
+        "raw_departure_time": "00:12:00",
+        "normalized_departure_time": "24:12:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "13",
+        "stop_id": "MN_P_2",
+        "raw_arrival_time": "00:14:00",
+        "normalized_arrival_time": "24:14:00",
+        "raw_departure_time": "00:15:00",
+        "normalized_departure_time": "24:15:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "14",
+        "stop_id": "TLM_P_2",
+        "raw_arrival_time": "00:16:00",
+        "normalized_arrival_time": "24:16:00",
+        "raw_departure_time": "00:17:00",
+        "normalized_departure_time": "24:17:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "15",
+        "stop_id": "PV_P_2",
+        "raw_arrival_time": "00:19:00",
+        "normalized_arrival_time": "24:19:00",
+        "raw_departure_time": "00:20:00",
+        "normalized_departure_time": "24:20:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "16",
+        "stop_id": "CMP_P_2",
+        "raw_arrival_time": "00:22:00",
+        "normalized_arrival_time": "24:22:00",
+        "raw_departure_time": "00:23:00",
+        "normalized_departure_time": "24:23:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "17",
+        "stop_id": "TBMS_P_2",
+        "raw_arrival_time": "00:25:00",
+        "normalized_arrival_time": "24:25:00",
+        "raw_departure_time": "00:26:00",
+        "normalized_departure_time": "24:26:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "18",
+        "stop_id": "TBM_P_1",
+        "raw_arrival_time": "00:35:00",
+        "normalized_arrival_time": "24:35:00",
+        "raw_departure_time": "00:35:00",
+        "normalized_departure_time": "24:35:00",
+        "offset_seconds": 86400
+      }
+    ],
+    "routeId": "40383",
+    "tripHeadsign": "TBM"
+  },
+  {
+    "tripId": "40385_T1",
+    "transformationType": "INTER_STOP_MIDNIGHT_REGRESSION",
+    "rolloverStopSequence": "2",
+    "rolloverStopId": "MSF_P_2",
+    "dwellOrHopSeconds": 180,
+    "totalStopsCount": 18,
+    "transformedStopsCount": 17,
+    "durationMinutes": 55,
+    "firstDeparture": "23:59:00",
+    "lastArrival": "24:54:00",
+    "stopsDiff": [
+      {
+        "stop_sequence": "2",
+        "stop_id": "MSF_P_2",
+        "raw_arrival_time": "00:02:00",
+        "normalized_arrival_time": "24:02:00",
+        "raw_departure_time": "00:03:00",
+        "normalized_departure_time": "24:03:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "3",
+        "stop_id": "MPK_P_2",
+        "raw_arrival_time": "00:05:00",
+        "normalized_arrival_time": "24:05:00",
+        "raw_departure_time": "00:06:00",
+        "normalized_departure_time": "24:06:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "4",
+        "stop_id": "MS_P_10",
+        "raw_arrival_time": "00:08:00",
+        "normalized_arrival_time": "24:08:00",
+        "raw_departure_time": "00:09:00",
+        "normalized_departure_time": "24:09:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "5",
+        "stop_id": "MSC_P_2",
+        "raw_arrival_time": "00:11:00",
+        "normalized_arrival_time": "24:11:00",
+        "raw_departure_time": "00:12:00",
+        "normalized_departure_time": "24:12:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "6",
+        "stop_id": "NBK_P_2",
+        "raw_arrival_time": "00:14:00",
+        "normalized_arrival_time": "24:14:00",
+        "raw_departure_time": "00:15:00",
+        "normalized_departure_time": "24:15:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "7",
+        "stop_id": "MKK_P_2",
+        "raw_arrival_time": "00:16:00",
+        "normalized_arrival_time": "24:16:00",
+        "raw_departure_time": "00:17:00",
+        "normalized_departure_time": "24:17:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "8",
+        "stop_id": "MBM_P_2",
+        "raw_arrival_time": "00:18:00",
+        "normalized_arrival_time": "24:18:00",
+        "raw_departure_time": "00:19:00",
+        "normalized_departure_time": "24:19:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "9",
+        "stop_id": "SP_P_2",
+        "raw_arrival_time": "00:21:00",
+        "normalized_arrival_time": "24:21:00",
+        "raw_departure_time": "00:22:00",
+        "normalized_departure_time": "24:22:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "10",
+        "stop_id": "GDY_P_2",
+        "raw_arrival_time": "00:24:00",
+        "normalized_arrival_time": "24:24:00",
+        "raw_departure_time": "00:25:00",
+        "normalized_departure_time": "24:25:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "11",
+        "stop_id": "STM_P_2",
+        "raw_arrival_time": "00:27:00",
+        "normalized_arrival_time": "24:27:00",
+        "raw_departure_time": "00:28:00",
+        "normalized_departure_time": "24:28:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "12",
+        "stop_id": "PZA_P_2",
+        "raw_arrival_time": "00:30:00",
+        "normalized_arrival_time": "24:30:00",
+        "raw_departure_time": "00:31:00",
+        "normalized_departure_time": "24:31:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "13",
+        "stop_id": "MN_P_2",
+        "raw_arrival_time": "00:33:00",
+        "normalized_arrival_time": "24:33:00",
+        "raw_departure_time": "00:34:00",
+        "normalized_departure_time": "24:34:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "14",
+        "stop_id": "TLM_P_2",
+        "raw_arrival_time": "00:35:00",
+        "normalized_arrival_time": "24:35:00",
+        "raw_departure_time": "00:36:00",
+        "normalized_departure_time": "24:36:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "15",
+        "stop_id": "PV_P_2",
+        "raw_arrival_time": "00:38:00",
+        "normalized_arrival_time": "24:38:00",
+        "raw_departure_time": "00:39:00",
+        "normalized_departure_time": "24:39:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "16",
+        "stop_id": "CMP_P_2",
+        "raw_arrival_time": "00:41:00",
+        "normalized_arrival_time": "24:41:00",
+        "raw_departure_time": "00:42:00",
+        "normalized_departure_time": "24:42:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "17",
+        "stop_id": "TBMS_P_2",
+        "raw_arrival_time": "00:44:00",
+        "normalized_arrival_time": "24:44:00",
+        "raw_departure_time": "00:45:00",
+        "normalized_departure_time": "24:45:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "18",
+        "stop_id": "TBM_P_1",
+        "raw_arrival_time": "00:54:00",
+        "normalized_arrival_time": "24:54:00",
+        "raw_departure_time": "00:54:00",
+        "normalized_departure_time": "24:54:00",
+        "offset_seconds": 86400
+      }
+    ],
+    "routeId": "40385",
+    "tripHeadsign": "TBM"
+  },
+  {
+    "tripId": "40396_T1",
+    "transformationType": "INTER_STOP_MIDNIGHT_REGRESSION",
+    "rolloverStopSequence": "8",
+    "rolloverStopId": "STM_P_2",
+    "dwellOrHopSeconds": 120,
+    "totalStopsCount": 18,
+    "transformedStopsCount": 11,
+    "durationMinutes": 55,
+    "firstDeparture": "23:40:00",
+    "lastArrival": "24:35:00",
+    "stopsDiff": [
+      {
+        "stop_sequence": "8",
+        "stop_id": "STM_P_2",
+        "raw_arrival_time": "00:00:00",
+        "normalized_arrival_time": "24:00:00",
+        "raw_departure_time": "00:01:00",
+        "normalized_departure_time": "24:01:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "9",
+        "stop_id": "GDY_P_2",
+        "raw_arrival_time": "00:03:00",
+        "normalized_arrival_time": "24:03:00",
+        "raw_departure_time": "00:04:00",
+        "normalized_departure_time": "24:04:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "10",
+        "stop_id": "SP_P_2",
+        "raw_arrival_time": "00:06:00",
+        "normalized_arrival_time": "24:06:00",
+        "raw_departure_time": "00:07:00",
+        "normalized_departure_time": "24:07:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "11",
+        "stop_id": "MBM_P_2",
+        "raw_arrival_time": "00:09:00",
+        "normalized_arrival_time": "24:09:00",
+        "raw_departure_time": "00:10:00",
+        "normalized_departure_time": "24:10:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "12",
+        "stop_id": "MKK_P_2",
+        "raw_arrival_time": "00:11:00",
+        "normalized_arrival_time": "24:11:00",
+        "raw_departure_time": "00:12:00",
+        "normalized_departure_time": "24:12:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "13",
+        "stop_id": "NBK_P_2",
+        "raw_arrival_time": "00:13:00",
+        "normalized_arrival_time": "24:13:00",
+        "raw_departure_time": "00:14:00",
+        "normalized_departure_time": "24:14:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "14",
+        "stop_id": "MSC_P_2",
+        "raw_arrival_time": "00:16:00",
+        "normalized_arrival_time": "24:16:00",
+        "raw_departure_time": "00:17:00",
+        "normalized_departure_time": "24:17:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "15",
+        "stop_id": "MS_P_10",
+        "raw_arrival_time": "00:19:00",
+        "normalized_arrival_time": "24:19:00",
+        "raw_departure_time": "00:20:00",
+        "normalized_departure_time": "24:20:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "16",
+        "stop_id": "MPK_P_2",
+        "raw_arrival_time": "00:22:00",
+        "normalized_arrival_time": "24:22:00",
+        "raw_departure_time": "00:23:00",
+        "normalized_departure_time": "24:23:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "17",
+        "stop_id": "MSF_P_2",
+        "raw_arrival_time": "00:25:00",
+        "normalized_arrival_time": "24:25:00",
+        "raw_departure_time": "00:26:00",
+        "normalized_departure_time": "24:26:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "18",
+        "stop_id": "MSB_P_4",
+        "raw_arrival_time": "00:35:00",
+        "normalized_arrival_time": "24:35:00",
+        "raw_departure_time": "00:35:00",
+        "normalized_departure_time": "24:35:00",
+        "offset_seconds": 86400
+      }
+    ],
+    "routeId": "40396",
+    "tripHeadsign": "MSB"
+  },
+  {
+    "tripId": "40571_T1",
+    "transformationType": "INTER_STOP_MIDNIGHT_REGRESSION",
+    "rolloverStopSequence": "26",
+    "rolloverStopId": "SKL_P_1",
+    "dwellOrHopSeconds": 120,
+    "totalStopsCount": 28,
+    "transformedStopsCount": 3,
+    "durationMinutes": 120,
+    "firstDeparture": "22:40:00",
+    "lastArrival": "24:40:00",
+    "stopsDiff": [
+      {
+        "stop_sequence": "26",
+        "stop_id": "SKL_P_1",
+        "raw_arrival_time": "00:00:00",
+        "normalized_arrival_time": "24:00:00",
+        "raw_departure_time": "00:01:00",
+        "normalized_departure_time": "24:01:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "27",
+        "stop_id": "PWU_P_1",
+        "raw_arrival_time": "00:03:00",
+        "normalized_arrival_time": "24:03:00",
+        "raw_departure_time": "00:04:00",
+        "normalized_departure_time": "24:04:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "28",
+        "stop_id": "CGL_P_1",
+        "raw_arrival_time": "00:40:00",
+        "normalized_arrival_time": "24:40:00",
+        "raw_departure_time": "00:40:00",
+        "normalized_departure_time": "24:40:00",
+        "offset_seconds": 86400
+      }
+    ],
+    "routeId": "40571",
+    "tripHeadsign": "CGL"
+  },
+  {
+    "tripId": "40572_T1",
+    "transformationType": "INTER_STOP_MIDNIGHT_REGRESSION",
+    "rolloverStopSequence": "12",
+    "rolloverStopId": "TBMS_P_2",
+    "dwellOrHopSeconds": 180,
+    "totalStopsCount": 28,
+    "transformedStopsCount": 17,
+    "durationMinutes": 114,
+    "firstDeparture": "23:00:00",
+    "lastArrival": "24:54:00",
+    "stopsDiff": [
+      {
+        "stop_sequence": "12",
+        "stop_id": "TBMS_P_2",
+        "raw_arrival_time": "00:02:00",
+        "normalized_arrival_time": "24:02:00",
+        "raw_departure_time": "00:03:00",
+        "normalized_departure_time": "24:03:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "13",
+        "stop_id": "CMP_P_2",
+        "raw_arrival_time": "00:05:00",
+        "normalized_arrival_time": "24:05:00",
+        "raw_departure_time": "00:06:00",
+        "normalized_departure_time": "24:06:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "14",
+        "stop_id": "PV_P_2",
+        "raw_arrival_time": "00:08:00",
+        "normalized_arrival_time": "24:08:00",
+        "raw_departure_time": "00:09:00",
+        "normalized_departure_time": "24:09:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "15",
+        "stop_id": "TLM_P_2",
+        "raw_arrival_time": "00:11:00",
+        "normalized_arrival_time": "24:11:00",
+        "raw_departure_time": "00:12:00",
+        "normalized_departure_time": "24:12:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "16",
+        "stop_id": "MN_P_2",
+        "raw_arrival_time": "00:13:00",
+        "normalized_arrival_time": "24:13:00",
+        "raw_departure_time": "00:14:00",
+        "normalized_departure_time": "24:14:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "17",
+        "stop_id": "PZA_P_2",
+        "raw_arrival_time": "00:16:00",
+        "normalized_arrival_time": "24:16:00",
+        "raw_departure_time": "00:17:00",
+        "normalized_departure_time": "24:17:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "18",
+        "stop_id": "STM_P_2",
+        "raw_arrival_time": "00:19:00",
+        "normalized_arrival_time": "24:19:00",
+        "raw_departure_time": "00:20:00",
+        "normalized_departure_time": "24:20:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "19",
+        "stop_id": "GDY_P_2",
+        "raw_arrival_time": "00:22:00",
+        "normalized_arrival_time": "24:22:00",
+        "raw_departure_time": "00:23:00",
+        "normalized_departure_time": "24:23:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "20",
+        "stop_id": "SP_P_2",
+        "raw_arrival_time": "00:25:00",
+        "normalized_arrival_time": "24:25:00",
+        "raw_departure_time": "00:26:00",
+        "normalized_departure_time": "24:26:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "21",
+        "stop_id": "MBM_P_2",
+        "raw_arrival_time": "00:28:00",
+        "normalized_arrival_time": "24:28:00",
+        "raw_departure_time": "00:29:00",
+        "normalized_departure_time": "24:29:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "22",
+        "stop_id": "MKK_P_2",
+        "raw_arrival_time": "00:30:00",
+        "normalized_arrival_time": "24:30:00",
+        "raw_departure_time": "00:31:00",
+        "normalized_departure_time": "24:31:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "23",
+        "stop_id": "NBK_P_2",
+        "raw_arrival_time": "00:32:00",
+        "normalized_arrival_time": "24:32:00",
+        "raw_departure_time": "00:33:00",
+        "normalized_departure_time": "24:33:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "24",
+        "stop_id": "MSC_P_2",
+        "raw_arrival_time": "00:35:00",
+        "normalized_arrival_time": "24:35:00",
+        "raw_departure_time": "00:36:00",
+        "normalized_departure_time": "24:36:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "25",
+        "stop_id": "MS_P_10",
+        "raw_arrival_time": "00:38:00",
+        "normalized_arrival_time": "24:38:00",
+        "raw_departure_time": "00:39:00",
+        "normalized_departure_time": "24:39:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "26",
+        "stop_id": "MPK_P_2",
+        "raw_arrival_time": "00:41:00",
+        "normalized_arrival_time": "24:41:00",
+        "raw_departure_time": "00:42:00",
+        "normalized_departure_time": "24:42:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "27",
+        "stop_id": "MSF_P_2",
+        "raw_arrival_time": "00:44:00",
+        "normalized_arrival_time": "24:44:00",
+        "raw_departure_time": "00:45:00",
+        "normalized_departure_time": "24:45:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "28",
+        "stop_id": "MSB_P_4",
+        "raw_arrival_time": "00:54:00",
+        "normalized_arrival_time": "24:54:00",
+        "raw_departure_time": "00:54:00",
+        "normalized_departure_time": "24:54:00",
+        "offset_seconds": 86400
+      }
+    ],
+    "routeId": "40572",
+    "tripHeadsign": "MSB"
+  },
+  {
+    "tripId": "40660_T1",
+    "transformationType": "SAME_STOP_MIDNIGHT_INVERSION",
+    "rolloverStopSequence": "25",
+    "rolloverStopId": "MS_P_10",
+    "dwellOrHopSeconds": 60,
+    "totalStopsCount": 28,
+    "transformedStopsCount": 4,
+    "durationMinutes": 120,
+    "firstDeparture": "22:15:00",
+    "lastArrival": "24:15:00",
+    "stopsDiff": [
+      {
+        "stop_sequence": "25",
+        "stop_id": "MS_P_10",
+        "raw_arrival_time": "23:59:00",
+        "normalized_arrival_time": "23:59:00",
+        "raw_departure_time": "00:00:00",
+        "normalized_departure_time": "24:00:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "26",
+        "stop_id": "MPK_P_2",
+        "raw_arrival_time": "00:02:00",
+        "normalized_arrival_time": "24:02:00",
+        "raw_departure_time": "00:03:00",
+        "normalized_departure_time": "24:03:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "27",
+        "stop_id": "MSF_P_2",
+        "raw_arrival_time": "00:05:00",
+        "normalized_arrival_time": "24:05:00",
+        "raw_departure_time": "00:06:00",
+        "normalized_departure_time": "24:06:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "28",
+        "stop_id": "MSB_P_4",
+        "raw_arrival_time": "00:15:00",
+        "normalized_arrival_time": "24:15:00",
+        "raw_departure_time": "00:15:00",
+        "normalized_departure_time": "24:15:00",
+        "offset_seconds": 86400
+      }
+    ],
+    "routeId": "40660",
+    "tripHeadsign": "MSB"
+  },
+  {
+    "tripId": "40661_T1",
+    "transformationType": "INTER_STOP_MIDNIGHT_REGRESSION",
+    "rolloverStopSequence": "23",
+    "rolloverStopId": "POTI_P_1",
+    "dwellOrHopSeconds": 180,
+    "totalStopsCount": 28,
+    "transformedStopsCount": 6,
+    "durationMinutes": 115,
+    "firstDeparture": "22:45:00",
+    "lastArrival": "24:40:00",
+    "stopsDiff": [
+      {
+        "stop_sequence": "23",
+        "stop_id": "POTI_P_1",
+        "raw_arrival_time": "00:00:00",
+        "normalized_arrival_time": "24:00:00",
+        "raw_departure_time": "00:01:00",
+        "normalized_departure_time": "24:01:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "24",
+        "stop_id": "CTM_P_1",
+        "raw_arrival_time": "00:03:00",
+        "normalized_arrival_time": "24:03:00",
+        "raw_departure_time": "00:04:00",
+        "normalized_departure_time": "24:04:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "25",
+        "stop_id": "MMNK_P_1",
+        "raw_arrival_time": "00:05:00",
+        "normalized_arrival_time": "24:05:00",
+        "raw_departure_time": "00:06:00",
+        "normalized_departure_time": "24:06:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "26",
+        "stop_id": "SKL_P_1",
+        "raw_arrival_time": "00:10:00",
+        "normalized_arrival_time": "24:10:00",
+        "raw_departure_time": "00:11:00",
+        "normalized_departure_time": "24:11:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "27",
+        "stop_id": "PWU_P_1",
+        "raw_arrival_time": "00:15:00",
+        "normalized_arrival_time": "24:15:00",
+        "raw_departure_time": "00:16:00",
+        "normalized_departure_time": "24:16:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "28",
+        "stop_id": "CGL_P_1",
+        "raw_arrival_time": "00:40:00",
+        "normalized_arrival_time": "24:40:00",
+        "raw_departure_time": "00:40:00",
+        "normalized_departure_time": "24:40:00",
+        "offset_seconds": 86400
+      }
+    ],
+    "routeId": "40661",
+    "tripHeadsign": "CGL"
+  },
+  {
+    "tripId": "40662_T1",
+    "transformationType": "INTER_STOP_MIDNIGHT_REGRESSION",
+    "rolloverStopSequence": "12",
+    "rolloverStopId": "TBMS_P_2",
+    "dwellOrHopSeconds": 180,
+    "totalStopsCount": 28,
+    "transformedStopsCount": 17,
+    "durationMinutes": 114,
+    "firstDeparture": "23:00:00",
+    "lastArrival": "24:54:00",
+    "stopsDiff": [
+      {
+        "stop_sequence": "12",
+        "stop_id": "TBMS_P_2",
+        "raw_arrival_time": "00:02:00",
+        "normalized_arrival_time": "24:02:00",
+        "raw_departure_time": "00:03:00",
+        "normalized_departure_time": "24:03:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "13",
+        "stop_id": "CMP_P_2",
+        "raw_arrival_time": "00:05:00",
+        "normalized_arrival_time": "24:05:00",
+        "raw_departure_time": "00:06:00",
+        "normalized_departure_time": "24:06:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "14",
+        "stop_id": "PV_P_2",
+        "raw_arrival_time": "00:08:00",
+        "normalized_arrival_time": "24:08:00",
+        "raw_departure_time": "00:09:00",
+        "normalized_departure_time": "24:09:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "15",
+        "stop_id": "TLM_P_2",
+        "raw_arrival_time": "00:11:00",
+        "normalized_arrival_time": "24:11:00",
+        "raw_departure_time": "00:12:00",
+        "normalized_departure_time": "24:12:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "16",
+        "stop_id": "MN_P_2",
+        "raw_arrival_time": "00:13:00",
+        "normalized_arrival_time": "24:13:00",
+        "raw_departure_time": "00:14:00",
+        "normalized_departure_time": "24:14:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "17",
+        "stop_id": "PZA_P_2",
+        "raw_arrival_time": "00:16:00",
+        "normalized_arrival_time": "24:16:00",
+        "raw_departure_time": "00:17:00",
+        "normalized_departure_time": "24:17:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "18",
+        "stop_id": "STM_P_2",
+        "raw_arrival_time": "00:19:00",
+        "normalized_arrival_time": "24:19:00",
+        "raw_departure_time": "00:20:00",
+        "normalized_departure_time": "24:20:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "19",
+        "stop_id": "GDY_P_2",
+        "raw_arrival_time": "00:22:00",
+        "normalized_arrival_time": "24:22:00",
+        "raw_departure_time": "00:23:00",
+        "normalized_departure_time": "24:23:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "20",
+        "stop_id": "SP_P_2",
+        "raw_arrival_time": "00:25:00",
+        "normalized_arrival_time": "24:25:00",
+        "raw_departure_time": "00:26:00",
+        "normalized_departure_time": "24:26:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "21",
+        "stop_id": "MBM_P_2",
+        "raw_arrival_time": "00:28:00",
+        "normalized_arrival_time": "24:28:00",
+        "raw_departure_time": "00:29:00",
+        "normalized_departure_time": "24:29:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "22",
+        "stop_id": "MKK_P_2",
+        "raw_arrival_time": "00:30:00",
+        "normalized_arrival_time": "24:30:00",
+        "raw_departure_time": "00:31:00",
+        "normalized_departure_time": "24:31:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "23",
+        "stop_id": "NBK_P_2",
+        "raw_arrival_time": "00:32:00",
+        "normalized_arrival_time": "24:32:00",
+        "raw_departure_time": "00:33:00",
+        "normalized_departure_time": "24:33:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "24",
+        "stop_id": "MSC_P_2",
+        "raw_arrival_time": "00:35:00",
+        "normalized_arrival_time": "24:35:00",
+        "raw_departure_time": "00:36:00",
+        "normalized_departure_time": "24:36:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "25",
+        "stop_id": "MS_P_10",
+        "raw_arrival_time": "00:38:00",
+        "normalized_arrival_time": "24:38:00",
+        "raw_departure_time": "00:39:00",
+        "normalized_departure_time": "24:39:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "26",
+        "stop_id": "MPK_P_2",
+        "raw_arrival_time": "00:41:00",
+        "normalized_arrival_time": "24:41:00",
+        "raw_departure_time": "00:42:00",
+        "normalized_departure_time": "24:42:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "27",
+        "stop_id": "MSF_P_2",
+        "raw_arrival_time": "00:44:00",
+        "normalized_arrival_time": "24:44:00",
+        "raw_departure_time": "00:45:00",
+        "normalized_departure_time": "24:45:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "28",
+        "stop_id": "MSB_P_4",
+        "raw_arrival_time": "00:54:00",
+        "normalized_arrival_time": "24:54:00",
+        "raw_departure_time": "00:54:00",
+        "normalized_departure_time": "24:54:00",
+        "offset_seconds": 86400
+      }
+    ],
+    "routeId": "40662",
+    "tripHeadsign": "MSB"
+  },
+  {
+    "tripId": "42035_T1",
+    "transformationType": "INTER_STOP_MIDNIGHT_REGRESSION",
+    "rolloverStopSequence": "17",
+    "rolloverStopId": "GPD_P_1",
+    "dwellOrHopSeconds": 1560,
+    "totalStopsCount": 17,
+    "transformedStopsCount": 1,
+    "durationMinutes": 100,
+    "firstDeparture": "22:35:00",
+    "lastArrival": "24:15:00",
+    "stopsDiff": [
+      {
+        "stop_sequence": "17",
+        "stop_id": "GPD_P_1",
+        "raw_arrival_time": "00:15:00",
+        "normalized_arrival_time": "24:15:00",
+        "raw_departure_time": "00:15:00",
+        "normalized_departure_time": "24:15:00",
+        "offset_seconds": 86400
+      }
+    ],
+    "routeId": "42035",
+    "tripHeadsign": "GPD"
+  },
+  {
+    "tripId": "42037_T1",
+    "transformationType": "INTER_STOP_MIDNIGHT_REGRESSION",
+    "rolloverStopSequence": "10",
+    "rolloverStopId": "AIPP_P_3",
+    "dwellOrHopSeconds": 360,
+    "totalStopsCount": 17,
+    "transformedStopsCount": 8,
+    "durationMinutes": 100,
+    "firstDeparture": "23:20:00",
+    "lastArrival": "25:00:00",
+    "stopsDiff": [
+      {
+        "stop_sequence": "10",
+        "stop_id": "AIPP_P_3",
+        "raw_arrival_time": "00:02:00",
+        "normalized_arrival_time": "24:02:00",
+        "raw_departure_time": "00:03:00",
+        "normalized_departure_time": "24:03:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "11",
+        "stop_id": "AIP_P_1",
+        "raw_arrival_time": "00:06:00",
+        "normalized_arrival_time": "24:06:00",
+        "raw_departure_time": "00:07:00",
+        "normalized_departure_time": "24:07:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "12",
+        "stop_id": "NPKM_P_1",
+        "raw_arrival_time": "00:10:00",
+        "normalized_arrival_time": "24:10:00",
+        "raw_departure_time": "00:11:00",
+        "normalized_departure_time": "24:11:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "13",
+        "stop_id": "MJR_P_1",
+        "raw_arrival_time": "00:13:00",
+        "normalized_arrival_time": "24:13:00",
+        "raw_departure_time": "00:14:00",
+        "normalized_departure_time": "24:14:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "14",
+        "stop_id": "APB_P_1",
+        "raw_arrival_time": "00:17:00",
+        "normalized_arrival_time": "24:17:00",
+        "raw_departure_time": "00:18:00",
+        "normalized_departure_time": "24:18:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "15",
+        "stop_id": "PON_P_2",
+        "raw_arrival_time": "00:23:00",
+        "normalized_arrival_time": "24:23:00",
+        "raw_departure_time": "00:24:00",
+        "normalized_departure_time": "24:24:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "16",
+        "stop_id": "KVP_P_1",
+        "raw_arrival_time": "00:29:00",
+        "normalized_arrival_time": "24:29:00",
+        "raw_departure_time": "00:30:00",
+        "normalized_departure_time": "24:30:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "17",
+        "stop_id": "GPD_P_1",
+        "raw_arrival_time": "01:00:00",
+        "normalized_arrival_time": "25:00:00",
+        "raw_departure_time": "01:00:00",
+        "normalized_departure_time": "25:00:00",
+        "offset_seconds": 86400
+      }
+    ],
+    "routeId": "42037",
+    "tripHeadsign": "GPD"
+  },
+  {
+    "tripId": "43253_T1",
+    "transformationType": "INTER_STOP_MIDNIGHT_REGRESSION",
+    "rolloverStopSequence": "15",
+    "rolloverStopId": "PAB_P_1",
+    "dwellOrHopSeconds": 240,
+    "totalStopsCount": 21,
+    "transformedStopsCount": 7,
+    "durationMinutes": 80,
+    "firstDeparture": "23:15:00",
+    "lastArrival": "24:35:00",
+    "stopsDiff": [
+      {
+        "stop_sequence": "15",
+        "stop_id": "PAB_P_1",
+        "raw_arrival_time": "00:03:00",
+        "normalized_arrival_time": "24:03:00",
+        "raw_departure_time": "00:04:00",
+        "normalized_departure_time": "24:04:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "16",
+        "stop_id": "NEC_P_2",
+        "raw_arrival_time": "00:06:00",
+        "normalized_arrival_time": "24:06:00",
+        "raw_departure_time": "00:07:00",
+        "normalized_departure_time": "24:07:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "17",
+        "stop_id": "TI_P_1",
+        "raw_arrival_time": "00:09:00",
+        "normalized_arrival_time": "24:09:00",
+        "raw_departure_time": "00:10:00",
+        "normalized_departure_time": "24:10:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "18",
+        "stop_id": "VEU_P_1",
+        "raw_arrival_time": "00:13:00",
+        "normalized_arrival_time": "24:13:00",
+        "raw_departure_time": "00:14:00",
+        "normalized_departure_time": "24:14:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "19",
+        "stop_id": "SVR_P_1",
+        "raw_arrival_time": "00:17:00",
+        "normalized_arrival_time": "24:17:00",
+        "raw_departure_time": "00:18:00",
+        "normalized_departure_time": "24:18:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "20",
+        "stop_id": "PTLR_P_1",
+        "raw_arrival_time": "00:20:00",
+        "normalized_arrival_time": "24:20:00",
+        "raw_departure_time": "00:21:00",
+        "normalized_departure_time": "24:21:00",
+        "offset_seconds": 86400
+      },
+      {
+        "stop_sequence": "21",
+        "stop_id": "TRL_P_4",
+        "raw_arrival_time": "00:35:00",
+        "normalized_arrival_time": "24:35:00",
+        "raw_departure_time": "00:35:00",
+        "normalized_departure_time": "24:35:00",
+        "offset_seconds": 86400
+      }
+    ],
+    "routeId": "43253",
+    "tripHeadsign": "TRL"
+  },
+  {
+    "tripId": "43441_T1",
+    "transformationType": "INTER_STOP_MIDNIGHT_REGRESSION",
+    "rolloverStopSequence": "29",
+    "rolloverStopId": "AJJ_P_1",
+    "dwellOrHopSeconds": 480,
+    "totalStopsCount": 29,
+    "transformedStopsCount": 1,
+    "durationMinutes": 125,
+    "firstDeparture": "22:00:00",
+    "lastArrival": "24:05:00",
+    "stopsDiff": [
+      {
+        "stop_sequence": "29",
+        "stop_id": "AJJ_P_1",
+        "raw_arrival_time": "00:05:00",
+        "normalized_arrival_time": "24:05:00",
+        "raw_departure_time": "00:05:00",
+        "normalized_departure_time": "24:05:00",
+        "offset_seconds": 86400
+      }
+    ],
+    "routeId": "43441",
+    "tripHeadsign": "AJJ"
+  },
+  {
+    "tripId": "43524_T1",
+    "transformationType": "INTER_STOP_MIDNIGHT_REGRESSION",
+    "rolloverStopSequence": "29",
+    "rolloverStopId": "MAS_P_12",
+    "dwellOrHopSeconds": 1740,
+    "totalStopsCount": 29,
+    "transformedStopsCount": 1,
+    "durationMinutes": 136,
+    "firstDeparture": "22:05:00",
+    "lastArrival": "24:20:00",
+    "stopsDiff": [
+      {
+        "stop_sequence": "29",
+        "stop_id": "MAS_P_12",
+        "raw_arrival_time": "00:20:00",
+        "normalized_arrival_time": "24:20:00",
+        "raw_departure_time": "00:20:00",
+        "normalized_departure_time": "24:20:00",
+        "offset_seconds": 86400
+      }
+    ],
+    "routeId": "43524",
+    "tripHeadsign": "MAS"
+  }
+]

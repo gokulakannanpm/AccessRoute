@@ -1,0 +1,406 @@
+{
+  "version": "1.0.0",
+  "operator": {
+    "id": "MTC",
+    "name": "Metropolitan Transport Corporation (Chennai) Ltd.",
+    "shortName": "MTC Chennai",
+    "headquarters": "Pallavan Illam, Anna Salai, Chennai 600002"
+  },
+  "fareCategories": [
+    {
+      "code": "ORD",
+      "name": "Ordinary (White Board)",
+      "fareType": "distance_slab_standard",
+      "freeFareEligible": true
+    },
+    {
+      "code": "EXP",
+      "name": "Express (Green / Blue Board)",
+      "fareType": "distance_slab_express",
+      "freeFareEligible": false
+    },
+    {
+      "code": "DLX",
+      "name": "Deluxe (Red Board)",
+      "fareType": "distance_slab_deluxe",
+      "freeFareEligible": false
+    },
+    {
+      "code": "AC_ELEC",
+      "name": "Air-Conditioned Electric / Volvo",
+      "fareType": "distance_slab_premium",
+      "freeFareEligible": false
+    }
+  ],
+  "interchangeHubs": [
+    {
+      "id": "mtc_broadway",
+      "code": "BWAY",
+      "name": "Broadway Bus Terminus",
+      "tamilName": "பிராட்வே பேருந்து நிலையம்",
+      "latitude": 13.0886,
+      "longitude": 80.2845,
+      "corridorRole": "Northern & Central Core Trunk Terminal",
+      "district": "Chennai",
+      "platforms": 14,
+      "interchangeConnections": [
+        "Chennai Metro High Court Station",
+        "Suburban Rail (Chennai Fort & Beach Stations)"
+      ],
+      "hasShelter": true,
+      "stepFreeAccess": false,
+      "evidenceStatus": "manually_curated"
+    },
+    {
+      "id": "mtc_cmbt",
+      "code": "CMBT",
+      "name": "Puratchi Thalaivar Dr. M.G.R. Bus Terminus (Koyambedu CMBT)",
+      "tamilName": "புரட்சித் தலைவர் டாக்டர் எம்.ஜி.ஆர் பேருந்து நிலையம் (கோயம்பேடு)",
+      "latitude": 13.0694,
+      "longitude": 80.1948,
+      "corridorRole": "Central Western Arterial Hub & City-Mofussil Gateway",
+      "district": "Chennai",
+      "platforms": 20,
+      "interchangeConnections": [
+        "Chennai Metro CMBT Station (Green Line)",
+        "SETC / TNSTC Intercity Terminals"
+      ],
+      "hasShelter": true,
+      "stepFreeAccess": false,
+      "evidenceStatus": "manually_curated"
+    },
+    {
+      "id": "mtc_kcbt",
+      "code": "KCBT",
+      "name": "Kalaignar Centenary Bus Terminus (KCBT Kilambakkam)",
+      "tamilName": "கலைஞர் நூற்றாண்டு பேருந்து முனையம் (கிளாம்பாக்கம்)",
+      "latitude": 12.8682,
+      "longitude": 80.0768,
+      "corridorRole": "Southern Arterial Mega Terminal for GST Corridor",
+      "district": "Chengalpattu",
+      "platforms": 24,
+      "interchangeConnections": [
+        "Suburban Rail (Vandalur / Kilambakkam Proposed Halt)",
+        "TNSTC / SETC South-Bound Intercity Services"
+      ],
+      "hasShelter": true,
+      "stepFreeAccess": false,
+      "evidenceStatus": "manually_curated"
+    },
+    {
+      "id": "mtc_tnagar",
+      "code": "TNGR",
+      "name": "T. Nagar Bus Terminus",
+      "tamilName": "தி. நகர் பேருந்து நிலையம்",
+      "latitude": 13.0402,
+      "longitude": 80.2315,
+      "corridorRole": "South-Central Commercial & Commuter Radial Hub",
+      "district": "Chennai",
+      "platforms": 12,
+      "interchangeConnections": [
+        "Suburban Rail (Mambalam Station via elevated pedestrian skywalk)",
+        "Express Trains at Mambalam"
+      ],
+      "hasShelter": true,
+      "stepFreeAccess": false,
+      "evidenceStatus": "manually_curated"
+    },
+    {
+      "id": "mtc_tambaram_west",
+      "code": "TBMW",
+      "name": "Tambaram West Bus Terminus",
+      "tamilName": "தாம்பரம் மேற்கு பேருந்து நிலையம்",
+      "latitude": 12.9255,
+      "longitude": 80.1172,
+      "corridorRole": "South-Western Terminal for Kanchipuram / Oragadam Corridors",
+      "district": "Chengalpattu",
+      "platforms": 10,
+      "interchangeConnections": [
+        "Suburban Rail (Tambaram Station West Entrance)",
+        "Express Rail Terminal Platforms"
+      ],
+      "hasShelter": true,
+      "stepFreeAccess": false,
+      "evidenceStatus": "manually_curated"
+    },
+    {
+      "id": "mtc_tambaram_east",
+      "code": "TBME",
+      "name": "Tambaram East Bus Terminus",
+      "tamilName": "தாம்பரம் கிழக்கு பேருந்து நிலையம்",
+      "latitude": 12.9261,
+      "longitude": 80.1228,
+      "corridorRole": "South-Eastern Radial Gateway to Velachery, Medavakkam & OMR",
+      "district": "Chengalpattu",
+      "platforms": 8,
+      "interchangeConnections": [
+        "Suburban Rail (Tambaram Station East Entrance)"
+      ],
+      "hasShelter": true,
+      "stepFreeAccess": false,
+      "evidenceStatus": "manually_curated"
+    },
+    {
+      "id": "mtc_guindy",
+      "code": "GDY",
+      "name": "Guindy Multi-Modal Bus Hub",
+      "tamilName": "கிண்டி பேருந்து நிலையம்",
+      "latitude": 13.0084,
+      "longitude": 80.2131,
+      "corridorRole": "Central Industrial & Metro/Suburban Tri-modal Junction",
+      "district": "Chennai",
+      "platforms": 8,
+      "interchangeConnections": [
+        "Chennai Metro Guindy Station (Blue Line)",
+        "Suburban Rail (Guindy EMU Station - GDY)"
+      ],
+      "hasShelter": true,
+      "stepFreeAccess": false,
+      "evidenceStatus": "manually_curated"
+    },
+    {
+      "id": "mtc_saidapet",
+      "code": "SDPT",
+      "name": "Saidapet Bus Terminus",
+      "tamilName": "சைதாப்பேட்டை பேருந்து நிலையம்",
+      "latitude": 13.0235,
+      "longitude": 80.2245,
+      "corridorRole": "South-Central Arterial Terminal on Anna Salai",
+      "district": "Chennai",
+      "platforms": 6,
+      "interchangeConnections": [
+        "Chennai Metro Saidapet Station",
+        "Suburban Rail (Saidapet EMU Station)"
+      ],
+      "hasShelter": true,
+      "stepFreeAccess": false,
+      "evidenceStatus": "manually_curated"
+    },
+    {
+      "id": "mtc_thiruvanmiyur",
+      "code": "TYMR",
+      "name": "Thiruvanmiyur Bus Depot & Terminus",
+      "tamilName": "திருவான்மியூர் பணிமனை / பேருந்து நிலையம்",
+      "latitude": 12.9868,
+      "longitude": 80.2585,
+      "corridorRole": "OMR (IT Expressway) & ECR Coastal Gateway",
+      "district": "Chennai",
+      "platforms": 10,
+      "interchangeConnections": [
+        "MRTS Line (Thiruvanmiyur Station - TYMR)",
+        "Tidel Park IT Corridor"
+      ],
+      "hasShelter": true,
+      "stepFreeAccess": false,
+      "evidenceStatus": "manually_curated"
+    },
+    {
+      "id": "mtc_poonamallee",
+      "code": "PMLE",
+      "name": "Poonamallee Bus Terminus",
+      "tamilName": "பூவிருந்தவல்லி பேருந்து நிலையம்",
+      "latitude": 13.0495,
+      "longitude": 80.0985,
+      "corridorRole": "Western Corridor Hub for Sriperumbudur / Tiruvallur / NH48",
+      "district": "Tiruvallur",
+      "platforms": 10,
+      "interchangeConnections": [
+        "Future CMRL Phase 2 Poonamallee Bypass Terminal Station"
+      ],
+      "hasShelter": true,
+      "stepFreeAccess": false,
+      "evidenceStatus": "manually_curated"
+    },
+    {
+      "id": "mtc_avadi",
+      "code": "AVD",
+      "name": "Avadi Bus Terminus",
+      "tamilName": "ஆவடி பேருந்து நிலையம்",
+      "latitude": 13.1185,
+      "longitude": 80.1065,
+      "corridorRole": "Western Heavy Industrial & Suburban Interchange",
+      "district": "Tiruvallur",
+      "platforms": 10,
+      "interchangeConnections": [
+        "Suburban Rail (Avadi Railway Station - AVD)",
+        "Selective Express Trains"
+      ],
+      "hasShelter": true,
+      "stepFreeAccess": false,
+      "evidenceStatus": "manually_curated"
+    },
+    {
+      "id": "mtc_ambattur_ot",
+      "code": "ABOT",
+      "name": "Ambattur Old Town (OT) Terminus",
+      "tamilName": "அம்பத்தூர் பழைய பேருந்து நிலையம்",
+      "latitude": 13.1188,
+      "longitude": 80.1525,
+      "corridorRole": "North-Western Industrial Sub-Hub",
+      "district": "Chennai",
+      "platforms": 6,
+      "interchangeConnections": [
+        "Suburban Rail (Ambattur Railway Station - ABU)"
+      ],
+      "hasShelter": true,
+      "stepFreeAccess": false,
+      "evidenceStatus": "manually_curated"
+    },
+    {
+      "id": "mtc_red_hills",
+      "code": "RDHL",
+      "name": "Red Hills Bus Terminus",
+      "tamilName": "செங்குன்றம் பேருந்து நிலையம்",
+      "latitude": 13.1975,
+      "longitude": 80.1955,
+      "corridorRole": "Northern Gateway on GNT Road (NH16)",
+      "district": "Tiruvallur",
+      "platforms": 8,
+      "interchangeConnections": [
+        "GNT Road Intercity Connections to Andhra Pradesh"
+      ],
+      "hasShelter": true,
+      "stepFreeAccess": false,
+      "evidenceStatus": "manually_curated"
+    },
+    {
+      "id": "mtc_tollgate",
+      "code": "TLGT",
+      "name": "Tollgate Bus Terminus",
+      "tamilName": "டோல்கேட் பேருந்து நிலையம்",
+      "latitude": 13.1325,
+      "longitude": 80.2965,
+      "corridorRole": "North Chennai Coastal Radial Hub",
+      "district": "Chennai",
+      "platforms": 6,
+      "interchangeConnections": [
+        "Chennai Metro Tollgate Station (Blue Line)"
+      ],
+      "hasShelter": true,
+      "stepFreeAccess": false,
+      "evidenceStatus": "manually_curated"
+    },
+    {
+      "id": "mtc_vadapalani",
+      "code": "VDPL",
+      "name": "Vadapalani Bus Terminus",
+      "tamilName": "வடபழனி பேருந்து நிலையம்",
+      "latitude": 13.0515,
+      "longitude": 80.21,
+      "corridorRole": "Central Arcot Road Commercial Corridor",
+      "district": "Chennai",
+      "platforms": 8,
+      "interchangeConnections": [
+        "Chennai Metro Vadapalani Station (Green Line)"
+      ],
+      "hasShelter": true,
+      "stepFreeAccess": false,
+      "evidenceStatus": "manually_curated"
+    },
+    {
+      "id": "mtc_velachery",
+      "code": "VLCY",
+      "name": "Velachery Bus Terminus",
+      "tamilName": "வேளச்சேரி பேருந்து நிலையம்",
+      "latitude": 12.9775,
+      "longitude": 80.2185,
+      "corridorRole": "South-East Inner Ring Road Hub",
+      "district": "Chennai",
+      "platforms": 8,
+      "interchangeConnections": [
+        "MRTS (Velachery Elevated Station - VLCY)"
+      ],
+      "hasShelter": true,
+      "stepFreeAccess": false,
+      "evidenceStatus": "manually_curated"
+    },
+    {
+      "id": "mtc_adyar",
+      "code": "ADYR",
+      "name": "Adyar Bus Depot",
+      "tamilName": "அடையாறு பணிமனை",
+      "latitude": 13.0065,
+      "longitude": 80.2575,
+      "corridorRole": "South Chennai Coastal Radial Junction",
+      "district": "Chennai",
+      "platforms": 6,
+      "interchangeConnections": [
+        "L.B. Road & Sardar Patel Road Corridors"
+      ],
+      "hasShelter": true,
+      "stepFreeAccess": false,
+      "evidenceStatus": "manually_curated"
+    },
+    {
+      "id": "mtc_chengalpattu",
+      "code": "CGLB",
+      "name": "Chengalpattu Bus Stand",
+      "tamilName": "செங்கல்பட்டு பேருந்து நிலையம்",
+      "latitude": 12.6935,
+      "longitude": 79.9785,
+      "corridorRole": "Southern District Headquarters Interchange",
+      "district": "Chengalpattu",
+      "platforms": 8,
+      "interchangeConnections": [
+        "Suburban Rail (Chengalpattu Junction - CGL)",
+        "TNSTC Villupuram District Services"
+      ],
+      "hasShelter": true,
+      "stepFreeAccess": false,
+      "evidenceStatus": "manually_curated"
+    },
+    {
+      "id": "mtc_sriperumbudur",
+      "code": "SPBD",
+      "name": "Sriperumbudur Bus Stand",
+      "tamilName": "ஸ்ரீபெரும்புதூர் பேருந்து நிலையம்",
+      "latitude": 12.9695,
+      "longitude": 79.9485,
+      "corridorRole": "Kanchipuram Industrial Belt Gateway (NH48)",
+      "district": "Kanchipuram",
+      "platforms": 6,
+      "interchangeConnections": [
+        "SIPCOT Sriperumbudur / Oragadam Industrial Shuttles",
+        "TNSTC Bangalore Highway Buses"
+      ],
+      "hasShelter": true,
+      "stepFreeAccess": false,
+      "evidenceStatus": "manually_curated"
+    },
+    {
+      "id": "mtc_guduvancheri",
+      "code": "GUDV",
+      "name": "Guduvancheri Bus Stand",
+      "tamilName": "கூடுவாஞ்சேரி பேருந்து நிலையம்",
+      "latitude": 12.8465,
+      "longitude": 80.0575,
+      "corridorRole": "Chengalpattu Peri-Urban GST Corridor Hub",
+      "district": "Chengalpattu",
+      "platforms": 4,
+      "interchangeConnections": [
+        "Suburban Rail (Guduvancheri Station - GI)"
+      ],
+      "hasShelter": true,
+      "stepFreeAccess": false,
+      "evidenceStatus": "manually_curated"
+    },
+    {
+      "id": "mtc_thiruporur",
+      "code": "TPRR",
+      "name": "Thiruporur Bus Stand",
+      "tamilName": "திருப்போரூர் பேருந்து நிலையம்",
+      "latitude": 12.7235,
+      "longitude": 80.1885,
+      "corridorRole": "OMR Southern Corridor Gateway & ECR Connector",
+      "district": "Chengalpattu",
+      "platforms": 4,
+      "interchangeConnections": [
+        "MTC OMR Trunk Routes (519, 102 series)",
+        "TNSTC Mamallapuram / Chengalpattu Link"
+      ],
+      "hasShelter": true,
+      "stepFreeAccess": false,
+      "evidenceStatus": "manually_curated"
+    }
+  ]
+}

@@ -1,30 +1,55 @@
 import React, { useContext, useState, useEffect, useRef } from 'react';
 import { AppContext } from '../context/AppContext';
-import { Navigation, MapPin, Mic, AlertCircle, Check } from 'lucide-react';
+import { Navigation, MapPin, Mic, AlertCircle, Check, ArrowUpDown, X, Loader2, Clock, Footprints, Bike, Car, Compass } from 'lucide-react';
 import { startVoiceRecognition, stopVoiceRecognition } from '../utils/voiceInput';
+import { ALL_TRANSIT_STATIONS } from '../utils/transitExplorerData';
+import { isUnsupportedLocation, CHENNAI_COVERAGE_MESSAGE } from '../utils/coverage';
 
-export const ALLOWED_LOCATIONS = [
+// Seeded quick-pick locations
+const BASE_LOCATIONS = [
   'Chennai Central',
   'Egmore',
   'T. Nagar',
   'Koyambedu',
   'Guindy',
-  'Tambaram'
+  'Tambaram',
+  'Alandur',
+  'Chennai Airport',
+  'Saidapet',
+  'Thiruvanmiyur',
+  'Ambattur OT',
+  'Avadi'
 ];
 
-const LOCATION_DETAILS = {
-  'Chennai Central': 'Main railway terminus',
-  'Egmore': 'Railway station & hospital hub',
-  'T. Nagar': 'Commercial & bus transit hub',
-  'Koyambedu': 'Largest bus terminus in Chennai',
-  'Guindy': 'Metro & suburban rail interchange',
-  'Tambaram': 'Suburban rail terminus'
+// Combine base locations with all 140 catalogue stations
+export const ALLOWED_LOCATIONS = Array.from(
+  new Set([
+    ...BASE_LOCATIONS,
+    ...ALL_TRANSIT_STATIONS.map((s) => s.name)
+  ])
+);
+
+export const LOCATION_DETAILS = {
+  'Chennai Central': { desc: 'Main railway terminus & Metro interchange (Blue/Green)', mode: 'Metro & Rail' },
+  'Egmore': { desc: 'Railway station & Green Line Metro hub', mode: 'Metro & Rail' },
+  'T. Nagar': { desc: 'Major MTC bus transit & commercial hub', mode: 'Bus Hub' },
+  'Koyambedu': { desc: 'CMBT bus terminus & Green Line Metro', mode: 'Metro & Bus' },
+  'Guindy': { desc: 'Metro Blue Line & Suburban rail interchange', mode: 'Interchange' },
+  'Tambaram': { desc: 'Major Southern Railway suburban terminus & bus depot', mode: 'Suburban & Bus' },
+  'Alandur': { desc: 'Bi-level Metro interchange (Blue & Green Lines)', mode: 'Metro Interchange' },
+  'Chennai Airport': { desc: 'International Airport Metro terminal', mode: 'Metro' },
+  'Saidapet': { desc: 'Metro Blue Line & MTC transit hub', mode: 'Metro & Bus' },
+  'Thiruvanmiyur': { desc: 'MTC Bus depot & MRTS terminal', mode: 'MRTS & Bus' },
+  'Ambattur OT': { desc: 'Suburban rail & western bus stand', mode: 'Suburban & Bus' },
+  'Avadi': { desc: 'North-west suburban railway & bus terminal', mode: 'Suburban & Bus' }
 };
 
 const LOCATION_ALIASES = {
   'chennai central': 'Chennai Central',
   'central': 'Chennai Central',
   'central station': 'Chennai Central',
+  'mgr central': 'Chennai Central',
+  'puratchi thalaivar': 'Chennai Central',
   'egmore': 'Egmore',
   'egmore station': 'Egmore',
   't. nagar': 'T. Nagar',
@@ -39,7 +64,17 @@ const LOCATION_ALIASES = {
   'guindy station': 'Guindy',
   'tambaram': 'Tambaram',
   'tambaram station': 'Tambaram',
-  'tambaram bus stand': 'Tambaram'
+  'tambaram bus stand': 'Tambaram',
+  'alandur': 'Alandur',
+  'alandur metro': 'Alandur',
+  'airport': 'Chennai Airport',
+  'chennai airport': 'Chennai Airport',
+  'saidapet': 'Saidapet',
+  'saidapet metro': 'Saidapet',
+  'thiruvanmiyur': 'Thiruvanmiyur',
+  'ambattur': 'Ambattur OT',
+  'ambattur ot': 'Ambattur OT',
+  'avadi': 'Avadi'
 };
 
 export function matchLocation(transcript) {
@@ -83,9 +118,22 @@ export function RouteSearch({ onSearchComplete }) {
     setOrigin,
     destination,
     setDestination,
+    departureTime,
+    setDepartureTime,
+    routingMode,
+    setRoutingMode,
+    geoProfile,
+    setGeoProfile,
+    searchGeographicalRoute,
+    useSyntheticFixtures,
+    setUseSyntheticFixtures,
     preferences,
+    transportModes,
+    searchTimetableJourneys,
+    loadIllustrativePreview,
     refreshRoutes,
-    setCurrentView
+    setCurrentView,
+    isSearching
   } = useContext(AppContext);
 
   const [originText, setOriginText] = useState(origin || 'Chennai Central');
@@ -102,13 +150,13 @@ export function RouteSearch({ onSearchComplete }) {
 
   // Keep state in sync with context
   useEffect(() => {
-    if (origin && ALLOWED_LOCATIONS.includes(origin)) {
+    if (origin) {
       setOriginText(origin);
     }
   }, [origin]);
 
   useEffect(() => {
-    if (destination && ALLOWED_LOCATIONS.includes(destination)) {
+    if (destination) {
       setDestText(destination);
     }
   }, [destination]);
@@ -135,10 +183,24 @@ export function RouteSearch({ onSearchComplete }) {
     };
   }, []);
 
-  const originValid = ALLOWED_LOCATIONS.includes(originText);
-  const destValid = ALLOWED_LOCATIONS.includes(destText);
-  const isSameLocation = originValid && destValid && originText === destText;
-  const isFormValid = originValid && destValid && !isSameLocation;
+  const isOriginUnsupported = isUnsupportedLocation(originText);
+  const isDestUnsupported = isUnsupportedLocation(destText);
+  const hasUnsupportedLocation = isOriginUnsupported || isDestUnsupported;
+
+  const originValid = !isOriginUnsupported && (
+    ALLOWED_LOCATIONS.some(
+      (l) => l.toLowerCase() === originText.trim().toLowerCase()
+    ) || originText.trim().length > 1
+  );
+
+  const destValid = !isDestUnsupported && (
+    ALLOWED_LOCATIONS.some(
+      (l) => l.toLowerCase() === destText.trim().toLowerCase()
+    ) || destText.trim().length > 1
+  );
+
+  const isSameLocation = originText.trim().toLowerCase() === destText.trim().toLowerCase() && originText.trim() !== '';
+  const isFormValid = originValid && destValid && !isSameLocation && !hasUnsupportedLocation;
 
   // Filtered lists for dropdowns
   const originFiltered = ALLOWED_LOCATIONS.filter((loc) =>
@@ -158,6 +220,23 @@ export function RouteSearch({ onSearchComplete }) {
     setDestText(loc);
     setDestination(loc);
     setShowDestDropdown(false);
+  };
+
+  // Swap Source and Destination control
+  const handleSwap = () => {
+    const prevOrigin = originText;
+    const prevDest = destText;
+    setOriginText(prevDest);
+    setDestText(prevOrigin);
+    setOrigin(prevDest);
+    setDestination(prevOrigin);
+    if (routingMode === 'geographical') {
+      searchGeographicalRoute(prevDest, prevOrigin, geoProfile, preferences);
+    } else if (routingMode === 'timetable') {
+      searchTimetableJourneys(prevDest, prevOrigin, departureTime, preferences, transportModes, useSyntheticFixtures);
+    } else {
+      loadIllustrativePreview(prevDest, prevOrigin, preferences);
+    }
   };
 
   // Voice recognition for Origin
@@ -224,7 +303,14 @@ export function RouteSearch({ onSearchComplete }) {
 
     setOrigin(originText);
     setDestination(destText);
-    refreshRoutes(originText, destText, preferences);
+
+    if (routingMode === 'geographical') {
+      searchGeographicalRoute(originText, destText, geoProfile, preferences);
+    } else if (routingMode === 'timetable') {
+      searchTimetableJourneys(originText, destText, departureTime, preferences, transportModes, useSyntheticFixtures);
+    } else {
+      loadIllustrativePreview(originText, destText, preferences);
+    }
 
     if (onSearchComplete) {
       onSearchComplete();
@@ -234,20 +320,101 @@ export function RouteSearch({ onSearchComplete }) {
   };
 
   return (
-    <form onSubmit={handleSearchSubmit} className="space-y-3 relative">
-      {/* ORIGIN FIELD */}
-      <div ref={originContainerRef} className="relative">
-        <div
-          className={`flex items-center gap-2 p-2.5 rounded-xl bg-slate-100 border text-xs font-semibold text-slate-800 transition-colors ${
-            !originValid && originText.trim() !== ''
-              ? 'border-amber-400 bg-amber-50/50'
-              : showOriginDropdown
-              ? 'border-[#1AC8A0] bg-white ring-2 ring-[#1AC8A0]/20'
-              : 'border-slate-200'
+    <form onSubmit={handleSearchSubmit} className="space-y-3 relative" aria-label="Journey Search Form">
+      {/* Route Type Selector: Transit Preview vs Geographical (Walk / Bike / Drive) */}
+      <div className="flex items-center gap-1 p-1 bg-[#F5F3ED] rounded-xl border border-[#DCE3EB] text-[11px] font-bold">
+        <button
+          type="button"
+          onClick={() => {
+            setRoutingMode('illustrative');
+            loadIllustrativePreview(originText, destText, preferences);
+          }}
+          className={`flex-1 py-1 px-2 rounded-lg transition-all cursor-pointer flex items-center justify-center gap-1 ${
+            routingMode !== 'geographical'
+              ? 'bg-[#263B68] text-white shadow-xs'
+              : 'text-[#5B6E88] hover:text-[#263B68]'
           }`}
         >
-          <Navigation className="w-4 h-4 text-[#1F3A5F] shrink-0" />
+          <Compass className="w-3.5 h-3.5" />
+          <span>Transit</span>
+        </button>
+        <button
+          type="button"
+          onClick={() => {
+            setRoutingMode('geographical');
+            setGeoProfile('walking');
+            searchGeographicalRoute(originText, destText, 'walking', preferences);
+          }}
+          className={`flex-1 py-1 px-2 rounded-lg transition-all cursor-pointer flex items-center justify-center gap-1 ${
+            routingMode === 'geographical' && geoProfile === 'walking'
+              ? 'bg-[#263B68] text-white shadow-xs'
+              : 'text-[#5B6E88] hover:text-[#263B68]'
+          }`}
+        >
+          <Footprints className="w-3.5 h-3.5" />
+          <span>Walk</span>
+        </button>
+        <button
+          type="button"
+          onClick={() => {
+            setRoutingMode('geographical');
+            setGeoProfile('cycling');
+            searchGeographicalRoute(originText, destText, 'cycling', preferences);
+          }}
+          className={`flex-1 py-1 px-2 rounded-lg transition-all cursor-pointer flex items-center justify-center gap-1 ${
+            routingMode === 'geographical' && geoProfile === 'cycling'
+              ? 'bg-[#263B68] text-white shadow-xs'
+              : 'text-[#5B6E88] hover:text-[#263B68]'
+          }`}
+        >
+          <Bike className="w-3.5 h-3.5" />
+          <span>Cycle</span>
+        </button>
+        <button
+          type="button"
+          onClick={() => {
+            setRoutingMode('geographical');
+            setGeoProfile('driving');
+            searchGeographicalRoute(originText, destText, 'driving', preferences);
+          }}
+          className={`flex-1 py-1 px-2 rounded-lg transition-all cursor-pointer flex items-center justify-center gap-1 ${
+            routingMode === 'geographical' && geoProfile === 'driving'
+              ? 'bg-[#263B68] text-white shadow-xs'
+              : 'text-[#5B6E88] hover:text-[#263B68]'
+          }`}
+        >
+          <Car className="w-3.5 h-3.5" />
+          <span>Drive</span>
+        </button>
+      </div>
+
+      {/* Chennai-Only Coverage Alert */}
+      {hasUnsupportedLocation && (
+        <div className="p-2.5 rounded-xl bg-amber-50 border border-amber-300 text-amber-900 text-xs font-semibold flex items-start gap-2 shadow-xs">
+          <AlertCircle className="w-4 h-4 text-amber-700 shrink-0 mt-0.5" />
+          <div>
+            <div className="font-bold text-amber-950">Outside Supported Geographic Scope</div>
+            <div className="text-[11px] text-amber-800 leading-snug">{CHENNAI_COVERAGE_MESSAGE}</div>
+          </div>
+        </div>
+      )}
+      {/* ORIGIN FIELD */}
+      <div ref={originContainerRef} className="relative">
+        <label htmlFor="planner-origin-input" className="block text-[11px] font-bold text-[#5B6E88] uppercase tracking-wider mb-1">
+          Starting Point (Origin)
+        </label>
+        <div
+          className={`flex items-center gap-2 p-2.5 rounded-xl bg-[#FFFFFF] border text-xs font-semibold text-slate-800 transition-all ${
+            !originValid && originText.trim() !== ''
+              ? 'border-amber-400 bg-amber-50/40'
+              : showOriginDropdown
+              ? 'border-[#263B68] ring-2 ring-[#60C4D4]/30'
+              : 'border-[#DCE3EB] hover:border-[#8CA0BA]'
+          }`}
+        >
+          <Navigation className="w-4 h-4 text-[#263B68] shrink-0" aria-hidden="true" />
           <input
+            id="planner-origin-input"
             type="text"
             value={originText}
             onChange={(e) => {
@@ -257,18 +424,34 @@ export function RouteSearch({ onSearchComplete }) {
             onFocus={() => setShowOriginDropdown(true)}
             placeholder="Starting point (e.g. Chennai Central)"
             className="bg-transparent w-full focus:outline-hidden text-slate-900 font-bold text-xs"
+            aria-autocomplete="list"
+            aria-expanded={showOriginDropdown}
           />
+          {originText && (
+            <button
+              type="button"
+              onClick={() => {
+                setOriginText('');
+                setShowOriginDropdown(true);
+              }}
+              className="p-1 text-[#8CA0BA] hover:text-[#5B6E88] rounded-md cursor-pointer shrink-0"
+              aria-label="Clear origin"
+            >
+              <X className="w-3.5 h-3.5" />
+            </button>
+          )}
           {originValid && (
-            <Check className="w-4 h-4 text-emerald-600 shrink-0" />
+            <Check className="w-4 h-4 text-emerald-600 shrink-0" aria-label="Origin valid" />
           )}
           <button
             type="button"
             onClick={handleVoiceOrigin}
             title="Voice input for origin"
+            aria-label="Voice input for starting point"
             className={`p-1.5 rounded-lg transition-colors cursor-pointer shrink-0 ${
               isListeningOrigin
                 ? 'bg-red-100 text-red-600 animate-pulse'
-                : 'text-slate-400 hover:text-slate-700 hover:bg-slate-200'
+                : 'text-[#8CA0BA] hover:text-[#263B68] hover:bg-[#F5F3ED]'
             }`}
           >
             <Mic className="w-3.5 h-3.5" />
@@ -277,76 +460,91 @@ export function RouteSearch({ onSearchComplete }) {
 
         {/* Origin Dropdown */}
         {showOriginDropdown && (
-          <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-slate-200 rounded-xl shadow-xl z-50 overflow-hidden max-h-56 overflow-y-auto animate-in fade-in slide-in-from-top-1 duration-150">
-            <div className="px-3 py-1.5 bg-slate-50 border-b border-slate-100 text-[10px] font-extrabold uppercase text-slate-400 tracking-wider">
-              Select Starting Point (6 Hotspots)
+          <div className="absolute top-full left-0 right-0 mt-1 bg-[#FFFFFF] border border-[#DCE3EB] rounded-xl shadow-lg z-50 overflow-hidden max-h-56 overflow-y-auto animate-in fade-in slide-in-from-top-1 duration-150">
+            <div className="px-3 py-1.5 bg-[#F5F3ED] border-b border-[#DCE3EB] text-[10px] font-extrabold uppercase text-[#5B6E88] tracking-wider flex justify-between items-center">
+              <span>Select Starting Point</span>
+              <span className="text-[9px] text-[#8CA0BA]">Chennai Transit Hubs</span>
             </div>
             {originFiltered.length > 0 ? (
               originFiltered.map((loc) => {
                 const isSelected = loc === originText;
                 const isDestMatch = loc === destText;
+                const detail = LOCATION_DETAILS[loc] || { desc: 'Chennai Transit Hub', mode: 'Transit' };
                 return (
                   <button
                     key={loc}
                     type="button"
                     disabled={isDestMatch}
                     onClick={() => handleSelectOrigin(loc)}
-                    className={`w-full text-left px-3.5 py-2.5 text-xs font-bold transition-colors flex items-center justify-between border-b border-slate-50 last:border-0 ${
+                    className={`w-full text-left px-3.5 py-2 text-xs font-bold transition-colors flex items-center justify-between border-b border-[#F5F3ED] last:border-0 ${
                       isDestMatch
-                        ? 'bg-slate-50 text-slate-400 cursor-not-allowed opacity-60'
+                        ? 'bg-slate-50 text-[#8CA0BA] cursor-not-allowed opacity-60'
                         : isSelected
-                        ? 'bg-[#E6FAF5] text-[#064E3B]'
-                        : 'hover:bg-slate-50 text-slate-800 cursor-pointer'
+                        ? 'bg-[#EEF7F9] text-[#263B68] border-l-3 border-[#60C4D4]'
+                        : 'hover:bg-[#F5F3ED] text-slate-800 cursor-pointer'
                     }`}
                   >
                     <div>
-                      <div className="font-bold">{loc}</div>
-                      <div className="text-[10px] font-normal text-slate-500">
-                        {LOCATION_DETAILS[loc]}
+                      <div className="font-bold flex items-center gap-1.5">
+                        <span className={isSelected ? 'text-[#263B68]' : 'text-slate-900'}>{loc}</span>
+                        <span className="text-[9px] font-semibold px-1.5 py-0.5 rounded-sm bg-[#EEF3FA] text-[#263B68]">
+                          {detail.mode}
+                        </span>
+                      </div>
+                      <div className="text-[10px] font-normal text-[#5B6E88]">
+                        {detail.desc}
                       </div>
                     </div>
                     {isDestMatch ? (
-                      <span className="text-[10px] font-semibold text-slate-400">
+                      <span className="text-[10px] font-semibold text-[#8CA0BA]">
                         (Selected as Destination)
                       </span>
                     ) : isSelected ? (
-                      <Check className="w-4 h-4 text-emerald-600" />
+                      <Check className="w-4 h-4 text-[#263B68]" />
                     ) : null}
                   </button>
                 );
               })
             ) : (
-              <div className="p-3 text-xs text-amber-700 bg-amber-50">
-                No matching hotspot found.
+              <div className="p-3 text-xs text-amber-800 bg-amber-50">
+                No matching hotspot found. Try: Central, Guindy, Egmore, CMBT, Tambaram
               </div>
             )}
           </div>
         )}
+      </div>
 
-        {/* Origin Validation Warning */}
-        {!originValid && originText.trim() !== '' && !showOriginDropdown && (
-          <div className="mt-1 text-[11px] font-semibold text-amber-700 flex items-center gap-1">
-            <AlertCircle className="w-3.5 h-3.5 shrink-0" />
-            <span>
-              Try one of: Chennai Central, Egmore, T. Nagar, Koyambedu, Guindy, Tambaram
-            </span>
-          </div>
-        )}
+      {/* SWAP SOURCE AND DESTINATION CONTROL */}
+      <div className="flex justify-center -my-1 z-10 relative">
+        <button
+          type="button"
+          onClick={handleSwap}
+          aria-label="Swap starting point and destination"
+          title="Swap starting point and destination"
+          className="px-3 py-1 rounded-full bg-[#FFFFFF] hover:bg-[#F5F3ED] text-[#263B68] border border-[#DCE3EB] shadow-2xs hover:border-[#60C4D4] transition-all active:scale-95 duration-150 cursor-pointer flex items-center gap-1.5 group select-none"
+        >
+          <ArrowUpDown className="w-3.5 h-3.5 text-[#263B68] group-hover:text-[#60C4D4] transition-colors" />
+          <span className="text-[10px] font-bold text-[#5B6E88] group-hover:text-[#263B68]">Swap</span>
+        </button>
       </div>
 
       {/* DESTINATION FIELD & FIND ROUTES BUTTON */}
       <div ref={destContainerRef} className="relative">
+        <label htmlFor="planner-dest-input" className="block text-[11px] font-bold text-[#5B6E88] uppercase tracking-wider mb-1">
+          Destination (Where to?)
+        </label>
         <div
-          className={`flex items-center gap-2 p-2.5 rounded-xl bg-slate-100 border text-xs font-semibold text-slate-800 transition-colors ${
+          className={`flex items-center gap-2 p-2.5 rounded-xl bg-[#FFFFFF] border text-xs font-semibold text-slate-800 transition-all ${
             !destValid && destText.trim() !== ''
-              ? 'border-amber-400 bg-amber-50/50'
+              ? 'border-amber-400 bg-amber-50/40'
               : showDestDropdown
-              ? 'border-[#1AC8A0] bg-white ring-2 ring-[#1AC8A0]/20'
-              : 'border-slate-200'
+              ? 'border-[#263B68] ring-2 ring-[#60C4D4]/30'
+              : 'border-[#DCE3EB] hover:border-[#8CA0BA]'
           }`}
         >
-          <MapPin className="w-4 h-4 text-red-600 shrink-0" />
+          <MapPin className="w-4 h-4 text-[#DC2626] shrink-0" aria-hidden="true" />
           <input
+            id="planner-dest-input"
             type="text"
             value={destText}
             onChange={(e) => {
@@ -356,101 +554,186 @@ export function RouteSearch({ onSearchComplete }) {
             onFocus={() => setShowDestDropdown(true)}
             placeholder="Where to? (e.g. Guindy)"
             className="bg-transparent w-full focus:outline-hidden text-slate-900 font-bold text-xs"
+            aria-autocomplete="list"
+            aria-expanded={showDestDropdown}
           />
+          {destText && (
+            <button
+              type="button"
+              onClick={() => {
+                setDestText('');
+                setShowDestDropdown(true);
+              }}
+              className="p-1 text-[#8CA0BA] hover:text-[#5B6E88] rounded-md cursor-pointer shrink-0"
+              aria-label="Clear destination"
+            >
+              <X className="w-3.5 h-3.5" />
+            </button>
+          )}
           {destValid && (
-            <Check className="w-4 h-4 text-emerald-600 shrink-0" />
+            <Check className="w-4 h-4 text-emerald-600 shrink-0" aria-label="Destination valid" />
           )}
           <button
             type="button"
             onClick={handleVoiceDest}
             title="Voice input for destination"
+            aria-label="Voice input for destination"
             className={`p-1.5 rounded-lg transition-colors cursor-pointer shrink-0 ${
               isListeningDest
                 ? 'bg-red-100 text-red-600 animate-pulse'
-                : 'text-slate-400 hover:text-slate-700 hover:bg-slate-200'
+                : 'text-[#8CA0BA] hover:text-[#263B68] hover:bg-[#F5F3ED]'
             }`}
           >
             <Mic className="w-3.5 h-3.5" />
           </button>
           <button
             type="submit"
-            disabled={!isFormValid}
-            className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0 ${
-              isFormValid
-                ? 'bg-[#1F3A5F] hover:bg-[#132A4A] text-white cursor-pointer shadow-xs'
-                : 'bg-slate-300 text-slate-500 cursor-not-allowed opacity-60'
+            disabled={!isFormValid || isSearching}
+            aria-label="Find accessible routes"
+            className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0 flex items-center gap-1.5 shadow-xs ${
+              isFormValid && !isSearching
+                ? 'bg-[#263B68] hover:bg-[#1B2B4C] text-[#FFFFFF] cursor-pointer'
+                : 'bg-[#DCE3EB] text-[#8CA0BA] cursor-not-allowed opacity-75'
             }`}
           >
-            Find Routes
+            {isSearching ? (
+              <>
+                <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                <span>Searching...</span>
+              </>
+            ) : (
+              <span>Find Routes</span>
+            )}
           </button>
         </div>
 
         {/* Destination Dropdown */}
         {showDestDropdown && (
-          <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-slate-200 rounded-xl shadow-xl z-50 overflow-hidden max-h-56 overflow-y-auto animate-in fade-in slide-in-from-top-1 duration-150">
-            <div className="px-3 py-1.5 bg-slate-50 border-b border-slate-100 text-[10px] font-extrabold uppercase text-slate-400 tracking-wider">
-              Select Destination (6 Hotspots)
+          <div className="absolute top-full left-0 right-0 mt-1 bg-[#FFFFFF] border border-[#DCE3EB] rounded-xl shadow-lg z-50 overflow-hidden max-h-56 overflow-y-auto animate-in fade-in slide-in-from-top-1 duration-150">
+            <div className="px-3 py-1.5 bg-[#F5F3ED] border-b border-[#DCE3EB] text-[10px] font-extrabold uppercase text-[#5B6E88] tracking-wider flex justify-between items-center">
+              <span>Select Destination</span>
+              <span className="text-[9px] text-[#8CA0BA]">Chennai Transit Hubs</span>
             </div>
             {destFiltered.length > 0 ? (
               destFiltered.map((loc) => {
                 const isSelected = loc === destText;
                 const isOriginMatch = loc === originText;
+                const detail = LOCATION_DETAILS[loc] || { desc: 'Chennai Transit Hub', mode: 'Transit' };
                 return (
                   <button
                     key={loc}
                     type="button"
                     disabled={isOriginMatch}
                     onClick={() => handleSelectDest(loc)}
-                    className={`w-full text-left px-3.5 py-2.5 text-xs font-bold transition-colors flex items-center justify-between border-b border-slate-50 last:border-0 ${
+                    className={`w-full text-left px-3.5 py-2 text-xs font-bold transition-colors flex items-center justify-between border-b border-[#F5F3ED] last:border-0 ${
                       isOriginMatch
-                        ? 'bg-slate-50 text-slate-400 cursor-not-allowed opacity-60'
+                        ? 'bg-slate-50 text-[#8CA0BA] cursor-not-allowed opacity-60'
                         : isSelected
-                        ? 'bg-[#E6FAF5] text-[#064E3B]'
-                        : 'hover:bg-slate-50 text-slate-800 cursor-pointer'
+                        ? 'bg-[#EEF7F9] text-[#263B68] border-l-3 border-[#60C4D4]'
+                        : 'hover:bg-[#F5F3ED] text-slate-800 cursor-pointer'
                     }`}
                   >
                     <div>
-                      <div className="font-bold">{loc}</div>
-                      <div className="text-[10px] font-normal text-slate-500">
-                        {LOCATION_DETAILS[loc]}
+                      <div className="font-bold flex items-center gap-1.5">
+                        <span className={isSelected ? 'text-[#263B68]' : 'text-slate-900'}>{loc}</span>
+                        <span className="text-[9px] font-semibold px-1.5 py-0.5 rounded-sm bg-[#EEF3FA] text-[#263B68]">
+                          {detail.mode}
+                        </span>
+                      </div>
+                      <div className="text-[10px] font-normal text-[#5B6E88]">
+                        {detail.desc}
                       </div>
                     </div>
                     {isOriginMatch ? (
-                      <span className="text-[10px] font-semibold text-slate-400">
+                      <span className="text-[10px] font-semibold text-[#8CA0BA]">
                         (Selected as Origin)
                       </span>
                     ) : isSelected ? (
-                      <Check className="w-4 h-4 text-emerald-600" />
+                      <Check className="w-4 h-4 text-[#263B68]" />
                     ) : null}
                   </button>
                 );
               })
             ) : (
-              <div className="p-3 text-xs text-amber-700 bg-amber-50">
-                No matching hotspot found.
+              <div className="p-3 text-xs text-amber-800 bg-amber-50">
+                No matching hotspot found. Try: Guindy, Central, Egmore, CMBT, Tambaram
               </div>
             )}
           </div>
         )}
+      </div>
 
-        {/* Destination Validation Warning */}
-        {!destValid && destText.trim() !== '' && !showDestDropdown && (
-          <div className="mt-1 text-[11px] font-semibold text-amber-700 flex items-center gap-1">
-            <AlertCircle className="w-3.5 h-3.5 shrink-0" />
-            <span>
-              Try one of: Chennai Central, Egmore, T. Nagar, Koyambedu, Guindy, Tambaram
-            </span>
+      {/* TIMETABLE ROUTING CONTROLS: DEPARTURE TIME & ENGINE MODE */}
+      <div className="pt-1 space-y-2">
+        <div className="flex flex-wrap items-center justify-between gap-2 text-xs">
+          {/* Departure Time Input */}
+          <div className="flex items-center gap-2 bg-[#FFFFFF] border border-[#DCE3EB] rounded-xl px-2.5 py-1.5 shadow-2xs">
+            <Clock className="w-3.5 h-3.5 text-[#263B68] shrink-0" />
+            <label htmlFor="planner-departure-time" className="text-[11px] font-bold text-[#5B6E88] uppercase tracking-wider">
+              Departure:
+            </label>
+            <input
+              type="time"
+              id="planner-departure-time"
+              value={departureTime || '08:30'}
+              onChange={(e) => setDepartureTime(e.target.value)}
+              className="text-xs font-bold text-[#263B68] bg-transparent focus:outline-hidden"
+            />
           </div>
-        )}
+
+          {/* Engine Routing Mode Toggle */}
+          <div className="flex items-center p-0.5 rounded-lg bg-[#F5F3ED] border border-[#DCE3EB] text-xs font-bold">
+            <button
+              type="button"
+              onClick={() => setRoutingMode('timetable')}
+              className={`px-2.5 py-1 rounded-md text-[11px] font-bold transition-all cursor-pointer ${
+                routingMode === 'timetable'
+                  ? 'bg-[#263B68] text-[#FFFFFF] shadow-2xs'
+                  : 'text-[#5B6E88] hover:text-[#263B68]'
+              }`}
+            >
+              Timetable Search
+            </button>
+            <button
+              type="button"
+              onClick={() => setRoutingMode('illustrative')}
+              className={`px-2.5 py-1 rounded-md text-[11px] font-bold transition-all cursor-pointer ${
+                routingMode === 'illustrative'
+                  ? 'bg-[#263B68] text-[#FFFFFF] shadow-2xs'
+                  : 'text-[#5B6E88] hover:text-[#263B68]'
+              }`}
+            >
+              Illustrative Preview
+            </button>
+          </div>
+        </div>
+
+        {/* Synthetic Fixtures Evaluator Toggle */}
+        <div className="flex items-center justify-between px-2.5 py-1.5 rounded-lg bg-[#F5F3ED]/70 border border-[#DCE3EB] text-[10px]">
+          <label htmlFor="planner-synthetic-fixtures" className="flex items-center gap-1.5 cursor-pointer text-[#5B6E88] font-medium">
+            <input
+              type="checkbox"
+              id="planner-synthetic-fixtures"
+              checked={Boolean(useSyntheticFixtures)}
+              onChange={(e) => setUseSyntheticFixtures(e.target.checked)}
+              className="w-3.5 h-3.5 accent-[#263B68] cursor-pointer rounded"
+            />
+            <span>Use Synthetic Test Fixtures (Evaluate real CSA multimodal calculation)</span>
+          </label>
+          <span className="text-[9px] text-[#8CA0BA] font-mono">
+            {useSyntheticFixtures ? 'Fixtures Active' : 'Production Feeds (Quarantined)'}
+          </span>
+        </div>
       </div>
 
       {/* SAME LOCATION VALIDATION ERROR */}
       {isSameLocation && (
-        <div className="p-2.5 rounded-xl bg-red-50 border border-red-200 text-red-800 text-xs font-semibold flex items-center gap-2">
-          <AlertCircle className="w-4 h-4 text-red-600 shrink-0" />
-          <span>Origin and Destination cannot be the same location.</span>
+        <div role="alert" className="p-2.5 rounded-xl bg-red-50 border border-red-200 text-red-800 text-xs font-semibold flex items-center gap-2">
+          <AlertCircle className="w-4 h-4 text-[#DC2626] shrink-0" />
+          <span>Origin and Destination cannot be the same location. Please choose two different transit hubs.</span>
         </div>
       )}
     </form>
   );
 }
+

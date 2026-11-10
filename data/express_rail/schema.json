@@ -1,0 +1,60 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Chennai Commuter Belt Express Rail Schema",
+  "description": "Schema for Indian Railways Express, Superfast, and Intercity services with commercial stops within the Chennai metropolitan commuter belt.",
+  "type": "object",
+  "required": ["version", "railwayZones", "trainTypes", "chennaiBeltStations", "commuterUtilityRules"],
+  "properties": {
+    "version": { "type": "string" },
+    "railwayZones": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "trainTypes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["code", "name", "ticketingRule", "reservationMandatory"],
+        "properties": {
+          "code": { "type": "string" },
+          "name": { "type": "string" },
+          "ticketingRule": { "type": "string" },
+          "reservationMandatory": { "type": "boolean" },
+          "suburbanSeasonPassAccepted": { "type": "boolean" }
+        }
+      }
+    },
+    "chennaiBeltStations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["code", "name", "latitude", "longitude", "corridor", "district", "terminalType"],
+        "properties": {
+          "code": { "type": "string" },
+          "name": { "type": "string" },
+          "tamilName": { "type": "string" },
+          "latitude": { "type": "number", "minimum": 12.50, "maximum": 13.50 },
+          "longitude": { "type": "number", "minimum": 79.50, "maximum": 80.40 },
+          "corridor": { "type": "string", "enum": ["south_corridor", "west_corridor", "north_corridor"] },
+          "district": { "type": "string", "enum": ["Chennai", "Chengalpattu", "Kanchipuram", "Tiruvallur"] },
+          "evidenceStatus": {
+            "type": "string",
+            "enum": ["source_verified", "cross_checked", "manually_curated", "unverified", "planned_not_operational"]
+          },
+          "terminalType": { "type": "string", "enum": ["major_terminal", "intermediate_commercial_stop", "peri_urban_junction"] },
+          "bookingFacilities": { "type": "array", "items": { "type": "string" } },
+          "stepFreeAccess": { "type": "boolean" }
+        }
+      }
+    },
+    "commuterUtilityRules": {
+      "type": "object",
+      "required": ["strictIsolationFromSuburbanEMU", "skipStopPolicy", "ticketDistinction"],
+      "properties": {
+        "strictIsolationFromSuburbanEMU": { "type": "boolean" },
+        "skipStopPolicy": { "type": "string" },
+        "ticketDistinction": { "type": "string" }
+      }
+    }
+  }
+}

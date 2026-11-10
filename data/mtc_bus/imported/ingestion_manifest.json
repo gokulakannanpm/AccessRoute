@@ -1,0 +1,500 @@
+{
+  "manifestVersion": "1.1.0",
+  "mode": "mtc_bus",
+  "provenance": {
+    "mode": "mtc_bus",
+    "sourceUrl": "https://github.com/ungalsoththu/ChennaiGTFS/tree/main/data/mtc",
+    "sourceCommit": "af0742dba777f9657ed6fda2046d6c2a721d630b",
+    "sourceRelease": "v0.2.0",
+    "publisher": "UngalSoththu / ChennaiGTFS (Community Mirror of MTC App Scrape)",
+    "license": "UNCONFIRMED",
+    "retrievalDate": "2026-10-28",
+    "feedPublicationDate": "2026-04-27",
+    "timetableValidityRange": {
+      "feedStartDate": "unknown",
+      "feedEndDate": "unknown",
+      "calendarStartDate": "20240501",
+      "calendarEndDate": "20300501",
+      "minServiceDate": "20240501",
+      "maxServiceDate": "20300501",
+      "status": "STANDARD"
+    },
+    "verifiedOperationalCurrency": "UNVERIFIED_HISTORICAL",
+    "licensing": {
+      "compilationPipeline": "ODbL / PDDL",
+      "timetableSchedules": "UNCONFIRMED",
+      "publisher": "UngalSoththu / ChennaiGTFS (Community Mirror of MTC App Scrape)",
+      "legalAttribution": "Public passenger bus timetable data scraped from official MTC mobile application API by UngalSoththu; underlying MTC timetable data redistribution rights unconfirmed"
+    },
+    "ingestedAt": "2026-10-28T15:55:12.002Z"
+  },
+  "status": "VALIDATED",
+  "readyForJourneyRouting": false,
+  "calendarStatus": "ACTIVE",
+  "fileInventory": {
+    "agency.txt": {
+      "bytes": 133,
+      "sha256": "6fbcead3ef9398e1784facbe71030772e6abebdb86137632178747815cce4da6"
+    },
+    "calendar.txt": {
+      "bytes": 342,
+      "sha256": "fca05f8f64ff8068da65f03439ff1320b0a5c556e9154b84e34c4f6e7d05a730"
+    },
+    "feed_info.txt": {
+      "bytes": 269,
+      "sha256": "ff68288fa3ed754b9c2262a8ba6d5ae4dccf7cc0edca934213f93b20042adac1"
+    },
+    "routes.txt": {
+      "bytes": 226405,
+      "sha256": "3f933bdd0f64b69359a1eef24cf0a5464494e1affce144da995ce164a17e0028"
+    },
+    "stops.txt": {
+      "bytes": 230767,
+      "sha256": "24ef742ee8312d27c9474a840330a5fbf271d2bbdd59514309d646cc4ea30c85"
+    },
+    "stop_times.txt": {
+      "bytes": 43537866,
+      "sha256": "aa80ad6804323964689b4a862c3d8dbcd497c386a9dc305e5f7e4badb4cad3cd"
+    },
+    "trips.txt": {
+      "bytes": 1049101,
+      "sha256": "0264fe39cf23ceac6ce096f5bbcfad16c47cc48849ece657b287df392eedfa86"
+    }
+  },
+  "filesFound": [
+    "agency.txt",
+    "calendar.txt",
+    "feed_info.txt",
+    "routes.txt",
+    "stops.txt",
+    "stop_times.txt",
+    "trips.txt"
+  ],
+  "recordCounts": {
+    "agencies": 1,
+    "routes": 4611,
+    "stops": 5580,
+    "trips": 47047,
+    "stopTimes": 1360443,
+    "calendarServices": 6
+  },
+  "qualityClassification": {
+    "sourceValidTripsCount": 47047,
+    "quarantinedTripsCount": 0,
+    "quarantinedTrips": []
+  },
+  "feedLevelBlockers": [
+    "FEED_UNCONFIRMED_DATA_LICENSE: Underlying Metropolitan Transport Corporation (Chennai) Ltd. timetable data redistribution rights are UNCONFIRMED",
+    "FEED_COMMUNITY_SCRAPE_ORIGIN: Feed is an unauthenticated third-party scrape of MTC mobile app API endpoints, not an official publication by MTC or CUMTA",
+    "FEED_SUSPICIOUS_CALENDAR_PLACEHOLDER: Calendar service range spans artificial 6-year window (20240501 to 20300501) with scrapers/test artifacts",
+    "FEED_MISSING_SHAPES_AND_FARES: Feed lacks route alignment geometry (shapes.txt) and fare rule definitions (fare_attributes.txt / fare_rules.txt)"
+  ],
+  "catalogueReconciliation": {
+    "catalogueTotalStations": 21,
+    "exactMatchedStations": 0,
+    "aliasMappedStations": [
+      {
+        "catalogueCode": "BWAY",
+        "gtfsCode": "2",
+        "name": "Broadway Bus Terminus",
+        "classification": "PROVISIONAL",
+        "confidence": "MEDIUM",
+        "targetFound": true,
+        "notes": "Broadway Bus Terminus: Stop 2 [Broadway] at 52m"
+      },
+      {
+        "catalogueCode": "CMBT",
+        "gtfsCode": "9607",
+        "name": "Puratchi Thalaivar Dr. M.G.R. Bus Terminus (Koyambedu CMBT)",
+        "classification": "PROVISIONAL",
+        "confidence": "MEDIUM",
+        "targetFound": true,
+        "notes": "CMBT Koyambedu: Stop 9607 [Koyambedu Metro] at 435m"
+      },
+      {
+        "catalogueCode": "KCBT",
+        "gtfsCode": "6379",
+        "name": "Kalaignar Centenary Bus Terminus (KCBT Kilambakkam)",
+        "classification": "PROVISIONAL",
+        "confidence": "MEDIUM",
+        "targetFound": true,
+        "notes": "Kilambakkam KCBT: Stop 6379 [Urappakam] at 112m"
+      },
+      {
+        "catalogueCode": "TNGR",
+        "gtfsCode": "10225",
+        "name": "T. Nagar Bus Terminus",
+        "classification": "PROVISIONAL",
+        "confidence": "MEDIUM",
+        "targetFound": true,
+        "notes": "T. Nagar: Stop 10225 [Duraiswamy Subway Or Pothys] at 80m"
+      },
+      {
+        "catalogueCode": "TBMW",
+        "gtfsCode": "6681",
+        "name": "Tambaram West Bus Terminus",
+        "classification": "PROVISIONAL",
+        "confidence": "MEDIUM",
+        "targetFound": true,
+        "notes": "Tambaram West: Stop 6681 [Tambaram Railway Station] at 27m"
+      },
+      {
+        "catalogueCode": "TBME",
+        "gtfsCode": "6663",
+        "name": "Tambaram East Bus Terminus",
+        "classification": "PROVISIONAL",
+        "confidence": "MEDIUM",
+        "targetFound": true,
+        "notes": "Tambaram East: Stop 6663 [Tambaram Railway Station East] at 330m"
+      },
+      {
+        "catalogueCode": "GDY",
+        "gtfsCode": "11108",
+        "name": "Guindy Multi-Modal Bus Hub",
+        "classification": "PROVISIONAL",
+        "confidence": "MEDIUM",
+        "targetFound": true,
+        "notes": "Guindy Hub: Stop 11108 [Guindy Race Cource] at 31m"
+      },
+      {
+        "catalogueCode": "SDPT",
+        "gtfsCode": "9146",
+        "name": "Saidapet Bus Terminus",
+        "classification": "PROVISIONAL",
+        "confidence": "MEDIUM",
+        "targetFound": true,
+        "notes": "Saidapet: Stop 9146 [Saidapet Market] at 180m"
+      },
+      {
+        "catalogueCode": "TYMR",
+        "gtfsCode": "5349",
+        "name": "Thiruvanmiyur Bus Depot & Terminus",
+        "classification": "PROVISIONAL",
+        "confidence": "MEDIUM",
+        "targetFound": true,
+        "notes": "Thiruvanmiyur: Stop 5349 [Thiruvanmiyur Depot] at 55m"
+      },
+      {
+        "catalogueCode": "PMLE",
+        "gtfsCode": "5782",
+        "name": "Poonamallee Bus Terminus",
+        "classification": "PROVISIONAL",
+        "confidence": "MEDIUM",
+        "targetFound": true,
+        "notes": "Poonamallee: Stop 5782 [Poonamallee Government Hospital] at 118m"
+      },
+      {
+        "catalogueCode": "AVD",
+        "gtfsCode": "6939",
+        "name": "Avadi Bus Terminus",
+        "classification": "PROVISIONAL",
+        "confidence": "MEDIUM",
+        "targetFound": true,
+        "notes": "Avadi: Stop 6939 [Avadi Market] at 338m"
+      },
+      {
+        "catalogueCode": "ABOT",
+        "gtfsCode": "10422",
+        "name": "Ambattur Old Town (OT) Terminus",
+        "classification": "PROVISIONAL",
+        "confidence": "MEDIUM",
+        "targetFound": true,
+        "notes": "Ambattur O.T: Stop 10422 [Amma Hotel - Near Ambattur O.T] at 62m"
+      },
+      {
+        "catalogueCode": "RDHL",
+        "gtfsCode": "10574",
+        "name": "Red Hills Bus Terminus",
+        "classification": "PROVISIONAL",
+        "confidence": "MEDIUM",
+        "targetFound": true,
+        "notes": "Red Hills: Stop 10574 [Red Hills Eb Or Azhinjivakkam Road Junction] at 463m"
+      },
+      {
+        "catalogueCode": "TLGT",
+        "gtfsCode": "7198",
+        "name": "Tollgate Bus Terminus",
+        "classification": "PROVISIONAL",
+        "confidence": "MEDIUM",
+        "targetFound": true,
+        "notes": "Tollgate: Stop 7198 [Nagara Thottam] at 58m"
+      },
+      {
+        "catalogueCode": "VDPL",
+        "gtfsCode": "9431",
+        "name": "Vadapalani Bus Terminus",
+        "classification": "PROVISIONAL",
+        "confidence": "MEDIUM",
+        "targetFound": true,
+        "notes": "Vadapalani: Stop 9431 [Kamala Theatre] at 219m"
+      },
+      {
+        "catalogueCode": "VLCY",
+        "gtfsCode": "8701",
+        "name": "Velachery Bus Terminus",
+        "classification": "PROVISIONAL",
+        "confidence": "MEDIUM",
+        "targetFound": true,
+        "notes": "Velachery: Stop 8701 [Mageshwari Nagar] at 222m"
+      },
+      {
+        "catalogueCode": "ADYR",
+        "gtfsCode": "8993",
+        "name": "Adyar Bus Depot",
+        "classification": "PROVISIONAL",
+        "confidence": "MEDIUM",
+        "targetFound": true,
+        "notes": "Adyar: Stop 8993 [Adyar Signal] at 14m"
+      },
+      {
+        "catalogueCode": "CGLB",
+        "gtfsCode": "9927",
+        "name": "Chengalpattu Bus Stand",
+        "classification": "PROVISIONAL",
+        "confidence": "MEDIUM",
+        "targetFound": true,
+        "notes": "Chengalpattu: Stop 9927 [Chengalpet] at 338m"
+      },
+      {
+        "catalogueCode": "SPBD",
+        "gtfsCode": "8576",
+        "name": "Sriperumbudur Bus Stand",
+        "classification": "PROVISIONAL",
+        "confidence": "MEDIUM",
+        "targetFound": true,
+        "notes": "Sriperumbudur: Stop 8576 [Sriperumbudur Theradi] at 266m"
+      },
+      {
+        "catalogueCode": "GUDV",
+        "gtfsCode": "6295",
+        "name": "Guduvancheri Bus Stand",
+        "classification": "PROVISIONAL",
+        "confidence": "MEDIUM",
+        "targetFound": true,
+        "notes": "Guduvancheri: Stop 6295 [Guduvancheri Railway Station] at 259m"
+      },
+      {
+        "catalogueCode": "TPRR",
+        "gtfsCode": "6016",
+        "name": "Thiruporur Bus Stand",
+        "classification": "PROVISIONAL",
+        "confidence": "MEDIUM",
+        "targetFound": true,
+        "notes": "Thiruporur: Stop 6016 [Kandhaswami Temple Tank Thiruporur] at 139m"
+      }
+    ],
+    "confirmedAliases": [],
+    "divergentFacilityAliases": [],
+    "provisionalAliases": [
+      {
+        "catalogueCode": "BWAY",
+        "gtfsCode": "2",
+        "name": "Broadway Bus Terminus",
+        "classification": "PROVISIONAL",
+        "confidence": "MEDIUM",
+        "targetFound": true,
+        "notes": "Broadway Bus Terminus: Stop 2 [Broadway] at 52m"
+      },
+      {
+        "catalogueCode": "CMBT",
+        "gtfsCode": "9607",
+        "name": "Puratchi Thalaivar Dr. M.G.R. Bus Terminus (Koyambedu CMBT)",
+        "classification": "PROVISIONAL",
+        "confidence": "MEDIUM",
+        "targetFound": true,
+        "notes": "CMBT Koyambedu: Stop 9607 [Koyambedu Metro] at 435m"
+      },
+      {
+        "catalogueCode": "KCBT",
+        "gtfsCode": "6379",
+        "name": "Kalaignar Centenary Bus Terminus (KCBT Kilambakkam)",
+        "classification": "PROVISIONAL",
+        "confidence": "MEDIUM",
+        "targetFound": true,
+        "notes": "Kilambakkam KCBT: Stop 6379 [Urappakam] at 112m"
+      },
+      {
+        "catalogueCode": "TNGR",
+        "gtfsCode": "10225",
+        "name": "T. Nagar Bus Terminus",
+        "classification": "PROVISIONAL",
+        "confidence": "MEDIUM",
+        "targetFound": true,
+        "notes": "T. Nagar: Stop 10225 [Duraiswamy Subway Or Pothys] at 80m"
+      },
+      {
+        "catalogueCode": "TBMW",
+        "gtfsCode": "6681",
+        "name": "Tambaram West Bus Terminus",
+        "classification": "PROVISIONAL",
+        "confidence": "MEDIUM",
+        "targetFound": true,
+        "notes": "Tambaram West: Stop 6681 [Tambaram Railway Station] at 27m"
+      },
+      {
+        "catalogueCode": "TBME",
+        "gtfsCode": "6663",
+        "name": "Tambaram East Bus Terminus",
+        "classification": "PROVISIONAL",
+        "confidence": "MEDIUM",
+        "targetFound": true,
+        "notes": "Tambaram East: Stop 6663 [Tambaram Railway Station East] at 330m"
+      },
+      {
+        "catalogueCode": "GDY",
+        "gtfsCode": "11108",
+        "name": "Guindy Multi-Modal Bus Hub",
+        "classification": "PROVISIONAL",
+        "confidence": "MEDIUM",
+        "targetFound": true,
+        "notes": "Guindy Hub: Stop 11108 [Guindy Race Cource] at 31m"
+      },
+      {
+        "catalogueCode": "SDPT",
+        "gtfsCode": "9146",
+        "name": "Saidapet Bus Terminus",
+        "classification": "PROVISIONAL",
+        "confidence": "MEDIUM",
+        "targetFound": true,
+        "notes": "Saidapet: Stop 9146 [Saidapet Market] at 180m"
+      },
+      {
+        "catalogueCode": "TYMR",
+        "gtfsCode": "5349",
+        "name": "Thiruvanmiyur Bus Depot & Terminus",
+        "classification": "PROVISIONAL",
+        "confidence": "MEDIUM",
+        "targetFound": true,
+        "notes": "Thiruvanmiyur: Stop 5349 [Thiruvanmiyur Depot] at 55m"
+      },
+      {
+        "catalogueCode": "PMLE",
+        "gtfsCode": "5782",
+        "name": "Poonamallee Bus Terminus",
+        "classification": "PROVISIONAL",
+        "confidence": "MEDIUM",
+        "targetFound": true,
+        "notes": "Poonamallee: Stop 5782 [Poonamallee Government Hospital] at 118m"
+      },
+      {
+        "catalogueCode": "AVD",
+        "gtfsCode": "6939",
+        "name": "Avadi Bus Terminus",
+        "classification": "PROVISIONAL",
+        "confidence": "MEDIUM",
+        "targetFound": true,
+        "notes": "Avadi: Stop 6939 [Avadi Market] at 338m"
+      },
+      {
+        "catalogueCode": "ABOT",
+        "gtfsCode": "10422",
+        "name": "Ambattur Old Town (OT) Terminus",
+        "classification": "PROVISIONAL",
+        "confidence": "MEDIUM",
+        "targetFound": true,
+        "notes": "Ambattur O.T: Stop 10422 [Amma Hotel - Near Ambattur O.T] at 62m"
+      },
+      {
+        "catalogueCode": "RDHL",
+        "gtfsCode": "10574",
+        "name": "Red Hills Bus Terminus",
+        "classification": "PROVISIONAL",
+        "confidence": "MEDIUM",
+        "targetFound": true,
+        "notes": "Red Hills: Stop 10574 [Red Hills Eb Or Azhinjivakkam Road Junction] at 463m"
+      },
+      {
+        "catalogueCode": "TLGT",
+        "gtfsCode": "7198",
+        "name": "Tollgate Bus Terminus",
+        "classification": "PROVISIONAL",
+        "confidence": "MEDIUM",
+        "targetFound": true,
+        "notes": "Tollgate: Stop 7198 [Nagara Thottam] at 58m"
+      },
+      {
+        "catalogueCode": "VDPL",
+        "gtfsCode": "9431",
+        "name": "Vadapalani Bus Terminus",
+        "classification": "PROVISIONAL",
+        "confidence": "MEDIUM",
+        "targetFound": true,
+        "notes": "Vadapalani: Stop 9431 [Kamala Theatre] at 219m"
+      },
+      {
+        "catalogueCode": "VLCY",
+        "gtfsCode": "8701",
+        "name": "Velachery Bus Terminus",
+        "classification": "PROVISIONAL",
+        "confidence": "MEDIUM",
+        "targetFound": true,
+        "notes": "Velachery: Stop 8701 [Mageshwari Nagar] at 222m"
+      },
+      {
+        "catalogueCode": "ADYR",
+        "gtfsCode": "8993",
+        "name": "Adyar Bus Depot",
+        "classification": "PROVISIONAL",
+        "confidence": "MEDIUM",
+        "targetFound": true,
+        "notes": "Adyar: Stop 8993 [Adyar Signal] at 14m"
+      },
+      {
+        "catalogueCode": "CGLB",
+        "gtfsCode": "9927",
+        "name": "Chengalpattu Bus Stand",
+        "classification": "PROVISIONAL",
+        "confidence": "MEDIUM",
+        "targetFound": true,
+        "notes": "Chengalpattu: Stop 9927 [Chengalpet] at 338m"
+      },
+      {
+        "catalogueCode": "SPBD",
+        "gtfsCode": "8576",
+        "name": "Sriperumbudur Bus Stand",
+        "classification": "PROVISIONAL",
+        "confidence": "MEDIUM",
+        "targetFound": true,
+        "notes": "Sriperumbudur: Stop 8576 [Sriperumbudur Theradi] at 266m"
+      },
+      {
+        "catalogueCode": "GUDV",
+        "gtfsCode": "6295",
+        "name": "Guduvancheri Bus Stand",
+        "classification": "PROVISIONAL",
+        "confidence": "MEDIUM",
+        "targetFound": true,
+        "notes": "Guduvancheri: Stop 6295 [Guduvancheri Railway Station] at 259m"
+      },
+      {
+        "catalogueCode": "TPRR",
+        "gtfsCode": "6016",
+        "name": "Thiruporur Bus Stand",
+        "classification": "PROVISIONAL",
+        "confidence": "MEDIUM",
+        "targetFound": true,
+        "notes": "Thiruporur: Stop 6016 [Kandhaswami Temple Tank Thiruporur] at 139m"
+      }
+    ],
+    "unresolvedAliases": [],
+    "unmatchedExtensionStations": [],
+    "unmatchedStations": [],
+    "physicalStationsRepresented": 21,
+    "physicalRepresentationRate": "100.0%",
+    "confirmedMatches": 0,
+    "confirmedMatchRate": "0.0%",
+    "reconciliationRate": "100.0%"
+  },
+  "rejectionsCount": 0,
+  "duplicateCount": 0,
+  "brokenReferencesCount": 0,
+  "anomalies": {
+    "timeInversionsCount": 0,
+    "timeRegressionsCount": 0,
+    "singleStopTripsCount": 0,
+    "distantCalendarServicesCount": 0
+  },
+  "errors": [],
+  "warnings": [],
+  "sampleRejectedRecords": []
+}

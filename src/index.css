@@ -3,22 +3,27 @@
 
 @layer base {
   :root {
-    --color-primary: #1AC8A0;
-    --color-primary-dark: #14A080;
-    --color-primary-light: #E6FAF5;
-    --color-navy: #1F3A5F;
-    --color-navy-dark: #0D1B2A;
-    --color-navy-light: #F0F4F8;
-    --color-warning: #EF4444;
-    --color-warning-light: #FEE2E2;
-    --color-orange: #FF9800;
+    --color-navy: #263B68;
+    --color-navy-dark: #1A2A4C;
+    --color-navy-light: #EEF3FA;
+    --color-teal: #60C4D4;
+    --color-teal-dark: #3AAABF;
+    --color-teal-light: #EBF8FA;
+    --color-warm-bg: #F5F3ED;
+    --color-card-bg: #FFFFFF;
+    --color-border: #DCE3EB;
+    --color-muted: #5B6E88;
+    --color-muted-light: #8CA0BA;
+    --color-warning: #D97706;
+    --color-error: #DC2626;
+    --color-success: #16A34A;
   }
 
   body {
     margin: 0;
     padding: 0;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    background-color: #F8FAFC;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background-color: #F5F3ED;
     color: #1E293B;
     -webkit-font-smoothing: antialiased;
   }
@@ -28,6 +33,7 @@
     display: flex;
     flex-direction: column;
     width: 100%;
+    background-color: #F5F3ED;
   }
 }
 
@@ -57,4 +63,10 @@
 .leaflet-popup-content {
   margin: 8px 12px !important;
   font-family: inherit !important;
+}
+
+/* Custom leaflet div icon overrides to remove default border and background */
+.leaflet-div-icon {
+  background: transparent !important;
+  border: none !important;
 }

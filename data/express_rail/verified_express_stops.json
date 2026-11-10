@@ -1,0 +1,184 @@
+{
+  "version": "1.0.0",
+  "railwayZones": [
+    "Southern Railway (SR)",
+    "South Western Railway (SWR)",
+    "South Central Railway (SCR)"
+  ],
+  "trainTypes": [
+    {
+      "code": "EXP",
+      "name": "Mail / Express",
+      "ticketingRule": "UTS Unreserved 2nd Class or PRS Reserved (Sleeper / AC)",
+      "reservationMandatory": false,
+      "suburbanSeasonPassAccepted": false
+    },
+    {
+      "code": "SF",
+      "name": "Superfast Express",
+      "ticketingRule": "UTS Unreserved with Superfast Surcharge or PRS Reserved",
+      "reservationMandatory": false,
+      "suburbanSeasonPassAccepted": false
+    },
+    {
+      "code": "VB",
+      "name": "Vande Bharat Express",
+      "ticketingRule": "PRS Reserved Only (Chair Car / Executive Class)",
+      "reservationMandatory": true,
+      "suburbanSeasonPassAccepted": false
+    },
+    {
+      "code": "ICE",
+      "name": "Intercity Express",
+      "ticketingRule": "UTS Unreserved 2nd Class or PRS Reserved Chair Car",
+      "reservationMandatory": false,
+      "suburbanSeasonPassAccepted": false
+    }
+  ],
+  "chennaiBeltStations": [
+    {
+      "code": "MAS",
+      "name": "Puratchi Thalaivar Dr. M.G. Ramachandran Central (Chennai Central)",
+      "tamilName": "புரட்சித் தலைவர் டாக்டர் எம்.ஜி.ஆர் சென்ட்ரல்",
+      "latitude": 13.0827,
+      "longitude": 80.2707,
+      "corridor": "west_corridor",
+      "district": "Chennai",
+      "terminalType": "major_terminal",
+      "bookingFacilities": [
+        "PRS Reservation Center",
+        "UTS Counter",
+        "ATVM",
+        "IRCTC Executive Lounge"
+      ],
+      "stepFreeAccess": true,
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "code": "MS",
+      "name": "Chennai Egmore",
+      "tamilName": "சென்னை எழும்பூர்",
+      "latitude": 13.0792,
+      "longitude": 80.261,
+      "corridor": "south_corridor",
+      "district": "Chennai",
+      "terminalType": "major_terminal",
+      "bookingFacilities": [
+        "PRS Reservation Center",
+        "UTS Counter",
+        "ATVM",
+        "IRCTC Retiring Rooms"
+      ],
+      "stepFreeAccess": true,
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "code": "TBM",
+      "name": "Tambaram Terminal",
+      "tamilName": "தாம்பரம் முனையம்",
+      "latitude": 12.9253,
+      "longitude": 80.1189,
+      "corridor": "south_corridor",
+      "district": "Chengalpattu",
+      "terminalType": "major_terminal",
+      "bookingFacilities": [
+        "PRS Reservation Center",
+        "UTS Counter",
+        "ATVM",
+        "Coaching Terminal"
+      ],
+      "stepFreeAccess": true,
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "code": "CGL",
+      "name": "Chengalpattu Junction",
+      "tamilName": "செங்கல்பட்டு சந்திப்பு",
+      "latitude": 12.6935,
+      "longitude": 79.9785,
+      "corridor": "south_corridor",
+      "district": "Chengalpattu",
+      "terminalType": "peri_urban_junction",
+      "bookingFacilities": [
+        "PRS Reservation Center",
+        "UTS Counter",
+        "ATVM"
+      ],
+      "stepFreeAccess": true,
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "code": "PER",
+      "name": "Perambur",
+      "tamilName": "பெரம்பூர்",
+      "latitude": 13.1095,
+      "longitude": 80.2455,
+      "corridor": "west_corridor",
+      "district": "Chennai",
+      "terminalType": "intermediate_commercial_stop",
+      "bookingFacilities": [
+        "PRS Reservation Center",
+        "UTS Counter",
+        "ATVM"
+      ],
+      "stepFreeAccess": true,
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "code": "TRL",
+      "name": "Tiruvallur",
+      "tamilName": "திருவள்ளூர்",
+      "latitude": 13.1315,
+      "longitude": 79.9075,
+      "corridor": "west_corridor",
+      "district": "Tiruvallur",
+      "terminalType": "intermediate_commercial_stop",
+      "bookingFacilities": [
+        "PRS Reservation Center",
+        "UTS Counter",
+        "ATVM"
+      ],
+      "stepFreeAccess": true,
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "code": "AJJ",
+      "name": "Arakkonam Junction",
+      "tamilName": "அரக்கோணம் சந்திப்பு",
+      "latitude": 13.0785,
+      "longitude": 79.6675,
+      "corridor": "west_corridor",
+      "district": "Tiruvallur",
+      "terminalType": "peri_urban_junction",
+      "bookingFacilities": [
+        "PRS Reservation Center",
+        "UTS Counter",
+        "ATVM"
+      ],
+      "stepFreeAccess": true,
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "code": "MBM",
+      "name": "Mambalam",
+      "tamilName": "மாம்பலம்",
+      "latitude": 13.0392,
+      "longitude": 80.2235,
+      "corridor": "south_corridor",
+      "district": "Chennai",
+      "terminalType": "intermediate_commercial_stop",
+      "bookingFacilities": [
+        "PRS Reservation Center",
+        "UTS Counter",
+        "ATVM"
+      ],
+      "stepFreeAccess": true,
+      "evidenceStatus": "cross_checked"
+    }
+  ],
+  "commuterUtilityRules": {
+    "strictIsolationFromSuburbanEMU": true,
+    "skipStopPolicy": "Express trains running on the Chennai suburban track corridor skip all intermediate local halts (such as Chetpet, Palavanthangal, Tirusulam, Urapakkam, Potheri, Villivakkam, Pattaravakkam). They must NEVER be used for short-hop suburban hops unless commercial stops exist at both endpoints.",
+    "ticketDistinction": "Passengers must possess a valid Indian Railways Express ticket (UTS unreserved with superfast surcharge if applicable, or PRS reserved accommodation). Suburban local EMU season tickets are NOT valid on Express trains."
+  }
+}

@@ -1,0 +1,2 @@
+route_id,service_id,trip_id
+NONEXISTENT_ROUTE,NONEXISTENT_SVC,TRIP_01

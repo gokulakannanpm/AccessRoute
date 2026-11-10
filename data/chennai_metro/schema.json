@@ -1,0 +1,67 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Chennai Metro (CMRL) Data Schema",
+  "description": "Schema for Chennai Metro Rail Limited operational stations, lines, and accessibility data in AccessRoute.",
+  "type": "object",
+  "required": ["version", "operator", "lines", "stations"],
+  "properties": {
+    "version": { "type": "string" },
+    "operator": {
+      "type": "object",
+      "required": ["id", "name", "fareSystem"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "fareSystem": { "type": "string" }
+      }
+    },
+    "lines": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "color", "status", "terminals"],
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "color": { "type": "string" },
+          "status": { "type": "string", "enum": ["operational", "under_construction", "planned"] },
+          "terminals": { "type": "array", "items": { "type": "string" } },
+          "headwayMinutes": {
+            "type": "object",
+            "properties": {
+              "peak": { "type": "number" },
+              "offPeak": { "type": "number" }
+            }
+          }
+        }
+      }
+    },
+    "stations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "latitude", "longitude", "lines", "stationType", "stepFreeAccess"],
+        "properties": {
+          "id": { "type": "string" },
+          "code": { "type": "string" },
+          "name": { "type": "string" },
+          "tamilName": { "type": "string" },
+          "latitude": { "type": "number", "minimum": 12.50, "maximum": 13.50 },
+          "longitude": { "type": "number", "minimum": 79.50, "maximum": 80.40 },
+          "lines": { "type": "array", "items": { "type": "string" } },
+          "evidenceStatus": {
+            "type": "string",
+            "enum": ["source_verified", "cross_checked", "manually_curated", "unverified", "planned_not_operational"]
+          },
+          "stationType": { "type": "string", "enum": ["elevated", "underground", "at_grade"] },
+          "isInterchange": { "type": "boolean" },
+          "interchangeWith": { "type": "array", "items": { "type": "string" } },
+          "stepFreeAccess": { "type": "boolean" },
+          "hasElevator": { "type": "boolean" },
+          "hasEscalator": { "type": "boolean" },
+          "parkingAvailable": { "type": "boolean" }
+        }
+      }
+    }
+  }
+}

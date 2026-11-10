@@ -1,0 +1,60 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Chennai Suburban Railway & MRTS Schema",
+  "description": "Schema for Southern Railway Chennai Division Suburban (EMU) and MRTS stations, lines, and corridor linkages.",
+  "type": "object",
+  "required": ["version", "operator", "corridors", "stations"],
+  "properties": {
+    "version": { "type": "string" },
+    "operator": {
+      "type": "object",
+      "required": ["id", "name", "division", "fareSystem"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "division": { "type": "string" },
+        "fareSystem": { "type": "string" }
+      }
+    },
+    "corridors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "type", "terminals"],
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "type": { "type": "string", "enum": ["suburban_emu", "mrts_elevated"] },
+          "terminals": { "type": "array", "items": { "type": "string" } },
+          "servicePrefix": { "type": "string" }
+        }
+      }
+    },
+    "stations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "code", "name", "latitude", "longitude", "corridors", "district"],
+        "properties": {
+          "id": { "type": "string" },
+          "code": { "type": "string" },
+          "name": { "type": "string" },
+          "tamilName": { "type": "string" },
+          "latitude": { "type": "number", "minimum": 12.50, "maximum": 13.50 },
+          "longitude": { "type": "number", "minimum": 79.50, "maximum": 80.40 },
+          "corridors": { "type": "array", "items": { "type": "string" } },
+          "district": { "type": "string", "enum": ["Chennai", "Chengalpattu", "Kanchipuram", "Tiruvallur"] },
+          "evidenceStatus": {
+            "type": "string",
+            "enum": ["source_verified", "cross_checked", "manually_curated", "unverified", "planned_not_operational"]
+          },
+          "isInterchange": { "type": "boolean" },
+          "interchangeWith": { "type": "array", "items": { "type": "string" } },
+          "stepFreeAccess": { "type": "boolean" },
+          "platforms": { "type": "number" },
+          "ticketBooking": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    }
+  }
+}

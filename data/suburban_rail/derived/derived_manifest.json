@@ -1,0 +1,145 @@
+{
+  "manifestVersion": "1.2.0-derived-experimental",
+  "artifactType": "isolated_suburban_rail_derived_timetable",
+  "status": "EXPERIMENTAL_DERIVED_REPRESENTATION",
+  "readyForJourneyRouting": false,
+  "operationalVerification": "UNVERIFIED_HISTORICAL",
+  "licenseNotice": "UNCONFIRMED",
+  "statementOfPurpose": "Deterministic derived timetable representation for offline routing-engine research and development. Strictly disabled from passenger-facing journey routing.",
+  "sourceMetadata": {
+    "sourceDirectory": "data/suburban_rail/imported",
+    "sourceCommit": "af0742dba777f9657ed6fda2046d6c2a721d630b",
+    "sourceRelease": "v0.2.0",
+    "sourceChecksums": {
+      "agency.txt": {
+        "bytes": 115,
+        "sha256": "2ef8f11ce5c52eb8b62e02f87fbdc6865d0af3a4538754aa862dd5fbec7c4751"
+      },
+      "calendar.txt": {
+        "bytes": 328,
+        "sha256": "decf74ac0a5f7a060a93708b84e2f5c33ceff985b47d3437de0c721abc388087"
+      },
+      "calendar_dates.txt": {
+        "bytes": 139,
+        "sha256": "fba0b31d3f38b24804169c5aab9e8596eeb4abb3888aadec87ac465dec492fdd"
+      },
+      "feed_info.txt": {
+        "bytes": 178,
+        "sha256": "e1e3415e38e8e9f8516fc4ed05b04fc280fd2dc973d46a6e94ea73d1e9781ca8"
+      },
+      "pathways.txt": {
+        "bytes": 65738,
+        "sha256": "9a12074f0a387cd454d6cf319701982e3c2de8b7c20c8d5da1c21d1de22cdf76"
+      },
+      "routes.txt": {
+        "bytes": 25455,
+        "sha256": "357bfa08dcf31a3cf0dfa4e65ab344ffcd730f9cfcaf18e024ba93e3290ffa64"
+      },
+      "stops.txt": {
+        "bytes": 36199,
+        "sha256": "29bc27abb8e1ce94e312ad46c2a151f62a4174a279a520aa2ed442fc54588459"
+      },
+      "stop_times.txt": {
+        "bytes": 608308,
+        "sha256": "3f5a6d5f3bf76494e69d7b7a19199a3f73f208cfd3a7b19406059ac4a3f93e09"
+      },
+      "trips.txt": {
+        "bytes": 26798,
+        "sha256": "fc2f72954e8a024f56dda1cdc02669751435048c683bab5a62f6d857fc587bab"
+      }
+    }
+  },
+  "preprocessingMetadata": {
+    "preprocessorVersion": "1.0.0",
+    "preprocessingTimestamp": "2026-10-27T12:00:00.000Z",
+    "deterministic": true,
+    "deterministicContentHash": "ce69b631103cfe757ce10a25ba56026d12d2bce4d332e288adcb5a8d92ab629e"
+  },
+  "counts": {
+    "totalSourceTrips": 763,
+    "eligibleDerivedTrips": 759,
+    "sourceValidUnmodifiedTrips": 740,
+    "normalizedRolloverTrips": 19,
+    "excludedTrips": 4,
+    "quarantinedTrips": 4,
+    "totalSourceStopTimes": 16135,
+    "totalDerivedStopTimes": 16131,
+    "excludedStopTimes": 4,
+    "activeRoutesCount": 759,
+    "totalRoutesCount": 763,
+    "totalStopsCount": 708
+  },
+  "activeBlockers": [
+    "ROUTING_DISABLED: Derived representation is strictly isolated from production journey routing and map engines",
+    "FEED_SUSPICIOUS_CALENDAR_EXPIRY: 5 services specify distant placeholder end dates (21700820)",
+    "FEED_UNCONFIRMED_DATA_LICENSE: Underlying Southern Railway timetable data redistribution rights are UNCONFIRMED",
+    "FEED_MISSING_EXTENSION_TIMETABLES: Stations PRTK and ADMB lack commercial schedules in this snapshot",
+    "UNVERIFIED_OPERATIONAL_CURRENCY: Southern Railway operational schedule revisions and engineering blocks unverified",
+    "EXCLUDED_SHUTTLE_SERVICES: 4 single-stop shuttle trips (43551_T1, 43552_T1, 43553_T1, 43554_T1) excluded due to missing terminus"
+  ],
+  "excludedTripsAudit": [
+    {
+      "tripId": "43551_T1",
+      "routeId": "43551",
+      "tripHeadsign": "TRT",
+      "stopCount": 1,
+      "status": "INSUFFICIENT_STOPS",
+      "reason": "INSUFFICIENT_STOPS: Trip contains fewer than 2 stops and lacks terminus",
+      "normalizableWithoutAmbiguity": false
+    },
+    {
+      "tripId": "43552_T1",
+      "routeId": "43552",
+      "tripHeadsign": "AJJ",
+      "stopCount": 1,
+      "status": "INSUFFICIENT_STOPS",
+      "reason": "INSUFFICIENT_STOPS: Trip contains fewer than 2 stops and lacks terminus",
+      "normalizableWithoutAmbiguity": false
+    },
+    {
+      "tripId": "43553_T1",
+      "routeId": "43553",
+      "tripHeadsign": "TRT",
+      "stopCount": 1,
+      "status": "INSUFFICIENT_STOPS",
+      "reason": "INSUFFICIENT_STOPS: Trip contains fewer than 2 stops and lacks terminus",
+      "normalizableWithoutAmbiguity": false
+    },
+    {
+      "tripId": "43554_T1",
+      "routeId": "43554",
+      "tripHeadsign": "AJJ",
+      "stopCount": 1,
+      "status": "INSUFFICIENT_STOPS",
+      "reason": "INSUFFICIENT_STOPS: Trip contains fewer than 2 stops and lacks terminus",
+      "normalizableWithoutAmbiguity": false
+    }
+  ],
+  "transformationsSummary": {
+    "totalTransformedTrips": 19,
+    "sameStopInversionsCount": 4,
+    "interStopRegressionsCount": 15,
+    "totalStopTimesModified": 142,
+    "transformedTripIds": [
+      "40089_T1",
+      "40091_T1",
+      "40093_T1",
+      "40206_T1",
+      "40208_T1",
+      "40381_T1",
+      "40383_T1",
+      "40385_T1",
+      "40396_T1",
+      "40571_T1",
+      "40572_T1",
+      "40660_T1",
+      "40661_T1",
+      "40662_T1",
+      "42035_T1",
+      "42037_T1",
+      "43253_T1",
+      "43441_T1",
+      "43524_T1"
+    ]
+  }
+}

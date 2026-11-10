@@ -26,44 +26,44 @@ export function ReportIssue() {
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
-      <div className="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl space-y-5 relative animate-in fade-in zoom-in-95 duration-200">
+    <div className="fixed inset-0 z-50 bg-[#263B68]/40 backdrop-blur-xs flex items-center justify-center p-4">
+      <div className="bg-[#FFFFFF] rounded-2xl max-w-lg w-full p-6 shadow-xl border border-[#DCE3EB] space-y-5 relative animate-in fade-in zoom-in-95 duration-150">
         {/* Close Button */}
         <button
           onClick={() => setIsReportModalOpen(false)}
-          className="absolute top-5 right-5 p-2 text-slate-400 hover:text-slate-800 rounded-full hover:bg-slate-100 transition-colors"
+          className="absolute top-5 right-5 p-2 text-[#8CA0BA] hover:text-[#263B68] rounded-lg hover:bg-[#F5F3ED] transition-colors cursor-pointer"
         >
           <X className="w-5 h-5" />
         </button>
 
         {/* Header */}
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center shrink-0">
-            <AlertTriangle className="w-6 h-6" />
+          <div className="w-10 h-10 rounded-xl bg-amber-50 text-amber-700 flex items-center justify-center shrink-0 border border-amber-200">
+            <AlertTriangle className="w-5 h-5" />
           </div>
           <div>
-            <h2 className="text-xl font-bold text-[#1F3A5F]">Report Accessibility Issue</h2>
-            <p className="text-xs text-slate-500 font-medium">Help keep Chennai transport accessible for everyone</p>
+            <h2 className="text-xl font-bold text-[#263B68]">Report Accessibility Issue</h2>
+            <p className="text-xs text-[#5B6E88] font-medium">Help keep Chennai transport accessible for everyone</p>
           </div>
         </div>
 
         {isSubmitted ? (
           <div className="py-8 text-center space-y-3">
-            <div className="w-14 h-14 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto">
+            <div className="w-14 h-14 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto border border-emerald-200">
               <CheckCircle2 className="w-8 h-8" />
             </div>
-            <h3 className="text-lg font-bold text-slate-900">Report Submitted!</h3>
-            <p className="text-xs text-slate-600">Thank you for reporting. MTC & CMRL engineers have been notified.</p>
+            <h3 className="text-lg font-bold text-[#263B68]">Report Submitted!</h3>
+            <p className="text-xs text-[#5B6E88]">Thank you for reporting. MTC & CMRL engineers have been notified.</p>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4">
             {/* Location Select */}
             <div className="space-y-1.5">
-              <label className="text-xs font-bold text-slate-700">Station or Bus Stop</label>
+              <label className="text-xs font-bold text-[#5B6E88]">Station or Bus Stop</label>
               <select
                 value={station}
                 onChange={(e) => setStation(e.target.value)}
-                className="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-800 focus:outline-hidden focus:border-[#1AC8A0]"
+                className="w-full p-2.5 bg-[#FFFFFF] border border-[#DCE3EB] rounded-xl text-xs font-semibold text-slate-800 focus:outline-hidden focus:border-[#263B68] focus:ring-2 focus:ring-[#60C4D4]/30"
               >
                 <option value="Chennai Central">Chennai Central Metro & Station</option>
                 <option value="Guindy">Guindy Metro / Bus Depot</option>
@@ -75,11 +75,11 @@ export function ReportIssue() {
 
             {/* Issue Category */}
             <div className="space-y-1.5">
-              <label className="text-xs font-bold text-slate-700">Issue Category</label>
+              <label className="text-xs font-bold text-[#5B6E88]">Issue Category</label>
               <select
                 value={issueType}
                 onChange={(e) => setIssueType(e.target.value)}
-                className="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-800 focus:outline-hidden focus:border-[#1AC8A0]"
+                className="w-full p-2.5 bg-[#FFFFFF] border border-[#DCE3EB] rounded-xl text-xs font-semibold text-slate-800 focus:outline-hidden focus:border-[#263B68] focus:ring-2 focus:ring-[#60C4D4]/30"
               >
                 <option value="Elevator Out of Service">Elevator Out of Service</option>
                 <option value="Ramp Blocked / Damaged">Ramp Blocked / Damaged</option>
@@ -91,19 +91,19 @@ export function ReportIssue() {
 
             {/* Description */}
             <div className="space-y-1.5">
-              <label className="text-xs font-bold text-slate-700">Description</label>
+              <label className="text-xs font-bold text-[#5B6E88]">Description</label>
               <textarea
                 rows={3}
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 placeholder="Describe the barrier or broken infrastructure..."
-                className="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-800 focus:outline-hidden focus:border-[#1AC8A0]"
+                className="w-full p-2.5 bg-[#FFFFFF] border border-[#DCE3EB] rounded-xl text-xs font-medium text-slate-800 focus:outline-hidden focus:border-[#263B68] focus:ring-2 focus:ring-[#60C4D4]/30"
               />
             </div>
 
             {/* Upload Photo Button Simulation */}
-            <div className="p-3 border-2 border-dashed border-slate-200 rounded-xl flex items-center justify-center gap-2 text-xs font-bold text-slate-500 hover:bg-slate-50 cursor-pointer">
-              <Camera className="w-4 h-4 text-slate-400" />
+            <div className="p-3 border-2 border-dashed border-[#DCE3EB] rounded-xl flex items-center justify-center gap-2 text-xs font-bold text-[#5B6E88] hover:bg-[#F5F3ED] cursor-pointer transition-colors">
+              <Camera className="w-4 h-4 text-[#8CA0BA]" />
               <span>Attach Photo (Optional)</span>
             </div>
 
@@ -111,9 +111,9 @@ export function ReportIssue() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full py-3.5 px-4 rounded-xl bg-[#1F3A5F] hover:bg-[#132A4A] text-white font-bold text-sm flex items-center justify-center gap-2 shadow-md transition-all"
+              className="w-full py-3.5 px-4 rounded-xl bg-[#263B68] hover:bg-[#1B2B4C] text-[#FFFFFF] font-bold text-sm flex items-center justify-center gap-2 shadow-xs transition-all cursor-pointer"
             >
-              <Send className="w-4 h-4 text-[#1AC8A0]" />
+              <Send className="w-4 h-4 text-[#60C4D4]" />
               <span>{isSubmitting ? 'Submitting...' : 'Submit Report'}</span>
             </button>
           </form>

@@ -1,0 +1,1758 @@
+{
+  "version": "1.0.0",
+  "operator": {
+    "id": "SRR",
+    "name": "Southern Railway",
+    "division": "Chennai Division",
+    "fareSystem": "uts_distance_slabs"
+  },
+  "corridors": [
+    {
+      "id": "south_line",
+      "name": "South Suburban Corridor",
+      "type": "suburban_emu",
+      "terminals": [
+        "Chennai Beach",
+        "Tambaram",
+        "Chengalpattu Junction",
+        "Tirumalpur"
+      ],
+      "servicePrefix": "40xxx"
+    },
+    {
+      "id": "west_line",
+      "name": "West Suburban Corridor",
+      "type": "suburban_emu",
+      "terminals": [
+        "Chennai Central (MMC)",
+        "Avadi",
+        "Tiruvallur",
+        "Arakkonam Junction"
+      ],
+      "servicePrefix": "43xxx"
+    },
+    {
+      "id": "north_line",
+      "name": "North Suburban Corridor",
+      "type": "suburban_emu",
+      "terminals": [
+        "Chennai Central (MMC)",
+        "Gummidipoondi",
+        "Sullurpeta"
+      ],
+      "servicePrefix": "42xxx"
+    },
+    {
+      "id": "mrts_line",
+      "name": "Chennai Mass Rapid Transit System (MRTS)",
+      "type": "mrts_elevated",
+      "terminals": [
+        "Chennai Beach",
+        "St. Thomas Mount"
+      ],
+      "servicePrefix": "41xxx"
+    }
+  ],
+  "stations": [
+    {
+      "id": "srr_msb",
+      "code": "MSB",
+      "name": "Chennai Beach",
+      "tamilName": "சென்னை கடற்கரை",
+      "latitude": 13.0923,
+      "longitude": 80.2919,
+      "corridors": [
+        "south_line",
+        "mrts_line"
+      ],
+      "district": "Chennai",
+      "isInterchange": true,
+      "interchangeWith": [
+        "MRTS Line",
+        "MTC Beach Station / Broadway Terminus"
+      ],
+      "stepFreeAccess": false,
+      "platforms": 8,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter",
+        "ATVM"
+      ],
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "srr_msf",
+      "code": "MSF",
+      "name": "Chennai Fort",
+      "tamilName": "சென்னை கோட்டை",
+      "latitude": 13.0841,
+      "longitude": 80.2842,
+      "corridors": [
+        "south_line",
+        "mrts_line"
+      ],
+      "district": "Chennai",
+      "isInterchange": true,
+      "interchangeWith": [
+        "Chennai Metro High Court Station",
+        "MTC Fort Bus Stops"
+      ],
+      "stepFreeAccess": false,
+      "platforms": 4,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter"
+      ],
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "srr_mpk",
+      "code": "MPK",
+      "name": "Chennai Park",
+      "tamilName": "சென்னை பூங்கா",
+      "latitude": 13.0805,
+      "longitude": 80.2745,
+      "corridors": [
+        "south_line"
+      ],
+      "district": "Chennai",
+      "isInterchange": true,
+      "interchangeWith": [
+        "Puratchi Thalaivar Dr. M.G. Ramachandran Central (Chennai Central - MAS)",
+        "Chennai Metro Central Station",
+        "Park Town MRTS Station (MPKT)"
+      ],
+      "stepFreeAccess": false,
+      "platforms": 4,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter",
+        "ATVM"
+      ],
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "srr_ms",
+      "code": "MS",
+      "name": "Chennai Egmore",
+      "tamilName": "சென்னை எழும்பூர்",
+      "latitude": 13.0792,
+      "longitude": 80.261,
+      "corridors": [
+        "south_line"
+      ],
+      "district": "Chennai",
+      "isInterchange": true,
+      "interchangeWith": [
+        "Chennai Egmore Mainline Railway Station",
+        "Chennai Metro Egmore Station",
+        "National Express Trains (South Bound)",
+        "MTC Egmore Bus Stops"
+      ],
+      "stepFreeAccess": true,
+      "platforms": 11,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter",
+        "ATVM",
+        "PRS Reservation"
+      ],
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "srr_msc",
+      "code": "MSC",
+      "name": "Chetpet",
+      "tamilName": "சேத்துப்பட்டு",
+      "latitude": 13.0712,
+      "longitude": 80.2435,
+      "corridors": [
+        "south_line"
+      ],
+      "district": "Chennai",
+      "isInterchange": false,
+      "interchangeWith": [
+        "MTC Chetpet Bus Stops"
+      ],
+      "stepFreeAccess": false,
+      "platforms": 2,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter"
+      ],
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "srr_nbk",
+      "code": "NBK",
+      "name": "Nungambakkam",
+      "tamilName": "நுங்கம்பாக்கம்",
+      "latitude": 13.0645,
+      "longitude": 80.236,
+      "corridors": [
+        "south_line"
+      ],
+      "district": "Chennai",
+      "isInterchange": false,
+      "interchangeWith": [
+        "MTC Nungambakkam High Road Services"
+      ],
+      "stepFreeAccess": false,
+      "platforms": 4,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter",
+        "ATVM"
+      ],
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "srr_mkk",
+      "code": "MKK",
+      "name": "Kodambakkam",
+      "tamilName": "கோடம்பாக்கம்",
+      "latitude": 13.0515,
+      "longitude": 80.2285,
+      "corridors": [
+        "south_line"
+      ],
+      "district": "Chennai",
+      "isInterchange": false,
+      "interchangeWith": [
+        "MTC Kodambakkam Station Road"
+      ],
+      "stepFreeAccess": false,
+      "platforms": 4,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter"
+      ],
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "srr_mbm",
+      "code": "MBM",
+      "name": "Mambalam",
+      "tamilName": "மாம்பலம்",
+      "latitude": 13.0392,
+      "longitude": 80.2235,
+      "corridors": [
+        "south_line"
+      ],
+      "district": "Chennai",
+      "isInterchange": true,
+      "interchangeWith": [
+        "MTC T. Nagar Bus Terminus (connected via skywalk)",
+        "Express Trains (selective stops)"
+      ],
+      "stepFreeAccess": true,
+      "platforms": 4,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter",
+        "ATVM",
+        "PRS Reservation"
+      ],
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "srr_sp",
+      "code": "SP",
+      "name": "Saidapet",
+      "tamilName": "சைதாப்பேட்டை",
+      "latitude": 13.0232,
+      "longitude": 80.224,
+      "corridors": [
+        "south_line"
+      ],
+      "district": "Chennai",
+      "isInterchange": true,
+      "interchangeWith": [
+        "Chennai Metro Saidapet Station",
+        "MTC Saidapet Bus Terminus"
+      ],
+      "stepFreeAccess": false,
+      "platforms": 4,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter"
+      ],
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "srr_gdy",
+      "code": "GDY",
+      "name": "Guindy",
+      "tamilName": "கிண்டி",
+      "latitude": 13.0084,
+      "longitude": 80.2131,
+      "corridors": [
+        "south_line"
+      ],
+      "district": "Chennai",
+      "isInterchange": true,
+      "interchangeWith": [
+        "Chennai Metro Guindy Station (Blue Line)",
+        "MTC Guindy Bus Terminal"
+      ],
+      "stepFreeAccess": true,
+      "platforms": 4,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter",
+        "ATVM"
+      ],
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "srr_stm",
+      "code": "STM",
+      "name": "St. Thomas Mount",
+      "tamilName": "பரங்கிமலை",
+      "latitude": 12.9948,
+      "longitude": 80.1988,
+      "corridors": [
+        "south_line",
+        "mrts_line"
+      ],
+      "district": "Chennai",
+      "isInterchange": true,
+      "interchangeWith": [
+        "Chennai Metro St. Thomas Mount Station (Green Line)",
+        "MRTS Line (Extension)",
+        "MTC Bus Terminus"
+      ],
+      "stepFreeAccess": true,
+      "platforms": 4,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter",
+        "ATVM"
+      ],
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "srr_pza",
+      "code": "PZA",
+      "name": "Palavanthangal",
+      "tamilName": "பழவந்தாங்கல்",
+      "latitude": 12.9875,
+      "longitude": 80.1895,
+      "corridors": [
+        "south_line"
+      ],
+      "district": "Chennai",
+      "isInterchange": false,
+      "interchangeWith": [
+        "MTC Nanganallur Services"
+      ],
+      "stepFreeAccess": false,
+      "platforms": 4,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter"
+      ],
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "srr_mn",
+      "code": "MN",
+      "name": "Minambakkam",
+      "tamilName": "மீனம்பாக்கம்",
+      "latitude": 12.9825,
+      "longitude": 80.1795,
+      "corridors": [
+        "south_line"
+      ],
+      "district": "Chennai",
+      "isInterchange": true,
+      "interchangeWith": [
+        "Chennai Metro Meenambakkam Station"
+      ],
+      "stepFreeAccess": false,
+      "platforms": 4,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter"
+      ],
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "srr_tlm",
+      "code": "TLM",
+      "name": "Tirusulam",
+      "tamilName": "திரிசூலம்",
+      "latitude": 12.9795,
+      "longitude": 80.1685,
+      "corridors": [
+        "south_line"
+      ],
+      "district": "Chengalpattu",
+      "isInterchange": true,
+      "interchangeWith": [
+        "Chennai International Airport (subway connected)",
+        "Chennai Metro Airport Station"
+      ],
+      "stepFreeAccess": false,
+      "platforms": 4,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter",
+        "ATVM"
+      ],
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "srr_pv",
+      "code": "PV",
+      "name": "Pallavaram",
+      "tamilName": "பல்லாவரம்",
+      "latitude": 12.9695,
+      "longitude": 80.1545,
+      "corridors": [
+        "south_line"
+      ],
+      "district": "Chengalpattu",
+      "isInterchange": false,
+      "interchangeWith": [
+        "MTC GST Road Services",
+        "Pallavaram-Thoraipakkam 200 Feet Radial Road"
+      ],
+      "stepFreeAccess": false,
+      "platforms": 4,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter",
+        "ATVM"
+      ],
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "srr_cmp",
+      "code": "CMP",
+      "name": "Chromepet",
+      "tamilName": "குரோம்பேட்டை",
+      "latitude": 12.9525,
+      "longitude": 80.1415,
+      "corridors": [
+        "south_line"
+      ],
+      "district": "Chengalpattu",
+      "isInterchange": false,
+      "interchangeWith": [
+        "MTC Chromepet Bus Stops",
+        "MIT College Corridor"
+      ],
+      "stepFreeAccess": false,
+      "platforms": 4,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter",
+        "ATVM"
+      ],
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "srr_tbms",
+      "code": "TBMS",
+      "name": "Tambaram Sanatorium",
+      "tamilName": "தாம்பரம் சானடோரியம்",
+      "latitude": 12.9395,
+      "longitude": 80.1295,
+      "corridors": [
+        "south_line"
+      ],
+      "district": "Chengalpattu",
+      "isInterchange": true,
+      "interchangeWith": [
+        "MTC Tambaram Sanatorium Bus Stand (MEPZ)"
+      ],
+      "stepFreeAccess": false,
+      "platforms": 4,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter",
+        "ATVM"
+      ],
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "srr_tbm",
+      "code": "TBM",
+      "name": "Tambaram",
+      "tamilName": "தாம்பரம்",
+      "latitude": 12.9253,
+      "longitude": 80.1189,
+      "corridors": [
+        "south_line"
+      ],
+      "district": "Chengalpattu",
+      "isInterchange": true,
+      "interchangeWith": [
+        "Tambaram Railway Terminal (3rd Major City Rail Terminal)",
+        "Express / Superfast Trains",
+        "MTC Tambaram East & West Bus Terminals"
+      ],
+      "stepFreeAccess": true,
+      "platforms": 8,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter",
+        "ATVM",
+        "PRS Reservation"
+      ],
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "srr_prgl",
+      "code": "PRGL",
+      "name": "Perungalathur",
+      "tamilName": "பெருங்களத்தூர்",
+      "latitude": 12.9065,
+      "longitude": 80.0915,
+      "corridors": [
+        "south_line"
+      ],
+      "district": "Chengalpattu",
+      "isInterchange": false,
+      "interchangeWith": [
+        "MTC GST Road Southern Bus Interchange Point"
+      ],
+      "stepFreeAccess": false,
+      "platforms": 2,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter"
+      ],
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "srr_vdr",
+      "code": "VDR",
+      "name": "Vandalur",
+      "tamilName": "வண்டலூர்",
+      "latitude": 12.8905,
+      "longitude": 80.0815,
+      "corridors": [
+        "south_line"
+      ],
+      "district": "Chengalpattu",
+      "isInterchange": true,
+      "interchangeWith": [
+        "MTC Vandalur Zoo Bus Stops",
+        "Kalaignar Centenary Bus Terminus (KCBT Kilambakkam) Feeder"
+      ],
+      "stepFreeAccess": false,
+      "platforms": 3,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter"
+      ],
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "srr_upm",
+      "code": "UPM",
+      "name": "Urapakkam",
+      "tamilName": "ஊரப்பாக்கம்",
+      "latitude": 12.8685,
+      "longitude": 80.0685,
+      "corridors": [
+        "south_line"
+      ],
+      "district": "Chengalpattu",
+      "isInterchange": false,
+      "interchangeWith": [
+        "MTC GST Road Local Corridors"
+      ],
+      "stepFreeAccess": false,
+      "platforms": 2,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter"
+      ],
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "srr_gi",
+      "code": "GI",
+      "name": "Guduvancheri",
+      "tamilName": "கூடுவாஞ்சேரி",
+      "latitude": 12.8465,
+      "longitude": 80.0575,
+      "corridors": [
+        "south_line"
+      ],
+      "district": "Chengalpattu",
+      "isInterchange": true,
+      "interchangeWith": [
+        "MTC Guduvancheri Bus Stand"
+      ],
+      "stepFreeAccess": false,
+      "platforms": 3,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter"
+      ],
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "srr_poti",
+      "code": "POTI",
+      "name": "Potheri",
+      "tamilName": "பொத்தேரி",
+      "latitude": 12.8255,
+      "longitude": 80.0435,
+      "corridors": [
+        "south_line"
+      ],
+      "district": "Chengalpattu",
+      "isInterchange": false,
+      "interchangeWith": [
+        "SRM Institute of Science and Technology Campus Transit"
+      ],
+      "stepFreeAccess": false,
+      "platforms": 2,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter"
+      ],
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "srr_ctm",
+      "code": "CTM",
+      "name": "Kattangulattur",
+      "tamilName": "காட்டாங்கொளத்தூர்",
+      "latitude": 12.8165,
+      "longitude": 80.0365,
+      "corridors": [
+        "south_line"
+      ],
+      "district": "Chengalpattu",
+      "isInterchange": false,
+      "interchangeWith": [
+        "MTC GST Local Services"
+      ],
+      "stepFreeAccess": false,
+      "platforms": 2,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter"
+      ],
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "srr_mmnk",
+      "code": "MMNK",
+      "name": "Maraimalai Nagar",
+      "tamilName": "மறைமலை நகர்",
+      "latitude": 12.7985,
+      "longitude": 80.0245,
+      "corridors": [
+        "south_line"
+      ],
+      "district": "Chengalpattu",
+      "isInterchange": false,
+      "interchangeWith": [
+        "MTC Maraimalai Nagar Industrial Corridors"
+      ],
+      "stepFreeAccess": false,
+      "platforms": 2,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter"
+      ],
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "srr_skl",
+      "code": "SKL",
+      "name": "Singaperumal Koil",
+      "tamilName": "சிங்கபெருமாள்கோவில்",
+      "latitude": 12.7655,
+      "longitude": 80.0035,
+      "corridors": [
+        "south_line"
+      ],
+      "district": "Chengalpattu",
+      "isInterchange": false,
+      "interchangeWith": [
+        "MTC Sriperumbudur Link Corridor"
+      ],
+      "stepFreeAccess": false,
+      "platforms": 2,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter"
+      ],
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "srr_pwu",
+      "code": "PWU",
+      "name": "Paranur",
+      "tamilName": "பரனூர்",
+      "latitude": 12.7305,
+      "longitude": 79.9925,
+      "corridors": [
+        "south_line"
+      ],
+      "district": "Chengalpattu",
+      "isInterchange": false,
+      "interchangeWith": [
+        "Mahindra World City Transit Feeder"
+      ],
+      "stepFreeAccess": false,
+      "platforms": 2,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter"
+      ],
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "srr_cgl",
+      "code": "CGL",
+      "name": "Chengalpattu Junction",
+      "tamilName": "செங்கல்பட்டு சந்திப்பு",
+      "latitude": 12.6935,
+      "longitude": 79.9785,
+      "corridors": [
+        "south_line"
+      ],
+      "district": "Chengalpattu",
+      "isInterchange": true,
+      "interchangeWith": [
+        "Chengalpattu Mainline Railway Terminal",
+        "Branch Line to Kanchipuram / Arakkonam",
+        "Express Trains (National Lines)",
+        "MTC & TNSTC Chengalpattu Bus Stand"
+      ],
+      "stepFreeAccess": true,
+      "platforms": 7,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter",
+        "ATVM",
+        "PRS Reservation"
+      ],
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "srr_wj",
+      "code": "WJ",
+      "name": "Walajabad",
+      "tamilName": "வாலாஜாபாத்",
+      "latitude": 12.7935,
+      "longitude": 79.8215,
+      "corridors": [
+        "south_line"
+      ],
+      "district": "Kanchipuram",
+      "isInterchange": false,
+      "interchangeWith": [
+        "MTC & TNSTC Walajabad Link Buses"
+      ],
+      "stepFreeAccess": false,
+      "platforms": 2,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter"
+      ],
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "srr_cj",
+      "code": "CJ",
+      "name": "Kanchipuram",
+      "tamilName": "காஞ்சிபுரம்",
+      "latitude": 12.8342,
+      "longitude": 79.7035,
+      "corridors": [
+        "south_line"
+      ],
+      "district": "Kanchipuram",
+      "isInterchange": true,
+      "interchangeWith": [
+        "TNSTC Kanchipuram Central Bus Stand",
+        "MTC Kanchipuram Regional Services"
+      ],
+      "stepFreeAccess": false,
+      "platforms": 3,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter",
+        "PRS Reservation"
+      ],
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "srr_tmlp",
+      "code": "TMLP",
+      "name": "Tirumalpur",
+      "tamilName": "திருமால்பூர்",
+      "latitude": 12.9655,
+      "longitude": 79.6235,
+      "corridors": [
+        "south_line"
+      ],
+      "district": "Kanchipuram",
+      "isInterchange": false,
+      "interchangeWith": [
+        "Local feeder transport to Arakkonam"
+      ],
+      "stepFreeAccess": false,
+      "platforms": 2,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter"
+      ],
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "srr_mass",
+      "code": "MASS",
+      "name": "Chennai Central (MMC Suburban)",
+      "tamilName": "சென்னை சென்ட்ரல் புறநகர் (மூர் மார்க்கெட் வளாகம்)",
+      "latitude": 13.0827,
+      "longitude": 80.2745,
+      "corridors": [
+        "west_line",
+        "north_line"
+      ],
+      "district": "Chennai",
+      "isInterchange": true,
+      "interchangeWith": [
+        "Puratchi Thalaivar Dr. M.G. Ramachandran Central Mainline (MAS)",
+        "Chennai Metro Central Station",
+        "Chennai Park Suburban Station (MPK)",
+        "Park Town MRTS Station (MPKT)",
+        "MTC Central Bus Terminal"
+      ],
+      "stepFreeAccess": true,
+      "platforms": 6,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter",
+        "ATVM"
+      ],
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "srr_bbq",
+      "code": "BBQ",
+      "name": "Basin Bridge",
+      "tamilName": "பேசின் பாலம்",
+      "latitude": 13.1015,
+      "longitude": 80.2695,
+      "corridors": [
+        "west_line",
+        "north_line"
+      ],
+      "district": "Chennai",
+      "isInterchange": true,
+      "interchangeWith": [
+        "Junction bifurcation for West and North corridors"
+      ],
+      "stepFreeAccess": false,
+      "platforms": 6,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter"
+      ],
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "srr_vpy",
+      "code": "VPY",
+      "name": "Vyasarpadi Jeeva",
+      "tamilName": "வியாசர்பாடி ஜீவா",
+      "latitude": 13.1085,
+      "longitude": 80.2605,
+      "corridors": [
+        "west_line"
+      ],
+      "district": "Chennai",
+      "isInterchange": false,
+      "interchangeWith": [
+        "MTC Vyasarpadi Services"
+      ],
+      "stepFreeAccess": false,
+      "platforms": 4,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter"
+      ],
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "srr_per",
+      "code": "PER",
+      "name": "Perambur",
+      "tamilName": "பெரம்பூர்",
+      "latitude": 13.1095,
+      "longitude": 80.2455,
+      "corridors": [
+        "west_line"
+      ],
+      "district": "Chennai",
+      "isInterchange": true,
+      "interchangeWith": [
+        "Express Trains (Major Passenger Hub for North Chennai)",
+        "MTC Perambur Bus Terminus"
+      ],
+      "stepFreeAccess": true,
+      "platforms": 4,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter",
+        "ATVM",
+        "PRS Reservation"
+      ],
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "srr_pcw",
+      "code": "PCW",
+      "name": "Perambur Carriage Works",
+      "tamilName": "பெரம்பூர் கேரேஜ் ஒர்க்ஸ்",
+      "latitude": 13.1085,
+      "longitude": 80.2375,
+      "corridors": [
+        "west_line"
+      ],
+      "district": "Chennai",
+      "isInterchange": false,
+      "interchangeWith": [
+        "Integral Coach Factory (ICF) transit corridor"
+      ],
+      "stepFreeAccess": false,
+      "platforms": 2,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter"
+      ],
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "srr_pew",
+      "code": "PEW",
+      "name": "Perambur Loco Works",
+      "tamilName": "பெரம்பூர் லோகோ ஒர்க்ஸ்",
+      "latitude": 13.108,
+      "longitude": 80.2285,
+      "corridors": [
+        "west_line"
+      ],
+      "district": "Chennai",
+      "isInterchange": false,
+      "interchangeWith": [
+        "MTC Ayanavaram Feeder"
+      ],
+      "stepFreeAccess": false,
+      "platforms": 2,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter"
+      ],
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "srr_vlk",
+      "code": "VLK",
+      "name": "Villivakkam",
+      "tamilName": "வில்லிவாக்கம்",
+      "latitude": 13.1075,
+      "longitude": 80.2115,
+      "corridors": [
+        "west_line"
+      ],
+      "district": "Chennai",
+      "isInterchange": true,
+      "interchangeWith": [
+        "MTC Villivakkam Bus Terminus"
+      ],
+      "stepFreeAccess": false,
+      "platforms": 4,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter",
+        "ATVM"
+      ],
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "srr_kotr",
+      "code": "KOTR",
+      "name": "Korattur",
+      "tamilName": "கொரட்டூர்",
+      "latitude": 13.1115,
+      "longitude": 80.1875,
+      "corridors": [
+        "west_line"
+      ],
+      "district": "Chennai",
+      "isInterchange": false,
+      "interchangeWith": [
+        "MTC Korattur Local Services"
+      ],
+      "stepFreeAccess": false,
+      "platforms": 4,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter"
+      ],
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "srr_pvm",
+      "code": "PVM",
+      "name": "Pattaravakkam",
+      "tamilName": "பட்டரவாக்கம்",
+      "latitude": 13.1125,
+      "longitude": 80.1745,
+      "corridors": [
+        "west_line"
+      ],
+      "district": "Chennai",
+      "isInterchange": false,
+      "interchangeWith": [
+        "Sidco Industrial Estate Transit"
+      ],
+      "stepFreeAccess": false,
+      "platforms": 4,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter"
+      ],
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "srr_abu",
+      "code": "ABU",
+      "name": "Ambattur",
+      "tamilName": "அம்பத்தூர்",
+      "latitude": 13.1155,
+      "longitude": 80.1585,
+      "corridors": [
+        "west_line"
+      ],
+      "district": "Chennai",
+      "isInterchange": true,
+      "interchangeWith": [
+        "MTC Ambattur Bus Terminus",
+        "Ambattur OT Terminus"
+      ],
+      "stepFreeAccess": false,
+      "platforms": 4,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter",
+        "ATVM"
+      ],
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "srr_tmvl",
+      "code": "TMVL",
+      "name": "Tirumullaivoyal",
+      "tamilName": "திருமுல்லைவாயில்",
+      "latitude": 13.1165,
+      "longitude": 80.1415,
+      "corridors": [
+        "west_line"
+      ],
+      "district": "Tiruvallur",
+      "isInterchange": false,
+      "interchangeWith": [
+        "MTC CTH Road Corridors"
+      ],
+      "stepFreeAccess": false,
+      "platforms": 4,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter"
+      ],
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "srr_annr",
+      "code": "ANNR",
+      "name": "Annanur",
+      "tamilName": "அண்ணனூர்",
+      "latitude": 13.1175,
+      "longitude": 80.1305,
+      "corridors": [
+        "west_line"
+      ],
+      "district": "Tiruvallur",
+      "isInterchange": false,
+      "interchangeWith": [
+        "MTC Annanur Services"
+      ],
+      "stepFreeAccess": false,
+      "platforms": 4,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter"
+      ],
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "srr_avd",
+      "code": "AVD",
+      "name": "Avadi",
+      "tamilName": "ஆவடி",
+      "latitude": 13.1185,
+      "longitude": 80.1065,
+      "corridors": [
+        "west_line"
+      ],
+      "district": "Tiruvallur",
+      "isInterchange": true,
+      "interchangeWith": [
+        "Major Western Suburban Terminal",
+        "MTC Avadi Bus Terminus",
+        "Selective Express Trains"
+      ],
+      "stepFreeAccess": true,
+      "platforms": 6,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter",
+        "ATVM",
+        "PRS Reservation"
+      ],
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "srr_pab",
+      "code": "PAB",
+      "name": "Pattabiram",
+      "tamilName": "பட்டாபிராம்",
+      "latitude": 13.1205,
+      "longitude": 80.0735,
+      "corridors": [
+        "west_line"
+      ],
+      "district": "Tiruvallur",
+      "isInterchange": true,
+      "interchangeWith": [
+        "Pattabiram Military Siding branch",
+        "MTC Pattabiram Stand"
+      ],
+      "stepFreeAccess": false,
+      "platforms": 4,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter"
+      ],
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "srr_ti",
+      "code": "TI",
+      "name": "Tiruninravur",
+      "tamilName": "திருநின்றவூர்",
+      "latitude": 13.1225,
+      "longitude": 80.0315,
+      "corridors": [
+        "west_line"
+      ],
+      "district": "Tiruvallur",
+      "isInterchange": true,
+      "interchangeWith": [
+        "MTC Tiruninravur Bus Stand",
+        "Outer Ring Road Interchange"
+      ],
+      "stepFreeAccess": false,
+      "platforms": 4,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter",
+        "ATVM"
+      ],
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "srr_trl",
+      "code": "TRL",
+      "name": "Tiruvallur",
+      "tamilName": "திருவள்ளூர்",
+      "latitude": 13.1315,
+      "longitude": 79.9075,
+      "corridors": [
+        "west_line"
+      ],
+      "district": "Tiruvallur",
+      "isInterchange": true,
+      "interchangeWith": [
+        "Tiruvallur District Headquarters Railway Terminal",
+        "Express Trains (Bangalore / Mumbai mainline)",
+        "MTC & TNSTC Tiruvallur Bus Stand"
+      ],
+      "stepFreeAccess": true,
+      "platforms": 6,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter",
+        "ATVM",
+        "PRS Reservation"
+      ],
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "srr_kbt",
+      "code": "KBT",
+      "name": "Kadambattur",
+      "tamilName": "கடம்பத்தூர்",
+      "latitude": 13.1025,
+      "longitude": 79.8055,
+      "corridors": [
+        "west_line"
+      ],
+      "district": "Tiruvallur",
+      "isInterchange": false,
+      "interchangeWith": [
+        "TNSTC Kadambattur Services"
+      ],
+      "stepFreeAccess": false,
+      "platforms": 4,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter"
+      ],
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "srr_ajj",
+      "code": "AJJ",
+      "name": "Arakkonam Junction",
+      "tamilName": "அரக்கோணம் சந்திப்பு",
+      "latitude": 13.0785,
+      "longitude": 79.6675,
+      "corridors": [
+        "west_line"
+      ],
+      "district": "Tiruvallur",
+      "isInterchange": true,
+      "interchangeWith": [
+        "Major Western Railway Junction",
+        "Southern Railway Electric Loco Shed",
+        "National Express Lines (to Bangalore, Mumbai, Coimbatore)",
+        "Branch to Chengalpattu via Kanchipuram"
+      ],
+      "stepFreeAccess": true,
+      "platforms": 8,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter",
+        "ATVM",
+        "PRS Reservation"
+      ],
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "srr_enr",
+      "code": "ENR",
+      "name": "Ennore",
+      "tamilName": "எண்ணூர்",
+      "latitude": 13.2085,
+      "longitude": 80.3235,
+      "corridors": [
+        "north_line"
+      ],
+      "district": "Chennai",
+      "isInterchange": true,
+      "interchangeWith": [
+        "MTC Ennore Bus Stand",
+        "Kamarajar Port Corridor"
+      ],
+      "stepFreeAccess": false,
+      "platforms": 4,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter"
+      ],
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "srr_mjr",
+      "code": "MJR",
+      "name": "Minjur",
+      "tamilName": "மீஞ்சூர்",
+      "latitude": 13.2795,
+      "longitude": 80.2615,
+      "corridors": [
+        "north_line"
+      ],
+      "district": "Tiruvallur",
+      "isInterchange": false,
+      "interchangeWith": [
+        "MTC Minjur Bus Stand",
+        "Outer Ring Road Northern Terminal"
+      ],
+      "stepFreeAccess": false,
+      "platforms": 4,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter"
+      ],
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "srr_pon",
+      "code": "PON",
+      "name": "Ponneri",
+      "tamilName": "பொன்னேரி",
+      "latitude": 13.3285,
+      "longitude": 80.1985,
+      "corridors": [
+        "north_line"
+      ],
+      "district": "Tiruvallur",
+      "isInterchange": false,
+      "interchangeWith": [
+        "MTC & TNSTC Ponneri Bus Stand"
+      ],
+      "stepFreeAccess": false,
+      "platforms": 3,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter"
+      ],
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "srr_gpd",
+      "code": "GPD",
+      "name": "Gummidipoondi",
+      "tamilName": "கும்மிடிப்பூண்டி",
+      "latitude": 13.4075,
+      "longitude": 80.1285,
+      "corridors": [
+        "north_line"
+      ],
+      "district": "Tiruvallur",
+      "isInterchange": true,
+      "interchangeWith": [
+        "Northern Suburban Rail Terminal",
+        "SIPCOT Gummidipoondi Industrial Complex",
+        "MTC & TNSTC Gummidipoondi Bus Stand"
+      ],
+      "stepFreeAccess": false,
+      "platforms": 4,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter",
+        "ATVM"
+      ],
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "srr_mpkt",
+      "code": "MPKT",
+      "name": "Chennai Park Town",
+      "tamilName": "சென்னை பூங்கா நகர்",
+      "latitude": 13.0805,
+      "longitude": 80.2765,
+      "corridors": [
+        "mrts_line"
+      ],
+      "district": "Chennai",
+      "isInterchange": true,
+      "interchangeWith": [
+        "Chennai Central Suburban (MASS)",
+        "Chennai Park Suburban Station (MPK)",
+        "Chennai Metro Central Station"
+      ],
+      "stepFreeAccess": false,
+      "platforms": 2,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter"
+      ],
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "srr_mcpt",
+      "code": "MCPT",
+      "name": "Chintadripet",
+      "tamilName": "சிந்தாதிரிப்பேட்டை",
+      "latitude": 13.0745,
+      "longitude": 80.2745,
+      "corridors": [
+        "mrts_line"
+      ],
+      "district": "Chennai",
+      "isInterchange": false,
+      "interchangeWith": [
+        "MTC Arunachalam Street / Cooum River road"
+      ],
+      "stepFreeAccess": false,
+      "platforms": 2,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter"
+      ],
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "srr_mcpk",
+      "code": "MCPK",
+      "name": "Chepauk",
+      "tamilName": "சேப்பாக்கம்",
+      "latitude": 13.0645,
+      "longitude": 80.2795,
+      "corridors": [
+        "mrts_line"
+      ],
+      "district": "Chennai",
+      "isInterchange": false,
+      "interchangeWith": [
+        "M.A. Chidambaram Stadium (Chepauk)",
+        "MTC Bells Road Services"
+      ],
+      "stepFreeAccess": false,
+      "platforms": 2,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter"
+      ],
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "srr_mtcn",
+      "code": "MTCN",
+      "name": "Thiruvallikeni (Triplicane)",
+      "tamilName": "திருவல்லிக்கேணி",
+      "latitude": 13.0565,
+      "longitude": 80.2785,
+      "corridors": [
+        "mrts_line"
+      ],
+      "district": "Chennai",
+      "isInterchange": false,
+      "interchangeWith": [
+        "MTC Triplicane High Road Services"
+      ],
+      "stepFreeAccess": false,
+      "platforms": 2,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter"
+      ],
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "srr_mlhs",
+      "code": "MLHS",
+      "name": "Light House",
+      "tamilName": "லைட் ஹவுஸ்",
+      "latitude": 13.0415,
+      "longitude": 80.2775,
+      "corridors": [
+        "mrts_line"
+      ],
+      "district": "Chennai",
+      "isInterchange": false,
+      "interchangeWith": [
+        "Marina Beach Promenade",
+        "MTC Kamarajar Salai Services"
+      ],
+      "stepFreeAccess": false,
+      "platforms": 2,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter"
+      ],
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "srr_mtmy",
+      "code": "MTMY",
+      "name": "Thirumayilai (Mylapore)",
+      "tamilName": "திருமயிலை",
+      "latitude": 13.0325,
+      "longitude": 80.2685,
+      "corridors": [
+        "mrts_line"
+      ],
+      "district": "Chennai",
+      "isInterchange": true,
+      "interchangeWith": [
+        "Kapaleeshwarar Temple Corridor",
+        "MTC Luz Corner Bus Hub"
+      ],
+      "stepFreeAccess": false,
+      "platforms": 3,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter",
+        "ATVM"
+      ],
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "srr_mndy",
+      "code": "MNDY",
+      "name": "Mandaveli",
+      "tamilName": "மந்தவெளி",
+      "latitude": 13.0245,
+      "longitude": 80.2625,
+      "corridors": [
+        "mrts_line"
+      ],
+      "district": "Chennai",
+      "isInterchange": true,
+      "interchangeWith": [
+        "MTC Mandaveli Bus Terminus"
+      ],
+      "stepFreeAccess": false,
+      "platforms": 2,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter"
+      ],
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "srr_gwyr",
+      "code": "GWYR",
+      "name": "Greenways Road",
+      "tamilName": "கிரீன்வேஸ் சாலை",
+      "latitude": 13.0165,
+      "longitude": 80.2545,
+      "corridors": [
+        "mrts_line"
+      ],
+      "district": "Chennai",
+      "isInterchange": false,
+      "interchangeWith": [
+        "MTC Greenways Road Services"
+      ],
+      "stepFreeAccess": false,
+      "platforms": 2,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter"
+      ],
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "srr_ktpm",
+      "code": "KTPM",
+      "name": "Kotturpuram",
+      "tamilName": "கோட்டூர்புரம்",
+      "latitude": 13.0125,
+      "longitude": 80.2445,
+      "corridors": [
+        "mrts_line"
+      ],
+      "district": "Chennai",
+      "isInterchange": false,
+      "interchangeWith": [
+        "Anna Centenary Library Corridor",
+        "MTC Kotturpuram Services"
+      ],
+      "stepFreeAccess": false,
+      "platforms": 2,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter"
+      ],
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "srr_ktbr",
+      "code": "KTBR",
+      "name": "Kasturba Nagar",
+      "tamilName": "கஸ்தூர்பா நகர்",
+      "latitude": 13.0035,
+      "longitude": 80.2495,
+      "corridors": [
+        "mrts_line"
+      ],
+      "district": "Chennai",
+      "isInterchange": false,
+      "interchangeWith": [
+        "CLRI / Adyar Canal Bank Services"
+      ],
+      "stepFreeAccess": false,
+      "platforms": 2,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter"
+      ],
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "srr_indr",
+      "code": "INDR",
+      "name": "Indira Nagar",
+      "tamilName": "இந்திரா நகர்",
+      "latitude": 12.9945,
+      "longitude": 80.2525,
+      "corridors": [
+        "mrts_line"
+      ],
+      "district": "Chennai",
+      "isInterchange": false,
+      "interchangeWith": [
+        "MTC Indira Nagar Bus Stops"
+      ],
+      "stepFreeAccess": false,
+      "platforms": 2,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter"
+      ],
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "srr_tymr",
+      "code": "TYMR",
+      "name": "Thiruvanmiyur",
+      "tamilName": "திருவான்மியூர்",
+      "latitude": 12.9865,
+      "longitude": 80.2555,
+      "corridors": [
+        "mrts_line"
+      ],
+      "district": "Chennai",
+      "isInterchange": true,
+      "interchangeWith": [
+        "MTC Thiruvanmiyur Bus Depot / Terminus",
+        "OMR (Old Mahabalipuram Road) IT Corridor Gateway",
+        "Tidel Park"
+      ],
+      "stepFreeAccess": false,
+      "platforms": 3,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter",
+        "ATVM"
+      ],
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "srr_trmn",
+      "code": "TRMN",
+      "name": "Taramani",
+      "tamilName": "தரமணி",
+      "latitude": 12.9775,
+      "longitude": 80.2445,
+      "corridors": [
+        "mrts_line"
+      ],
+      "district": "Chennai",
+      "isInterchange": false,
+      "interchangeWith": [
+        "CSIR / Ascendas IT Park Feeder"
+      ],
+      "stepFreeAccess": false,
+      "platforms": 2,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter"
+      ],
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "srr_prgd",
+      "code": "PRGD",
+      "name": "Perungudi",
+      "tamilName": "பெருங்குடி",
+      "latitude": 12.9695,
+      "longitude": 80.2315,
+      "corridors": [
+        "mrts_line"
+      ],
+      "district": "Chennai",
+      "isInterchange": false,
+      "interchangeWith": [
+        "OMR IT Corridor Feeder Services"
+      ],
+      "stepFreeAccess": false,
+      "platforms": 2,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter"
+      ],
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "srr_vlcy",
+      "code": "VLCY",
+      "name": "Velachery",
+      "tamilName": "வேளச்சேரி",
+      "latitude": 12.9775,
+      "longitude": 80.2185,
+      "corridors": [
+        "mrts_line"
+      ],
+      "district": "Chennai",
+      "isInterchange": true,
+      "interchangeWith": [
+        "MRTS Southern Terminal",
+        "MTC Velachery Bus Terminus",
+        "Inner Ring Road Corridors"
+      ],
+      "stepFreeAccess": false,
+      "platforms": 3,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter",
+        "ATVM"
+      ],
+      "evidenceStatus": "cross_checked"
+    },
+    {
+      "id": "srr_prtk",
+      "code": "PRTK",
+      "name": "Puzhuthivakkam",
+      "tamilName": "புழுதிவாக்கம்",
+      "latitude": 12.9815,
+      "longitude": 80.2075,
+      "corridors": [
+        "mrts_line"
+      ],
+      "district": "Chennai",
+      "evidenceStatus": "source_verified",
+      "isInterchange": false,
+      "interchangeWith": [
+        "Local MTC Feeder Services"
+      ],
+      "stepFreeAccess": false,
+      "platforms": 2,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter"
+      ]
+    },
+    {
+      "id": "srr_admb",
+      "code": "ADMB",
+      "name": "Adambakkam",
+      "tamilName": "ஆதம்பாக்கம்",
+      "latitude": 12.9885,
+      "longitude": 80.2025,
+      "corridors": [
+        "mrts_line"
+      ],
+      "district": "Chennai",
+      "evidenceStatus": "source_verified",
+      "isInterchange": false,
+      "interchangeWith": [
+        "Local MTC Feeder Services"
+      ],
+      "stepFreeAccess": false,
+      "platforms": 2,
+      "ticketBooking": [
+        "UTS Mobile",
+        "Station Counter"
+      ]
+    }
+  ]
+}

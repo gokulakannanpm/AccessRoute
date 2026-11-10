@@ -1,0 +1,5 @@
+route_id,agency_id,route_short_name,route_long_name,route_type
+R_METRO_BLUE,CMRL,Blue,Blue Line,1
+R_METRO_GREEN,CMRL,Green,Green Line,1
+R_BUS_18A,MTC,18A,Broadway - Tambaram,3
+R_SUB_SOUTH,SRR,SouthLine,Chennai Beach - Tambaram,2

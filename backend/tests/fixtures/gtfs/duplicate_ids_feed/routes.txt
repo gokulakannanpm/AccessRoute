@@ -1,0 +1,3 @@
+route_id,agency_id,route_short_name,route_type
+BLUE,CMRL,Blue,1
+BLUE,CMRL,Blue Duplicate,1

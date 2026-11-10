@@ -1,0 +1,4 @@
+trip_id,arrival_time,departure_time,stop_id,stop_sequence
+TRIP_EXT,23:50:00,23:51:00,ST_CENTRAL,1
+TRIP_EXT,24:10:00,24:11:00,ST_GUINDY,2
+TRIP_EXT,24:25:00,24:25:00,ST_AIRPORT,3

@@ -1,0 +1,144 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AccessRoute Chennai Network Scope",
+  "version": "1.0.0",
+  "description": "Geographic and multi-modal transport boundary model for AccessRoute covering Chennai and genuinely connected corridors.",
+  "spatialBounds": {
+    "minLatitude": 12.50,
+    "maxLatitude": 13.50,
+    "minLongitude": 79.50,
+    "maxLongitude": 80.40,
+    "description": "Bounding box enclosing the Greater Chennai Metropolitan Area, Tambaram Corporation, Chengalpattu corridor, Kanchipuram corridor, and Tiruvallur/Arakkonam rail corridor."
+  },
+  "coveredDistrictsAndCorridors": [
+    {
+      "districtName": "Chennai",
+      "administrativeRole": "Core Urban District",
+      "transitCoverage": "Complete multi-modal coverage: MTC buses, CMRL Blue & Green Lines, MRTS, and Southern Railway suburban terminals.",
+      "includedLocalities": [
+        "Chennai Central", "Egmore", "Broadway", "T. Nagar", "Koyambedu (CMBT)", "Guindy",
+        "Saidapet", "Mylapore", "Adyar", "Thiruvanmiyur", "Anna Nagar", "Perambur",
+        "Washermanpet", "Tiruvottiyur", "Royapettah", "Thousand Lights", "Velachery"
+      ]
+    },
+    {
+      "districtName": "Chengalpattu",
+      "administrativeRole": "Southern Connected Metropolitan & Peri-Urban Corridor",
+      "transitCoverage": "Suburban rail (South Line) and MTC trunk routes connecting to Chennai employment and educational hubs.",
+      "includedCorridors": [
+        {
+          "corridorName": "GST Road Corridor (NH 45)",
+          "modes": ["Suburban Rail (EMU)", "MTC Bus", "Relevant Express Trains"],
+          "keyNodes": ["Tambaram", "Perungalathur", "Vandalur", "Urapakkam", "Guduvancheri", "Potheri", "Maraimalai Nagar", "Singaperumal Koil", "Paranur", "Chengalpattu Junction"]
+        },
+        {
+          "corridorName": "Old Mahabalipuram Road (OMR / IT Corridor)",
+          "modes": ["MTC Bus", "Future CMRL Phase 2"],
+          "keyNodes": ["Perungudi", "Thoraipakkam", "Sholinganallur", "Navalur", "Siruseri (SIPCOT)", "Kelambakkam"]
+        },
+        {
+          "corridorName": "East Coast Road (ECR)",
+          "modes": ["MTC Bus"],
+          "keyNodes": ["Kottivakkam", "Palavakkam", "Neelankarai", "Injambakkam", "Akkarai", "Kovalam", "Mahabalipuram"]
+        }
+      ]
+    },
+    {
+      "districtName": "Kanchipuram",
+      "administrativeRole": "South-Western Industrial & Heritage Corridor",
+      "transitCoverage": "Suburban rail link from Chengalpattu to Kanchipuram / Tirumalpur and MTC industrial bus lines from Tambaram / Poonamallee.",
+      "includedCorridors": [
+        {
+          "corridorName": "Chennai-Bengaluru Highway Corridor (NH 48)",
+          "modes": ["MTC Bus"],
+          "keyNodes": ["Irungattukottai", "Sriperumbudur", "Sunguvarchatram"]
+        },
+        {
+          "corridorName": "Chengalpattu - Kanchipuram - Arakkonam Rail Branch",
+          "modes": ["Suburban Rail (EMU)"],
+          "keyNodes": ["Walajabad", "Kanchipuram", "Kanchipuram East", "Tirumalpur"]
+        }
+      ]
+    },
+    {
+      "districtName": "Tiruvallur",
+      "administrativeRole": "Western & Northern Industrial Commuter Corridors",
+      "transitCoverage": "Suburban rail (West and North lines) and MTC western trunk bus routes.",
+      "includedCorridors": [
+        {
+          "corridorName": "Chennai - Arakkonam Western Rail Corridor",
+          "modes": ["Suburban Rail (EMU)", "Relevant Express Trains", "MTC Bus"],
+          "keyNodes": ["Villivakkam", "Korattur", "Ambattur", "Avadi", "Pattabiram", "Tiruninravur", "Tiruvallur", "Kadambattur", "Arakkonam Junction"]
+        },
+        {
+          "corridorName": "Poonamallee High Road Corridor",
+          "modes": ["MTC Bus", "Future CMRL Phase 2"],
+          "keyNodes": ["Maduravoyal", "Porur", "Iyyappanthangal", "Kumananchavadi", "Poonamallee"]
+        },
+        {
+          "corridorName": "Northern Coastal Rail Corridor",
+          "modes": ["Suburban Rail (EMU)", "CMRL Blue Line North"],
+          "keyNodes": ["Tollgate", "Wimco Nagar", "Ennore", "Minjur", "Ponneri", "Gummidipoondi"]
+        }
+      ]
+    }
+  ],
+  "interchangeHubs": [
+    {
+      "hubId": "hub_central",
+      "name": "Puratchi Thalaivar Dr. M.G. Ramachandran Central (Chennai Central)",
+      "modes": ["Chennai Metro Blue Line", "Chennai Metro Green Line", "Suburban Rail (MMC)", "National Express Rail", "MTC Bus"],
+      "coordinates": [80.2707, 13.0827],
+      "stepFreeInterchange": true
+    },
+    {
+      "hubId": "hub_egmore",
+      "name": "Chennai Egmore",
+      "modes": ["Chennai Metro Green Line", "Suburban Rail (South Line)", "National Express Rail", "MTC Bus"],
+      "coordinates": [80.2610, 13.0792],
+      "stepFreeInterchange": true
+    },
+    {
+      "hubId": "hub_guindy",
+      "name": "Guindy Multi-modal Interchange",
+      "modes": ["Chennai Metro Blue Line", "Suburban Rail (South Line)", "MTC Bus Depot"],
+      "coordinates": [80.2408, 13.0001],
+      "stepFreeInterchange": true
+    },
+    {
+      "hubId": "hub_alandur",
+      "name": "Arignar Anna Alandur Metro",
+      "modes": ["Chennai Metro Blue Line", "Chennai Metro Green Line", "MTC Feeder Bus"],
+      "coordinates": [80.2014, 13.0039],
+      "stepFreeInterchange": true
+    },
+    {
+      "hubId": "hub_st_thomas_mount",
+      "name": "St. Thomas Mount",
+      "modes": ["Chennai Metro Green Line", "Suburban Rail (South Line)", "MRTS Extension"],
+      "coordinates": [80.1988, 12.9948],
+      "stepFreeInterchange": true
+    },
+    {
+      "hubId": "hub_tambaram",
+      "name": "Tambaram Terminal Hub",
+      "modes": ["Suburban Rail (South Line Terminal)", "Express Trains", "MTC Southern Bus Terminus"],
+      "coordinates": [80.1189, 12.9253],
+      "stepFreeInterchange": true
+    },
+    {
+      "hubId": "hub_cmbt",
+      "name": "Koyambedu (CMBT)",
+      "modes": ["Chennai Metro Green Line", "MTC Bus Terminus", "Intercity Bus Terminus"],
+      "coordinates": [80.1948, 13.0694],
+      "stepFreeInterchange": true
+    },
+    {
+      "hubId": "hub_chennai_beach",
+      "name": "Chennai Beach",
+      "modes": ["Suburban Rail South Line Origin", "Suburban Rail West/North Connector", "MRTS Line Origin"],
+      "coordinates": [80.2919, 13.0923],
+      "stepFreeInterchange": true
+    }
+  ]
+}

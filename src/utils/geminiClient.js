@@ -1,22 +1,15 @@
-import { GoogleGenerativeAI } from '@google/generative-ai';
-
 /**
- * AccessRoute Gemini Client Utility
- * Integrates Google Gemini API for accessibility preference extraction and route explanations.
+ * AccessRoute Gemini Client Utility (Frontend Client)
+ * Proxies AI operations to backend Express endpoints (/api/ai/*).
+ * Completely isolates API keys on the server to prevent browser secret leakage.
+ * Provides deterministic offline rule-based fallback when server or provider is unavailable.
  */
 
-// Retrieve Gemini API Key from Vite or React or generic environment
-const getGeminiApiKey = () => {
-  if (typeof import.meta !== 'undefined' && import.meta.env) {
-    if (import.meta.env.VITE_GEMINI_API_KEY) return import.meta.env.VITE_GEMINI_API_KEY;
-    if (import.meta.env.REACT_APP_GEMINI_API_KEY) return import.meta.env.REACT_APP_GEMINI_API_KEY;
+const getApiBaseUrl = () => {
+  if (typeof window !== 'undefined') {
+    return ''; // Browser uses relative path (proxied by Vite to backend)
   }
-  if (typeof process !== 'undefined' && process.env) {
-    if (process.env.VITE_GEMINI_API_KEY) return process.env.VITE_GEMINI_API_KEY;
-    if (process.env.REACT_APP_GEMINI_API_KEY) return process.env.REACT_APP_GEMINI_API_KEY;
-    if (process.env.GEMINI_API_KEY) return process.env.GEMINI_API_KEY;
-  }
-  return '';
+  return (typeof process !== 'undefined' && process.env && process.env.API_BASE_URL) || 'http://127.0.0.1:5000';
 };
 
 export const HOTSPOT_ALIASES = {
@@ -174,7 +167,8 @@ export function fallbackExtractPreferences(userInput = '') {
 }
 
 /**
- * Extract structured accessibility preferences from natural language using Gemini API
+ * Extract structured accessibility preferences from natural language
+ * Calls the secure backend endpoint /api/ai/extract-preferences with fallback to deterministic local rules.
  * @param {string} userInput - The raw text or voice transcript from the user
  * @returns {Promise<{ origin: string|null, destination: string|null, wheelchair: boolean, avoidStairs: boolean, minimizeWalking: boolean, voiceGuidance: boolean }>}
  */
@@ -190,70 +184,38 @@ export async function extractPreferences(userInput) {
     };
   }
 
-  const apiKey = getGeminiApiKey();
-
-  // If no API key is provided, use high-fidelity deterministic fallback
-  if (!apiKey || apiKey.includes('YOUR_') || apiKey.length < 15) {
-    console.info('[Gemini Client] No API key detected; using deterministic preference extraction fallback.');
-    return fallbackExtractPreferences(userInput);
-  }
-
   try {
-    const genAI = new GoogleGenerativeAI(apiKey);
-    const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
+    const baseUrl = getApiBaseUrl();
+    const response = await fetch(`${baseUrl}/api/ai/extract-preferences`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text: userInput.trim() })
+    });
 
-    const prompt = `
-      You are an accessibility preference extractor for a Chennai transportation app.
-      Supported hotspots: Chennai Central, Egmore, T. Nagar, Koyambedu, Guindy, Tambaram.
-      
-      User input: "${userInput}"
-      
-      Extract structured preferences as JSON:
-      {
-        "origin": "exact hotspot name or null if not mentioned",
-        "destination": "exact hotspot name or null if not mentioned",
-        "wheelchair": boolean,
-        "avoidStairs": boolean,
-        "minimizeWalking": boolean,
-        "voiceGuidance": boolean
+    if (response.ok) {
+      const data = await response.json();
+      if (data && data.success && data.preferences) {
+        const fallbackLocations = extractOriginAndDestination(userInput);
+        return {
+          origin: data.preferences.origin || fallbackLocations.origin || null,
+          destination: data.preferences.destination || fallbackLocations.destination || null,
+          wheelchair: Boolean(data.preferences.wheelchair),
+          avoidStairs: Boolean(data.preferences.avoidStairs),
+          minimizeWalking: Boolean(data.preferences.minimizeWalking),
+          voiceGuidance: Boolean(data.preferences.voiceGuidance)
+        };
       }
-      
-      Return ONLY valid JSON, no explanation.
-    `;
-
-    const result = await model.generateContent(prompt);
-    const response = await result.response;
-    let text = response.text().trim();
-
-    if (text.startsWith('```json')) {
-      text = text.slice(7);
-    } else if (text.startsWith('```')) {
-      text = text.slice(3);
     }
-    if (text.endsWith('```')) {
-      text = text.slice(0, -3);
-    }
-    text = text.trim();
-
-    const parsed = JSON.parse(text);
-    const fallbackLocations = extractOriginAndDestination(userInput);
-
-    return {
-      origin: parsed.origin || fallbackLocations.origin || null,
-      destination: parsed.destination || fallbackLocations.destination || null,
-      wheelchair: Boolean(parsed.wheelchair),
-      avoidStairs: Boolean(parsed.avoidStairs),
-      minimizeWalking: Boolean(parsed.minimizeWalking),
-      voiceGuidance: Boolean(parsed.voiceGuidance)
-    };
-  } catch (error) {
-    console.warn('[Gemini Client] Preference extraction via Gemini API failed, falling back:', error.message);
-    return fallbackExtractPreferences(userInput);
+  } catch {
+    // Backend offline or network failure; gracefully use offline deterministic parser
   }
+
+  return fallbackExtractPreferences(userInput);
 }
 
 /**
- * Generate a human-friendly route explanation using Gemini API
+ * Generate a human-friendly route explanation
+ * Calls secure backend endpoint /api/ai/explain-route with fallback to template generator.
  * @param {object} route - Route object with duration, fare, segments, and accessibility data
  * @returns {Promise<string>}
  */
@@ -262,27 +224,14 @@ export async function explainRoute(route) {
     return 'Take public transit to your destination.';
   }
 
-  const durationText = route.durationText || (route.durationMinutes ? `${route.durationMinutes} min` : '38 min');
-  const fare = route.fare || 25;
-  const segments = route.segments
-    ? route.segments.map((s) => s.description || s.mode || s.routeName).join(', ')
-    : 'Bus 21, Chennai Metro';
-  const accessibilityDetails =
-    route.accessibilityLevel ||
-    (route.accessibility && route.accessibility.details) ||
-    (route.destinationDetails && route.destinationDetails.status) ||
-    'Elevator access is available at the transfer and no stairs are required';
+  const defaultExplanation = 'Take Bus 21, then Chennai Metro. Elevator access is available at the transfer and no stairs are required.';
 
-  const defaultExplanation = `Take Bus 21, then Chennai Metro. Elevator access is available at the transfer and no stairs are required.`;
-
-  const apiKey = getGeminiApiKey();
-  if (!apiKey || apiKey.includes('YOUR_') || apiKey.length < 15) {
-    // Generate deterministic template explanation
+  const getTemplateExplanation = () => {
     if (route.segments && route.segments.length > 0) {
       const mainModes = route.segments
         .filter((s) => s.type === 'bus' || s.type === 'metro' || s.type === 'train')
         .map((s) => s.badge || s.routeName || s.mode);
-      
+
       const modesStr = mainModes.length > 0 ? mainModes.join(', then ') : 'Bus 21, then Chennai Metro';
       const accessStr = route.isStepFree
         ? 'Elevator access is available at the transfer and no stairs are required.'
@@ -290,32 +239,27 @@ export async function explainRoute(route) {
       return `Take ${modesStr}. ${accessStr}`;
     }
     return defaultExplanation;
-  }
+  };
 
   try {
-    const genAI = new GoogleGenerativeAI(apiKey);
-    const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
+    const baseUrl = getApiBaseUrl();
+    const response = await fetch(`${baseUrl}/api/ai/explain-route`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ route })
+    });
 
-    const prompt = `
-      You are explaining a public transportation route to an accessibility-first user.
-      
-      Route details:
-      - Duration: ${durationText}
-      - Fare: ₹${fare}
-      - Segments: ${segments}
-      - Accessibility: ${accessibilityDetails}
-      
-      Generate a 1-2 sentence explanation in simple English. Mention transit options and key accessibility accommodations. Do not invent details not present in the route.
-    `;
-
-    const result = await model.generateContent(prompt);
-    const response = await result.response;
-    const text = response.text().trim();
-    return text || defaultExplanation;
-  } catch (error) {
-    console.warn('[Gemini Client] Route explanation via Gemini API failed, using default:', error.message);
-    return defaultExplanation;
+    if (response.ok) {
+      const data = await response.json();
+      if (data && data.success && data.explanation) {
+        return data.explanation;
+      }
+    }
+  } catch {
+    // Backend offline or network failure; gracefully use template explanation
   }
+
+  return getTemplateExplanation();
 }
 
 /**
@@ -324,13 +268,14 @@ export async function explainRoute(route) {
  */
 export async function processVoiceQuery(transcript) {
   const preferences = await extractPreferences(transcript);
-  
+
   const mockRoute = {
     durationText: '38 min',
     fare: 25,
+    isStepFree: true,
     segments: [
-      { mode: 'Bus 21', description: 'MTC Low-floor Bus' },
-      { mode: 'Chennai Metro', description: 'Step-free transfer via Elevator B' }
+      { mode: 'Bus 21', badge: 'MTC Bus 21', type: 'bus', description: 'MTC Low-floor Bus' },
+      { mode: 'Chennai Metro', badge: 'Chennai Metro', type: 'metro', description: 'Step-free transfer via Elevator B' }
     ],
     accessibilityLevel: 'Elevator access is available at the transfer and no stairs are required'
   };

@@ -1,3 +1,5 @@
+import { validateAndResolveLocation, CHENNAI_COVERAGE_MESSAGE, UNSUPPORTED_CITIES_REGEX } from '../services/coverageService.js';
+
 /**
  * Validation Middleware for AccessRoute API
  */
@@ -16,6 +18,25 @@ export function validateRouteSearch(req, res, next) {
     return res.status(400).json({
       error: 'Invalid request: "destination" is required and must be a non-empty string.',
       field: 'destination'
+    });
+  }
+
+  // Check explicit non-Chennai queries or out-of-scope destinations
+  if (UNSUPPORTED_CITIES_REGEX.test(origin.trim())) {
+    return res.status(400).json({
+      error: CHENNAI_COVERAGE_MESSAGE,
+      code: 'OUT_OF_COVERAGE',
+      field: 'origin',
+      notice: CHENNAI_COVERAGE_MESSAGE
+    });
+  }
+
+  if (UNSUPPORTED_CITIES_REGEX.test(destination.trim())) {
+    return res.status(400).json({
+      error: CHENNAI_COVERAGE_MESSAGE,
+      code: 'OUT_OF_COVERAGE',
+      field: 'destination',
+      notice: CHENNAI_COVERAGE_MESSAGE
     });
   }
 
@@ -86,3 +107,33 @@ export function validateRouteId(req, res, next) {
   }
   next();
 }
+
+export function validateAiExtract(req, res, next) {
+  const text = req.body.text || req.body.userInput;
+  if (!text || typeof text !== 'string' || text.trim() === '') {
+    return res.status(400).json({
+      error: 'Invalid request: "text" (or "userInput") is required and must be a non-empty string.',
+      field: 'text'
+    });
+  }
+  if (text.length > 2000) {
+    return res.status(400).json({
+      error: 'Invalid request: "text" exceeds maximum allowed length of 2000 characters.',
+      field: 'text'
+    });
+  }
+  req.body.text = text.trim();
+  next();
+}
+
+export function validateAiExplain(req, res, next) {
+  const { route } = req.body;
+  if (!route || typeof route !== 'object' || Array.isArray(route)) {
+    return res.status(400).json({
+      error: 'Invalid request: "route" is required and must be an object.',
+      field: 'route'
+    });
+  }
+  next();
+}
+

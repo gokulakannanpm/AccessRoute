@@ -1,0 +1,58 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Metropolitan Transport Corporation (MTC) Bus Network Schema",
+  "description": "Schema for MTC bus terminals, major interchange hubs, route structures, and stop metadata in Greater Chennai.",
+  "type": "object",
+  "required": ["version", "operator", "fareCategories", "interchangeHubs"],
+  "properties": {
+    "version": { "type": "string" },
+    "operator": {
+      "type": "object",
+      "required": ["id", "name", "shortName", "headquarters"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "shortName": { "type": "string" },
+        "headquarters": { "type": "string" }
+      }
+    },
+    "fareCategories": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["code", "name", "fareType"],
+        "properties": {
+          "code": { "type": "string" },
+          "name": { "type": "string" },
+          "fareType": { "type": "string" },
+          "freeFareEligible": { "type": "boolean" }
+        }
+      }
+    },
+    "interchangeHubs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "code", "name", "latitude", "longitude", "corridorRole", "district"],
+        "properties": {
+          "id": { "type": "string" },
+          "code": { "type": "string" },
+          "name": { "type": "string" },
+          "tamilName": { "type": "string" },
+          "latitude": { "type": "number", "minimum": 12.50, "maximum": 13.50 },
+          "longitude": { "type": "number", "minimum": 79.50, "maximum": 80.40 },
+          "corridorRole": { "type": "string" },
+          "district": { "type": "string", "enum": ["Chennai", "Chengalpattu", "Kanchipuram", "Tiruvallur"] },
+          "evidenceStatus": {
+            "type": "string",
+            "enum": ["source_verified", "cross_checked", "manually_curated", "unverified", "planned_not_operational"]
+          },
+          "platforms": { "type": "number" },
+          "interchangeConnections": { "type": "array", "items": { "type": "string" } },
+          "hasShelter": { "type": "boolean" },
+          "stepFreeAccess": { "type": "boolean" }
+        }
+      }
+    }
+  }
+}

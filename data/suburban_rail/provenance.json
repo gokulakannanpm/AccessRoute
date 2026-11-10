@@ -1,0 +1,50 @@
+{
+  "datasetName": "Southern Railway Chennai Division Suburban & MRTS Network Foundation",
+  "category": "suburban_rail",
+  "operator": "Southern Railway (SR), Chennai Division — Indian Railways",
+  "officialUrl": "https://sr.indianrailways.gov.in/",
+  "openDataSources": [
+    {
+      "sourceName": "CUMTA Open Data Portal",
+      "url": "https://test.cumta.org/ (mirror of Southern Railways.zip)",
+      "retrievalDate": "2026-10-04",
+      "format": "GTFS Static"
+    },
+    {
+      "sourceName": "UngalSoththu ChennaiGTFS",
+      "url": "https://github.com/ungalsoththu/ChennaiGTFS/tree/main/data/srr",
+      "retrievalDate": "2026-10-26",
+      "format": "GTFS Static",
+      "license": "ODbL / PDDL"
+    },
+    {
+      "sourceName": "Southern Railway Chennai Suburban Passenger Timetable Sheets",
+      "url": "https://sr.indianrailways.gov.in/",
+      "retrievalDate": "2026-10-20",
+      "format": "Official Indian Railways Timetable Publication"
+    }
+  ],
+  "dataArtifactType": "station_catalogue_tier_2_and_imported_gtfs_static",
+  "rawSourceDownloadedToRepo": true,
+  "importedSourceDir": "data/suburban_rail/imported/",
+  "derivedSourceDir": "data/suburban_rail/derived/",
+  "verificationStatus": "cross_checked_catalogue_and_imported_gtfs",
+  "coverage": {
+    "corridors": [
+      "South Line: Chennai Beach ⟷ Tambaram ⟷ Chengalpattu ⟷ Tirumalpur",
+      "West Line: Chennai Central (MMC) ⟷ Avadi ⟷ Tiruvallur ⟷ Arakkonam",
+      "North Line: Chennai Central (MMC) ⟷ Ennore ⟷ Gummidipoondi ⟷ Sullurpeta",
+      "MRTS Line: Chennai Beach ⟷ Thirumayilai ⟷ Velachery ⟷ St. Thomas Mount (CCRS certified March 2026)"
+    ],
+    "districtsCovered": ["Chennai", "Chengalpattu", "Kanchipuram", "Tiruvallur"],
+    "suburbanServicesPerDay": 763
+  },
+  "licenseAndAttribution": "Public passenger railway information published by Southern Railway / Indian Railways. Curated GTFS data mirrored under ODbL / PDDL.",
+  "limitationsAndCaveats": [
+    "Raw GTFS snapshot (9 files: agency, calendar, calendar_dates, feed_info, pathways, routes, stops, stop_times, trips) imported into data/suburban_rail/imported/ and preprocessed under data/suburban_rail/derived/ with SHA-256 verification and strict routing isolation (readyForJourneyRouting: false).",
+    "CUMTA GTFS models services as daily route patterns rather than complete per-train timetable trips. Specific train schedules are governed by Southern Railway suburban timetable sheets (40xxx/43xxx EMU series).",
+    "MRTS Phase 2 extension from Velachery to St. Thomas Mount received CCRS certification in March 2026 with new stations Puzhuthivakkam and Adambakkam; commercial timetable synchronization is in progress.",
+    "Accessibility: Step-free access flags on select junction stations reflect platform lift installations under Divyangjan schemes, but continuous barrier-free platform-to-platform connectivity is not universally verified.",
+    "Express and Superfast trains operating along these same physical tracks are segregated under the separate express_rail data domain to maintain strict suburban ticket validity boundaries."
+  ]
+}

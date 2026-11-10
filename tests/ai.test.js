@@ -58,6 +58,21 @@ async function runTests() {
   assert.ok(explanation && explanation.length > 10, 'Explanation should be non-empty string');
   console.log('✅ Test 5 Passed!\n');
 
+  // Test 6: Empty / Invalid user input handling
+  console.log('[Test 6] Testing empty input edge case');
+  const emptyRes = await extractPreferences('');
+  assert.strictEqual(emptyRes.origin, null);
+  assert.strictEqual(emptyRes.destination, null);
+  assert.strictEqual(emptyRes.wheelchair, false);
+  console.log('✅ Test 6 Passed!\n');
+
+  // Test 7: Null / Undefined route explanation
+  console.log('[Test 7] Testing null route explanation');
+  const nullExplanation = await explainRoute(null);
+  assert.strictEqual(typeof nullExplanation, 'string');
+  assert.ok(nullExplanation.includes('Take public transit'));
+  console.log('✅ Test 7 Passed!\n');
+
   console.log('🎉 All Gemini AI Layer tests passed successfully!');
 }
 
